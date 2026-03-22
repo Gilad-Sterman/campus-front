@@ -1,0 +1,302 @@
+// Thank You Page Styles
+.thank-you-page {
+  min-height: 100vh;
+
+  .container {
+    @include container;
+  }
+
+  // Progress tracker for completed state
+  .progress-tracker {
+    margin-bottom: $spacing-xl;
+
+    .progress-steps {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-block: $spacing-lg;
+
+      .step {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+        gap: $spacing-sm;
+        padding: $spacing-sm;
+        border: none;
+
+        &:hover {
+          box-shadow: none;
+        }
+
+        .step-number {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background-color: $color-disabled;
+          color: $color-text-secondary;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: $font-weight-semibold;
+          margin-bottom: $spacing-sm;
+          transition: $transition-base;
+        }
+
+        .step-label {
+          font-size: $font-size-sm;
+          color: $color-text-secondary;
+          text-align: center;
+        }
+
+        &.completed {
+          .step-number {
+            background-color: $color-success;
+            color: white;
+          }
+        }
+
+        &.active {
+          .step-number {
+            background-color: $color-surface;
+            color: $color-white;
+          }
+
+          .step-label {
+            color: $color-primary;
+            font-weight: $font-weight-semibold;
+          }
+        }
+      }
+
+      .step-connector {
+        width: 100px;
+        height: 2px;
+        background-color: $color-border;
+        margin: 0 $spacing-lg;
+        margin-bottom: $spacing-xl;
+      }
+    }
+  }
+
+  // Main thank you content
+  .thank-you-content {
+    text-align: center;
+
+    .thank-you-header {
+      text-align: center;
+      margin-bottom: $spacing-xl;
+      padding: $spacing-xl;
+      background-color: $color-seafoam;
+
+      h1 {
+        font-size: $font-size-3xl;
+        font-weight: $font-weight-bold;
+        color: $color-primary;
+        margin-bottom: $spacing-md;
+      }
+
+      .success-icon {
+        font-size: 4rem;
+        margin-bottom: $spacing-lg;
+      }
+    }
+
+    .confirmation-message {
+      padding: $spacing-md;
+      margin: $spacing-xl auto;
+      max-width: 700px;
+      text-align: start;
+
+      p {
+        font-size: $font-size-lg;
+        color: $color-text-primary;
+        line-height: 1.6;
+        margin: 0;
+      }
+    }
+
+    // Application summary
+    .application-summary {
+      background-color: white;
+      padding: $spacing-lg;
+      border-radius: $border-radius-lg;
+      box-shadow: $shadow-sm;
+      margin-bottom: $spacing-xl;
+      text-align: left;
+
+      h2 {
+        font-size: $font-size-2xl;
+        font-weight: $font-weight-semibold;
+        color: $color-primary;
+        margin-bottom: $spacing-lg;
+        text-align: center;
+      }
+
+      .summary-details {
+        .detail-item {
+          display: flex;
+          justify-content: space-between;
+          padding: $spacing-sm 0;
+          border-bottom: 1px solid $color-border;
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          strong {
+            color: $color-text-primary;
+            font-weight: $font-weight-semibold;
+          }
+        }
+      }
+    }
+
+    // University applications section
+    .university-applications {
+      margin-bottom: $spacing-xl;
+
+      h2 {
+        font-size: $font-size-2xl;
+        font-weight: $font-weight-semibold;
+        color: $color-primary;
+        margin-bottom: $spacing-md;
+      }
+
+      .next-steps-info {
+        font-size: $font-size-base;
+        color: $color-text-secondary;
+        margin-bottom: $spacing-lg;
+        line-height: 1.6;
+      }
+
+      .university-links {
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-md;
+
+        .university-card {
+          background-color: white;
+          padding: $spacing-lg;
+          border-radius: $border-radius-lg;
+          box-shadow: $shadow-sm;
+          display: flex;
+          justify-content: space-between;
+          gap: $spacing-md;
+          flex-direction: column;
+          align-items: center;
+          text-align: left;
+
+          .university-info {
+            h3 {
+              font-size: $font-size-xl;
+              font-weight: $font-weight-semibold;
+              color: $color-primary;
+              margin-bottom: $spacing-xs;
+            }
+
+            p {
+              font-size: $font-size-base;
+              color: $color-text-primary;
+              margin-bottom: $spacing-xs;
+            }
+
+            .degree-level {
+              font-size: $font-size-sm;
+              color: $color-text-secondary;
+              background-color: $color-background;
+              padding: $spacing-xs $spacing-sm;
+              border-radius: $border-radius-sm;
+            }
+          }
+
+          .university-actions {
+            .university-btn {
+              white-space: nowrap;
+              font-weight: $font-weight-semibold;
+            }
+
+            .no-link-notice {
+              color: $color-text-secondary;
+              font-size: $font-size-sm;
+              font-style: italic;
+            }
+          }
+        }
+      }
+    }
+
+    // Next steps section
+    .next-steps {
+      margin-bottom: $spacing-xl;
+
+      h2 {
+        font-size: $font-size-2xl;
+        font-weight: $font-weight-semibold;
+        color: $color-primary;
+        margin-bottom: $spacing-lg;
+      }
+
+      .steps-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: $spacing-lg;
+
+        .next-step {
+          background-color: white;
+          padding: $spacing-lg;
+          border-radius: $border-radius-lg;
+          box-shadow: $shadow-sm;
+          text-align: center;
+
+          .step-icon {
+            font-size: 3rem;
+            margin-bottom: $spacing-md;
+          }
+
+          h3 {
+            font-size: $font-size-lg;
+            font-weight: $font-weight-semibold;
+            color: $color-primary;
+            margin-bottom: $spacing-sm;
+          }
+
+          p {
+            font-size: $font-size-base;
+            color: $color-text-secondary;
+            line-height: 1.5;
+          }
+        }
+      }
+    }
+
+    // Action buttons
+    .thank-you-actions {
+      display: flex;
+      gap: $spacing-md;
+      justify-content: center;
+      margin-top: $spacing-xl;
+
+      @include respond-to(xs) {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  }
+
+  // Loading state
+  &.loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .loading-spinner {
+      text-align: center;
+
+      h2 {
+        color: $color-text-secondary;
+        font-weight: $font-weight-medium;
+      }
+    }
+  }
+}

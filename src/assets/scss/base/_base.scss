@@ -1,0 +1,303 @@
+// Campus Israel - Base Styles
+// Global styles and resets following academic, calm design language
+
+// Import variables and mixins
+@import 'vars';
+@import 'mixins';
+
+// Reset and base styles
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// Reset button styles to prevent browser defaults from overriding our fonts
+button {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  @include body-text;
+  background-color: $color-background;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Typography
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family-headers;
+  font-weight: 700; // NB International Bold
+  color: $color-primary;
+  margin-bottom: $spacing-md;
+}
+
+h1 {
+  font-size: 55px; // NB International Bold Header spec
+  line-height: 50px;
+  
+  @include respond-to(xs) {
+    font-size: 40px;
+    line-height: 36px;
+  }
+}
+
+h2 {
+  font-size: 45px;
+  line-height: 42px;
+  
+  @include respond-to(xs) {
+    font-size: 32px;
+    line-height: 30px;
+  }
+}
+
+h3 {
+  font-size: 35px;
+  line-height: 32px;
+  
+  @include respond-to(xs) {
+    font-size: 28px;
+    line-height: 26px;
+  }
+}
+
+h4 {
+  font-size: 30px;
+  line-height: 28px;
+}
+
+h5 {
+  font-size: 25px;
+  line-height: 24px;
+}
+
+h6 {
+  font-size: 22px;
+  line-height: 22px;
+}
+
+p {
+  margin-bottom: $spacing-md;
+}
+
+// Large paragraph class for subtitles and important text
+.p-large {
+  @include body-text-large;
+
+  @include respond-to(xs) {
+    font-size: 18px;
+    line-height: 24px;
+  }
+}
+
+a {
+  @include hyperlink-inline;
+  color: $color-primary;
+  transition: color $transition-base;
+  
+  &:hover {
+    color: darken($color-primary, 15%);
+  }
+}
+
+// Section headers (academic style)
+.section-header {
+  @include section-header;
+  margin-bottom: $spacing-lg;
+}
+
+// Lists
+ul, ol {
+  margin-bottom: $spacing-md;
+  padding-left: $spacing-lg;
+}
+
+li {
+  margin-bottom: $spacing-sm;
+}
+
+// Buttons
+.btn {
+  @include button-base;
+  
+  &-primary {
+    @include button-primary;
+  }
+  
+  &-secondary {
+    @include button-secondary;
+  }
+  
+  &-success {
+    @include button-success;
+  }
+  
+  &-sm {
+    padding: $spacing-xs $spacing-md;
+    font-size: $font-size-sm;
+  }
+  
+  &-lg {
+    padding: $spacing-md $spacing-xl;
+    font-size: $font-size-md;
+  }
+}
+
+// Form elements
+input,
+select,
+textarea {
+  @include input-base;
+  margin-bottom: $spacing-md;
+}
+
+label {
+  display: block;
+  margin-bottom: $spacing-xs;
+  font-weight: $font-weight-medium;
+}
+
+// Form groups
+.form-group {
+  margin-bottom: $spacing-lg;
+}
+
+// Cards
+.card {
+  @include card;
+  margin-bottom: $spacing-lg;
+}
+
+.card-hover {
+  @include card-hover;
+}
+
+.academic-card {
+  @include academic-card;
+}
+
+// Container
+.container {
+  @include container;
+}
+
+// Utility classes
+.text-center {
+  text-align: center;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-muted {
+  color: $color-text-tertiary;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+
+.mb-sm {
+  margin-bottom: $spacing-sm;
+}
+
+.mb-md {
+  margin-bottom: $spacing-md;
+}
+
+.mb-lg {
+  margin-bottom: $spacing-lg;
+}
+
+.mb-xl {
+  margin-bottom: $spacing-xl;
+}
+
+.mt-0 {
+  margin-top: 0;
+}
+
+.mt-sm {
+  margin-top: $spacing-sm;
+}
+
+.mt-md {
+  margin-top: $spacing-md;
+}
+
+.mt-lg {
+  margin-top: $spacing-lg;
+}
+
+.mt-xl {
+  margin-top: $spacing-xl;
+}
+
+// Accessibility
+.visually-hidden {
+  @include visually-hidden;
+}
+
+// Focus styles for accessibility
+:focus-visible {
+  @include focus-outline;
+}
+
+// Academic-specific elements
+.quote-block {
+  border-left: 4px solid $color-primary;
+  padding-left: $spacing-md;
+  margin: $spacing-lg 0;
+  font-style: italic;
+  color: $color-text-secondary;
+}
+
+.info-box {
+  background-color: rgba($color-primary, 0.05);
+  border-radius: $border-radius-md;
+  padding: $spacing-md;
+  margin-bottom: $spacing-lg;
+}
+
+// Chart and data visualization styles
+.chart-container {
+  @include monochrome-chart;
+  margin: $spacing-lg 0;
+}
+
+// Animations
+.fade-in {
+  @include fade-in;
+}
+
+.slide-in-up {
+  @include slide-in-up;
+}
+
+// Quiz-specific styles
+.quiz-option {
+  @include quiz-option;
+}
+
+.quiz-progress {
+  @include quiz-progress-bar;
+  margin-bottom: $spacing-lg;
+}

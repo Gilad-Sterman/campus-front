@@ -1,0 +1,420 @@
+.university-details-page {
+  min-height: 100vh;
+
+  // Hero Section - following domain/apply intro patterns
+  .university-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    margin-top: .5rem;
+
+    .top {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      margin: 0;
+      text-align: left;
+      align-self: flex-start;
+    }
+
+    .university-hero-title {
+      font-size: 3rem;
+      font-weight: 700;
+      color: $color-primary;
+      margin: 0;
+      text-align: left;
+      align-self: flex-start;
+      width: 100%;
+      font-family: $font-family-display;
+
+      @include respond-to(xs) {
+        font-size: 2rem;
+      }
+    }
+
+    // University Logo - positioned above image
+    .university-logo {
+      width: 60px;
+      height: 60px;
+      overflow: hidden;
+      border-radius: $border-radius-lg;
+      background-color: $color-background;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      align-self: flex-start;
+
+      img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+      }
+
+      @include respond-to(xs) {
+        width: 80px;
+        height: 80px;
+      }
+    }
+
+    // University Hero Image
+    .university-hero-image {
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      @include respond-to(xs) {
+        height: 250px;
+      }
+    }
+
+    .bottom {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      text-align: start;
+      max-width: 800px;
+      width: 100%;
+      margin: auto;
+    }
+
+    h2 {
+      text-align: start;
+      font-family: $font-family-display;
+      max-width: 800px;
+      width: 100%;
+      margin: auto;
+      font-size: $font-size-2xl;
+      color: $color-primary;
+
+      @include respond-to(xs) {
+        font-size: $font-size-xl;
+      }
+    }
+
+    .university-hero-subtitle {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      color: $color-text-primary;
+      margin: 0;
+      max-width: 800px;
+
+      @include respond-to(xs) {
+        font-size: 1rem;
+      }
+    }
+
+    // Visit Us Button
+    .university-visit-btn {
+      align-self: flex-start;
+      
+      .btn {
+        padding: $spacing-md $spacing-xl;
+        font-size: $font-size-md;
+        font-weight: $font-weight-semibold;
+      }
+    }
+
+    @include respond-to(xs) {
+      gap: 1.5rem;
+    }
+  }
+
+  // Container
+  .university-container {
+    @include container;
+    max-width: $container-max-lg;
+    padding-top: $spacing-2xl;
+    padding-bottom: $spacing-2xl;
+  }
+
+  // Loading State
+  .university-loading {
+    text-align: center;
+    padding: 3rem 0;
+    font-size: 1.2rem;
+    color: $color-text-secondary;
+  }
+
+  // Section Title
+  .university-section-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: $color-text-primary;
+    margin: 1rem auto;
+    max-width: 800px;
+
+    @include respond-to(xs) {
+      font-size: 1.5rem;
+    }
+  }
+
+  // Content sections
+  .university-content {
+    max-width: 800px;
+    margin: 0 auto;
+    
+    .university-section {
+      margin-bottom: $spacing-2xl;
+      
+      .university-section-text {
+        @include body-text;
+        line-height: $line-height-relaxed;
+        margin-bottom: $spacing-md;
+      }
+    }
+    
+    .tuition-ranges {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: $spacing-lg;
+      
+      .tuition-item {
+        @include card;
+        
+        h3 {
+          font-size: $font-size-lg;
+          font-weight: $font-weight-semibold;
+          color: $color-primary;
+          margin: 0 0 $spacing-sm 0;
+        }
+        
+        p {
+          @include body-text;
+          margin: 0;
+        }
+      }
+    }
+    
+    .campus-info {
+      .info-item {
+        @include card;
+        
+        h3 {
+          font-size: $font-size-lg;
+          font-weight: $font-weight-semibold;
+          color: $color-primary;
+          margin: 0 0 $spacing-sm 0;
+        }
+        
+        p {
+          @include body-text;
+          margin: 0;
+        }
+      }
+    }
+  }
+
+  // Programs Section
+  .university-programs-section {
+    background-color: $color-seafoam;
+    padding: $spacing-2xl;
+    margin: $spacing-2xl 0;
+    
+    .university-section-title {
+      text-align: center;
+      margin-bottom: $spacing-xl;
+    }
+    
+    .programs-loading {
+      text-align: center;
+      color: $color-text-secondary;
+      font-style: italic;
+      padding: $spacing-lg;
+    }
+    
+    .no-programs {
+      text-align: center;
+      padding: $spacing-lg;
+      
+      p {
+        @include body-text;
+        color: $color-text-secondary;
+        margin: 0;
+      }
+    }
+    
+    .programs-search {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    
+    .program-selector {
+      position: relative;
+      
+      .dropdown-container {
+        position: relative;
+        
+        .dropdown-trigger {
+          width: 100%;
+          padding: $spacing-md $spacing-2xl $spacing-md $spacing-md;
+          background: white;
+          border: 2px solid $color-border;
+          border-radius: $border-radius-pill;
+          font-size: $font-size-base;
+          text-align: left;
+          cursor: pointer;
+          transition: all $transition-base;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          
+          &:hover {
+            border-color: $color-primary;
+          }
+          
+          &:focus {
+            outline: none;
+            border-color: $color-primary;
+            box-shadow: 0 0 0 3px rgba($color-primary, 0.1);
+          }
+          
+          .dropdown-arrow {
+            color: $color-text-secondary;
+            transition: transform $transition-base;
+          }
+        }
+        
+        .dropdown-menu {
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: white;
+          border: 1px solid $color-border;
+          border-radius: $border-radius-lg;
+          box-shadow: $shadow-lg;
+          max-height: 400px;
+          overflow-y: auto;
+          z-index: $z-index-dropdown;
+          margin-top: $spacing-xs;
+          
+          .dropdown-item {
+            padding: $spacing-md;
+            cursor: pointer;
+            transition: all $transition-base;
+            border-bottom: 1px solid rgba($color-divider, 0.5);
+            
+            &:last-child {
+              border-bottom: none;
+            }
+            
+            &:hover {
+              background-color: rgba($color-secondary, 0.05);
+            }
+            
+            .program-info {
+              h4 {
+                font-size: $font-size-base;
+                font-weight: $font-weight-medium;
+                color: $color-primary;
+                margin: 0 0 $spacing-xs 0;
+              }
+              
+              p {
+                @include small-text;
+                margin: 0 0 $spacing-xs 0;
+                
+                &.program-description {
+                  color: $color-text-secondary;
+                  font-style: italic;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    
+    .program-actions {
+      text-align: center;
+      margin-top: $spacing-lg;
+      
+      .btn {
+        @include button-secondary;
+        padding: $spacing-md $spacing-xl;
+      }
+    }
+    
+    @include respond-to(xs) {
+      padding: $spacing-md;
+      margin: $spacing-xl 0;
+    }
+  }
+
+  // Navigation Section
+  .university-navigation {
+    text-align: center;
+    margin-top: $spacing-2xl;
+    max-width: 800px;
+    margin: $spacing-2xl auto 0;
+
+    .btn {
+      @include button-secondary;
+      font-size: $font-size-base;
+      padding: $spacing-md $spacing-xl;
+    }
+  }
+
+  // Error State
+  .error-state {
+    text-align: center;
+    padding: 3rem 0;
+    max-width: 600px;
+    margin: 0 auto;
+
+    h2 {
+      color: $color-error;
+      margin-bottom: $spacing-lg;
+    }
+
+    p {
+      color: $color-text-secondary;
+      margin-bottom: $spacing-xl;
+      font-size: $font-size-lg;
+    }
+
+    .btn {
+      padding: $spacing-md $spacing-xl;
+    }
+  }
+
+  // Responsive Design
+  @include respond-to(xs) {
+    .university-container {
+      padding: $spacing-xl 0;
+    }
+
+    .university-content {
+      .tuition-ranges {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .university-programs-section {
+      .program-selector {
+        .dropdown-container {
+          .dropdown-trigger {
+            padding: $spacing-sm $spacing-lg $spacing-sm $spacing-sm;
+          }
+        }
+      }
+    }
+
+    .university-navigation {
+      margin-top: $spacing-xl;
+
+      .btn {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+  }
+}

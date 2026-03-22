@@ -1,0 +1,119 @@
+// Campus Israel - Style Variables
+// Following the academic, calm, trustworthy design language
+
+// Color Palette
+$color-white: #FFFFFF;
+$color-accent-blue: #00BAFF;
+$color-accent-blue1:  #52B4F9;
+$color-seafoam: #00DFAA;
+$color-neutral-gray: #D9D9D9;
+$color-cta-orange: #FF3B00;
+
+$color-primary: #1c1e22; // Charcoal / near-black primary
+$color-secondary: $color-accent-blue1;
+$color-secondary-light: $color-seafoam;
+$color-background: #f9f9f9; // Off-white background
+$color-surface: $color-accent-blue1;
+$color-success: #42C500; // Muted green for success/progress
+$color-error: #a64452; // Subdued red for errors
+$color-text-primary: #1c1e22; // Primary text color (charcoal)
+$color-text-secondary: #858585; // Secondary text color
+$color-text-tertiary: #6e6e6e; // Tertiary text color
+$color-gray: $color-neutral-gray;
+$color-border: #e0e0e0; // Border color
+$color-divider: #ebebeb; // Divider color
+$color-disabled: #c4c4c4; // Disabled state color
+$btn-CTA-Color: $color-cta-orange;
+
+// Typography
+// Updated to use actual loaded font files
+$font-family-display: 'Druk Wide Super', 'Arial Black', Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+$font-family-secondary: 'NB International Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+$font-family-primary: $font-family-secondary;
+$font-family-headers: $font-family-secondary;
+$font-family-hero: $font-family-display;
+
+// Font Sizes
+$font-size-xs: 0.75rem; // 12px
+$font-size-sm: 0.875rem; // 14px
+$font-size-base: 1rem; // 16px
+$font-size-md: 1.125rem; // 18px
+$font-size-lg: 1.25rem; // 20px
+$font-size-xl: 1.5rem; // 24px
+$font-size-2xl: 1.875rem; // 30px
+$font-size-3xl: 2.25rem; // 36px
+
+// Font Weights
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+// Line Heights
+$line-height-tight: 1.25;
+$line-height-base: 1.5;
+$line-height-relaxed: 1.75;
+
+// Spacing
+$space-20: 20px;
+$space-30: 30px;
+$space-40: 40px;
+
+$spacing-xs: 0.25rem; // 4px
+$spacing-sm: 0.5rem; // 8px
+$spacing-md: 1rem; // 16px
+$spacing-lg: 1.5rem; // 24px
+$spacing-xl: 2rem; // 32px
+$spacing-2xl: 3rem; // 48px
+$spacing-3xl: 4rem; // 64px
+
+// Border Radius
+$border-radius-sm: 0.25rem; // 4px
+$border-radius-md: 0.5rem; // 8px
+$border-radius-lg: 0.75rem; // 12px
+$border-radius-xl: 1rem; // 16px
+$border-radius-pill: 9999px; // Pill shape for buttons
+
+// Shadows
+$shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+$shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+// Transitions
+$transition-fast: 150ms ease;
+$transition-base: 250ms ease;
+$transition-slow: 350ms ease;
+
+// Z-index
+$z-index-dropdown: 1000;
+$z-index-sticky: 1020;
+$z-index-fixed: 1030;
+$z-index-header: 1035;
+$z-index-modal-backdrop: 1040;
+$z-index-modal: 1050;
+$z-index-popover: 1060;
+$z-index-tooltip: 1070;
+
+// Breakpoints
+$breakpoint-xs: 0;
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+$breakpoint-2xl: 1400px;
+$breakpoint-3xl: 1600px;
+
+// Container max widths
+$container-max-sm: 540px;
+$container-max-md: 720px;
+$container-max-lg: 1080px;
+$container-max-xl: 1240px;
+$container-max-2xl: 1380px;
+$container-max-3xl: 1560px;
+
+// Quiz-specific variables
+$quiz-progress-height: 20px;
+$quiz-option-border: 1px solid $color-border;
+$quiz-option-selected-bg: rgba($color-success, 0.1);
+$quiz-option-selected-border: 1px solid $color-success;

@@ -1,0 +1,137 @@
+// Campus Israel - Navigation Styles
+
+// App navigation
+.app-nav {
+  ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    
+    @include respond-to(xs) {
+      flex-direction: column;
+    }
+  }
+  
+  li {
+    margin: 0 $spacing-md;
+    
+    @include respond-to(xs) {
+      margin: $spacing-xs 0;
+    }
+  }
+  
+  a {
+    text-decoration: none;
+    color: $color-text-primary;
+    font-weight: $font-weight-medium;
+    padding: $spacing-xs 0;
+    position: relative;
+    transition: color $transition-base;
+    
+    &:hover {
+      color: $color-primary;
+    }
+    
+    &.active {
+      color: $color-primary;
+      font-weight: $font-weight-semibold;
+      
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: $color-primary;
+      }
+    }
+  }
+}
+
+// App logo
+.app-logo {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-bold;
+  
+  a {
+    color: $color-primary;
+    text-decoration: none;
+  }
+  
+  // Hide duplicate logo in desktop navbar
+  .app-navbar & {
+    @media (min-width: $breakpoint-md) {
+      display: block;
+    }
+    
+    @include respond-to(xs) {
+      display: none;
+    }
+  }
+}
+
+// Footer navigation
+.footer-links {
+  h4 {
+    color: white;
+    margin-bottom: $spacing-md;
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  li {
+    margin-bottom: $spacing-sm;
+  }
+  
+  a {
+    color: rgba(white, 0.8);
+    text-decoration: none;
+    transition: color $transition-base;
+    
+    &:hover {
+      color: white;
+    }
+  }
+}
+
+// Mobile navigation toggle
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: $spacing-xs;
+  
+  @include respond-to(xs) {
+    display: block;
+  }
+  
+  span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    margin: 5px 0;
+    background-color: $color-primary;
+    transition: all $transition-base;
+  }
+  
+  &.active {
+    span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+    
+    span:nth-child(2) {
+      opacity: 0;
+    }
+    
+    span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+  }
+}

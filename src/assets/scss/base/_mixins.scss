@@ -1,0 +1,385 @@
+// Campus Israel - SCSS Mixins
+// Reusable style patterns for consistent implementation
+
+// Media query mixins
+@mixin respond-to($breakpoint) {
+  @if $breakpoint ==xs {
+    @media (max-width: #{$breakpoint-sm - 1}) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint ==sm {
+    @media (min-width: $breakpoint-sm) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint ==md {
+    @media (min-width: $breakpoint-md) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint ==lg {
+    @media (min-width: $breakpoint-lg) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint ==xl {
+    @media (min-width: $breakpoint-xl) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint ==2xl {
+    @media (min-width: $breakpoint-2xl) {
+      @content;
+    }
+  }
+
+  @else if $breakpoint ==3xl {
+    @media (min-width: $breakpoint-3xl) {
+      @content;
+    }
+  }
+}
+
+// Container mixin
+@mixin container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+
+  @include respond-to(sm) {
+    max-width: $container-max-sm;
+  }
+
+  @include respond-to(md) {
+    max-width: $container-max-md;
+  }
+
+  @include respond-to(lg) {
+    max-width: $container-max-lg;
+  }
+
+  @include respond-to(xl) {
+    max-width: $container-max-xl;
+  }
+
+  @include respond-to(2xl) {
+    max-width: $container-max-2xl;
+  }
+
+  @include respond-to(3xl) {
+    max-width: $container-max-3xl;
+  }
+}
+
+// Typography mixins
+@mixin section-header {
+  font-family: $font-family-headers;
+  font-weight: 700; // NB International Bold
+  font-size: 55px; // Per typography spec
+  line-height: 50px; // Per typography spec
+  color: $color-primary;
+}
+
+@mixin body-text {
+  font-family: $font-family-primary;
+  font-weight: 400; // NB International Book/Regular
+  font-size: 18px; // Reduced standard paragraph size
+  line-height: 26px; // Proportional line height
+  color: $color-text-primary;
+}
+
+@mixin body-text-large {
+  font-family: $font-family-primary;
+  font-weight: 400; // NB International Book/Regular
+  font-size: 30px; // Original large size for subtitles
+  line-height: 40px; // Original line height
+  color: $color-text-primary;
+}
+
+@mixin small-text {
+  font-family: $font-family-primary;
+  font-weight: $font-weight-regular;
+  font-size: $font-size-sm;
+  line-height: $line-height-base;
+  color: $color-text-secondary;
+}
+
+// Button mixins
+@mixin button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: $font-family-primary;
+  font-weight: $font-weight-medium;
+  font-size: $font-size-base;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  border: 2px solid transparent;
+  border-radius: $border-radius-pill;
+  padding: $spacing-sm $spacing-lg;
+  transition: all $transition-base;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}
+
+@mixin button-primary {
+  @include button-base;
+  background-color: $btn-CTA-Color;
+  color: white;
+  border-color: $btn-CTA-Color;
+
+  &:hover:not(:disabled) {
+    background-color: $color-primary;
+    border-color: $color-primary;
+    color: white;
+  }
+
+  &:active:not(:disabled) {
+    background-color: darken($color-primary, 8%);
+    border-color: darken($color-primary, 8%);
+    color: white;
+  }
+}
+
+@mixin button-secondary {
+  @include button-base;
+  background-color: transparent;
+  color: $color-primary;
+  border-color: $color-primary;
+
+  &:hover:not(:disabled) {
+    background-color: $color-primary;
+    color: white;
+  }
+
+  &:active:not(:disabled) {
+    background-color: darken($color-primary, 8%);
+    border-color: darken($color-primary, 8%);
+    color: white;
+  }
+}
+
+@mixin hyperlink-inline {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1.5px;
+
+  &:hover {
+    opacity: 0.85;
+  }
+}
+
+@mixin button-success {
+  @include button-base;
+  background-color: $color-success;
+  color: white;
+
+  &:hover:not(:disabled) {
+    background-color: darken($color-success, 10%);
+  }
+
+  &:active:not(:disabled) {
+    background-color: darken($color-success, 15%);
+  }
+}
+
+// Card mixins
+@mixin card {
+  background-color: white;
+  border-radius: $border-radius-md;
+  box-shadow: $shadow-sm;
+  padding: $spacing-lg;
+}
+
+@mixin card-hover {
+  @include card;
+  transition: transform $transition-base, box-shadow $transition-base;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
+  }
+}
+
+// Form element mixins
+@mixin input-base {
+  display: block;
+  width: 100%;
+  padding: $spacing-sm $spacing-md;
+  font-family: $font-family-primary;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  color: $color-text-primary;
+  background-color: white;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-md;
+  transition: border-color $transition-base, box-shadow $transition-base;
+
+  &:focus {
+    border-color: $color-primary;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba($color-primary, 0.1);
+  }
+
+  &::placeholder {
+    color: $color-text-tertiary;
+  }
+
+  &:disabled {
+    background-color: $color-surface;
+    cursor: not-allowed;
+  }
+}
+
+// Quiz-specific mixins
+@mixin quiz-option {
+  display: flex;
+  align-items: center;
+  padding: $spacing-md;
+  border: $quiz-option-border;
+  border-radius: $border-radius-md;
+  margin-bottom: $spacing-sm;
+  cursor: pointer;
+  transition: all $transition-base;
+
+  &:hover {
+    background-color: rgba($color-primary, 0.03);
+  }
+
+  &.selected {
+    background-color: $quiz-option-selected-bg;
+    border: $quiz-option-selected-border;
+  }
+}
+
+@mixin quiz-progress-bar {
+  width: 100%;
+  height: $quiz-progress-height;
+  background-color: $color-gray;
+  border-radius: $border-radius-pill;
+  overflow: hidden;
+
+  .progress {
+    height: 100%;
+    background-color: $color-success;
+    transition: width $transition-base;
+  }
+}
+
+// Accessibility mixins
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+@mixin focus-outline {
+  outline: 2px solid $color-primary;
+  outline-offset: 2px;
+}
+
+// Chart and data visualization mixins
+@mixin monochrome-chart {
+  .chart-bar {
+    background-color: $color-primary;
+    opacity: 0.9;
+  }
+
+  .chart-line {
+    stroke: $color-primary;
+    stroke-width: 2px;
+    fill: none;
+  }
+
+  .chart-area {
+    fill: $color-primary;
+    opacity: 0.8;
+  }
+
+  .chart-label {
+    @include small-text;
+  }
+}
+
+// Animation mixins
+@mixin fade-in {
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+
+    to {
+      opacity: 1;
+    }
+  }
+
+  animation: fadeIn $transition-base;
+}
+
+@mixin slide-in-up {
+  @keyframes slideInUp {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  animation: slideInUp $transition-base;
+}
+
+// Layout mixins
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// Academic-specific mixins
+@mixin academic-section {
+  margin-bottom: $spacing-2xl;
+
+  h2 {
+    @include section-header;
+    margin-bottom: $spacing-lg;
+  }
+}
+
+@mixin academic-card {
+  @include card;
+  border-left: 4px solid $color-primary;
+}

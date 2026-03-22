@@ -1,0 +1,156 @@
+// Campus Israel - Features Section Styles
+
+.why-campus-section {
+  padding: $spacing-2xl 0;
+  background-color: white;
+
+  .section-header {
+    text-align: center;
+    font-family: $font-family-display;
+  }
+}
+
+.features-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $spacing-lg;
+  margin-top: $spacing-xl;
+  width: 100%;
+  justify-content: center;
+  align-items: stretch;
+
+  .feature-tile {
+    flex: 0 0 200px;
+    max-width: 200px;
+  }
+
+  @include respond-to(md) {
+    .feature-tile {
+      flex: 0 0 180px;
+      max-width: 180px;
+    }
+  }
+
+  @include respond-to(xs) {
+    flex-direction: column;
+    align-items: center;
+
+    .feature-tile {
+      flex: 0 0 auto;
+      width: 200px;
+      max-width: 200px;
+    }
+  }
+}
+
+.feature-tile {
+  text-align: center;
+  padding: $spacing-2xl $spacing-md;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid $color-primary;
+  border-radius: $border-radius-pill;
+
+  .feature-icon {
+
+    img {
+      width: 70px;
+      height: 70px;
+    }
+
+    width: 70px;
+    height: 70px;
+    margin: 0 auto $spacing-md auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all $transition-base;
+
+    &:hover {
+      transform: translateY(-5px);
+    }
+  }
+
+  h3 {
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    margin-bottom: $spacing-sm;
+  }
+
+  p {
+    color: $color-text-secondary;
+    margin: 0;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: $font-size-sm;
+    line-height: $line-height-relaxed;
+  }
+
+  .btn-pill {
+    display: inline-block;
+    background-color: $btn-CTA-Color;
+    color: white;
+    margin-block: $spacing-md;
+    padding: $spacing-sm $spacing-lg;
+    border-radius: $border-radius-pill;
+    font-weight: $font-weight-medium;
+    text-decoration: none;
+    transition: all $transition-base;
+    max-width: 150px;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: $shadow-sm;
+    }
+  }
+}
+
+// Quiz CTA section
+.quiz-cta-section {
+  padding: $spacing-md 0;
+  background-color: white;
+  text-align: center;
+
+  .quiz-cta-content {
+    margin: 0 auto;
+    background-color: $color-secondary-light;
+    border-radius: $border-radius-pill;
+    padding: $spacing-md;
+    
+    @include respond-to(xs) {
+      padding: $spacing-sm;
+    }
+
+    h2 {
+      // font-size: $font-size-2xl;
+      margin-bottom: $spacing-md;
+      text-align: center;
+      font-family: $font-family-display;
+
+      @include respond-to(xs) {
+        font-size: $font-size-xl;
+      }
+    }
+
+    h1 {
+      @include respond-to(xs) {
+        font-size: $font-size-xl;
+      }
+    }
+
+    p {
+      font-size: $font-size-lg;
+      color: $color-text-secondary;
+      margin-bottom: $spacing-xl;
+
+      @include respond-to(xs) {
+        font-size: $font-size-base;
+      }
+    }
+  }
+}

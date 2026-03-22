@@ -1,0 +1,204 @@
+// Campus Israel - Contact Footer Styles
+
+.contact-footer {
+  background-color: $color-background;
+  color: $color-primary;
+  padding-top: $spacing-2xl;
+}
+
+// Contact section
+.contact-section {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $spacing-2xl;
+  padding-bottom: $spacing-2xl;
+  border-bottom: 1px solid rgba(white, 0.1);
+  align-items: start;
+
+  @include respond-to(md) {
+    grid-template-columns: 1fr;
+    gap: $spacing-xl;
+    text-align: center;
+  }
+}
+
+.contact-left {
+  h2 {
+    // color: white;
+    margin-bottom: $spacing-lg;
+    font-family: $font-family-display;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    @include respond-to(xs) {
+      font-size: $font-size-lg;
+    }
+  }
+}
+
+.contact-right {
+  h3 {
+    margin-bottom: $spacing-md;
+    font-size: $font-size-lg;
+    font-weight: $font-weight-semibold;
+  }
+
+  .contact-methods {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-md;
+    justify-content: space-between;
+    align-items: center;
+
+    a {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: $spacing-sm;
+      border: 1px solid $color-primary;
+      border-radius: $border-radius-pill;
+      padding: 1rem 1.5rem;
+      text-decoration: none;
+
+      span {
+        font-size: $font-size-3xl;
+        font-weight: $font-weight-bold;
+      }
+
+      img {
+        width: 32px;
+        height: 32px;
+      }
+
+      .multi-img {
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+      }
+    }
+
+    @include respond-to(xs) {
+      flex-direction: column;
+      align-items: stretch;
+
+      a {
+        // justify-content: center;
+        padding: $spacing-sm $spacing-md;
+      }
+    }
+  }
+}
+
+// Footer navigation
+.footer-navigation {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $spacing-lg;
+  padding: $spacing-xl 0;
+  border-bottom: 1px solid rgba(white, 0.1);
+
+  .btn {
+    align-self: center;
+    padding: 1rem 2rem;
+    font-size: $font-size-xl;
+    font-weight: bold;
+  }
+
+
+  @include respond-to(xs) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.footer-nav-group {
+  h3 {
+    font-size: $font-size-md;
+    margin-bottom: $spacing-md;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    margin-bottom: $spacing-sm;
+  }
+
+  a {
+    // color: rgba(white, 0.8);
+    font-size: $font-size-sm;
+    transition: color $transition-base;
+
+    &:hover {
+      color: $color-text-secondary;
+      text-decoration: underline;
+    }
+  }
+}
+
+// Social icons (now within footer nav group)
+.footer-nav-group .social-icons {
+  display: flex;
+  gap: $spacing-sm;
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: $spacing-xs;
+    // color: rgba(white, 0.8);
+    text-decoration: none;
+    transition: all $transition-base;
+
+    .social-icon {
+      font-size: 20px;
+      margin-right: $spacing-sm;
+      transition: all $transition-base;
+    }
+
+    &:hover {
+      color: $color-text-secondary;
+
+      .social-icon {
+        // color: white;
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+
+// Legal notes
+.legal-notes {
+  text-align: center;
+  padding: $spacing-lg 0;
+  font-size: $font-size-sm;
+
+  p {
+    margin-bottom: $spacing-sm;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.legal-links {
+  display: flex;
+  justify-content: center;
+  gap: $spacing-lg;
+  margin-top: $spacing-md;
+
+  a {
+    color: rgba(white, 0.8);
+    text-decoration: none;
+
+    &:hover {
+      color: white;
+      text-decoration: underline;
+    }
+  }
+}

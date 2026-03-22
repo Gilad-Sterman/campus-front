@@ -1,0 +1,392 @@
+.universities-page {
+  .page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary-color);
+    }
+    
+    .page-description {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  }
+
+  .universities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .university-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid var(--border-color);
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .university-card-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 1rem;
+      gap: 1rem;
+
+      .university-logo {
+        width: 60px;
+        height: 60px;
+        object-fit: contain;
+        border-radius: 8px;
+        background: var(--background-light);
+        padding: 0.5rem;
+      }
+
+      .university-info {
+        flex: 1;
+
+        .university-name {
+          font-size: 1.25rem;
+          font-weight: 600;
+          margin-bottom: 0.25rem;
+          color: var(--text-primary);
+        }
+
+        .university-location {
+          color: var(--text-secondary);
+          font-size: 0.9rem;
+          margin: 0;
+          display: flex;
+          align-items: center;
+          
+          &::before {
+            content: "📍";
+            margin-right: 0.5rem;
+          }
+        }
+      }
+    }
+
+    .university-description {
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .university-actions {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+
+      .btn {
+        flex: 1;
+        min-width: 120px;
+        text-align: center;
+        font-size: 0.9rem;
+        padding: 0.6rem 1rem;
+      }
+    }
+
+    .university-meta {
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-light);
+      
+      small {
+        color: var(--text-muted);
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  .empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-secondary);
+
+    h3 {
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+  }
+
+  .page-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 0;
+    border-top: 1px solid var(--border-light);
+    color: var(--text-secondary);
+    gap: 2rem;
+
+    .footer-info {
+      flex: 1;
+
+      p {
+        margin: 0 0 0.25rem 0;
+      }
+
+      .cache-info {
+        font-size: 0.875rem;
+        color: var(--text-muted);
+        font-style: italic;
+      }
+    }
+
+    .btn {
+      flex-shrink: 0;
+      min-width: 120px;
+
+      &.loading {
+        opacity: 0.7;
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .loading-state {
+    text-align: center;
+    
+    .loading-animation {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 2rem 0 1.5rem;
+
+      .pulse-circle {
+        width: 12px;
+        height: 12px;
+        background: var(--primary-color);
+        border-radius: 50%;
+        animation: pulse 1.5s ease-in-out infinite;
+
+        &.pulse-delay-1 {
+          animation-delay: 0.2s;
+        }
+
+        &.pulse-delay-2 {
+          animation-delay: 0.4s;
+        }
+      }
+    }
+
+    h3 {
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    p {
+      color: var(--text-secondary);
+      margin-bottom: 3rem;
+    }
+
+    .skeleton-card {
+      background: white;
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--border-color);
+      animation: skeleton-shimmer 2s ease-in-out infinite;
+
+      .skeleton-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+
+        .skeleton-logo {
+          width: 60px;
+          height: 60px;
+          border-radius: 8px;
+          background: #f0f0f0;
+          animation: skeleton-pulse 2s ease-in-out infinite;
+        }
+
+        .skeleton-info {
+          flex: 1;
+
+          .skeleton-title {
+            height: 20px;
+            width: 70%;
+            margin-bottom: 0.5rem;
+          }
+
+          .skeleton-location {
+            height: 16px;
+            width: 50%;
+          }
+        }
+      }
+
+      .skeleton-description {
+        margin-bottom: 1.5rem;
+
+        .skeleton-line {
+          height: 14px;
+          background: #f0f0f0;
+          border-radius: 4px;
+          margin-bottom: 0.5rem;
+          animation: skeleton-pulse 2s ease-in-out infinite;
+
+          &:nth-child(2) {
+            animation-delay: 0.2s;
+          }
+
+          &:nth-child(3) {
+            animation-delay: 0.4s;
+          }
+
+          &.skeleton-short {
+            width: 60%;
+          }
+        }
+      }
+
+      .skeleton-actions {
+        display: flex;
+        gap: 0.75rem;
+
+        .skeleton-button {
+          flex: 1;
+          height: 36px;
+          background: #f0f0f0;
+          border-radius: 6px;
+          animation: skeleton-pulse 2s ease-in-out infinite;
+
+          &:nth-child(2) {
+            animation-delay: 0.3s;
+          }
+        }
+      }
+    }
+  }
+
+  .error-message {
+    text-align: center;
+    padding: 3rem;
+    background: var(--background-light);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+
+    h2 {
+      color: var(--error-color);
+      margin-bottom: 1rem;
+    }
+
+    p {
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { 
+    opacity: 0.4;
+    transform: scale(0.8);
+  }
+  50% { 
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes skeleton-pulse {
+  0%, 100% { 
+    opacity: 1;
+  }
+  50% { 
+    opacity: 0.6;
+  }
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+// Responsive design
+@media (max-width: 768px) {
+  .universities-page {
+    .page-header h1 {
+      font-size: 2rem;
+    }
+
+    .universities-grid {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+
+    .page-footer {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+
+      .btn {
+        align-self: stretch;
+      }
+    }
+
+    .university-card {
+      padding: 1.25rem;
+
+      .university-card-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.75rem;
+
+        .university-logo {
+          width: 80px;
+          height: 80px;
+        }
+      }
+
+      .university-actions {
+        flex-direction: column;
+
+        .btn {
+          flex: none;
+          min-width: auto;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .universities-page {
+    .page-header {
+      margin-bottom: 2rem;
+
+      h1 {
+        font-size: 1.75rem;
+      }
+    }
+
+    .university-card {
+      padding: 1rem;
+    }
+  }
+}

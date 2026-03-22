@@ -1,0 +1,270 @@
+// // Campus Israel - Apply Page Styles
+
+// .apply-page {
+//   min-height: 100vh;
+// }
+
+// .apply-header {
+//   text-align: center;
+//   margin-bottom: $spacing-2xl;
+  
+//   h1 {
+//     font-size: $font-size-3xl;
+//     color: $color-primary;
+//     margin-bottom: $spacing-md;
+    
+//     @include respond-to(xs) {
+//       font-size: $font-size-2xl;
+//     }
+//   }
+  
+//   .apply-subtitle {
+//     font-size: $font-size-lg;
+//     color: $color-text-secondary;
+//     max-width: 600px;
+//     margin: 0 auto;
+    
+//     @include respond-to(xs) {
+//       font-size: $font-size-base;
+//     }
+//   }
+// }
+
+// // Quiz recommendation section
+// .quiz-recommendation {
+//   display: flex;
+//   justify-content: center;
+//   margin-bottom: $spacing-2xl;
+  
+//   .recommendation-card {
+//     @include card;
+//     text-align: center;
+//     max-width: 500px;
+//     padding: $spacing-xl;
+//     background-color: rgba($color-primary, 0.02);
+//     border: 1px solid rgba($color-primary, 0.1);
+    
+//     h2 {
+//       color: $color-primary;
+//       margin-bottom: $spacing-md;
+//       font-size: $font-size-lg;
+//     }
+    
+//     p {
+//       margin-bottom: $spacing-lg;
+//       line-height: $line-height-relaxed;
+//       color: $color-text-secondary;
+//     }
+//   }
+// }
+
+// // Main application content
+// .apply-content {
+//   display: flex;
+//   flex-direction: column;
+//   gap: $spacing-2xl;
+// }
+
+// // Current applications section
+// .current-applications {
+//   h2 {
+//     margin-bottom: $spacing-lg;
+//     color: $color-primary;
+//   }
+  
+//   .applications-list {
+//     display: flex;
+//     flex-direction: column;
+//     gap: $spacing-lg;
+//   }
+  
+//   .application-card {
+//     @include card;
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+//     padding: $spacing-lg;
+    
+//     @include respond-to(xs) {
+//       flex-direction: column;
+//       align-items: flex-start;
+//       gap: $spacing-md;
+//     }
+    
+//     .application-info {
+//       flex: 1;
+      
+//       h3 {
+//         margin-bottom: $spacing-xs;
+//         color: $color-primary;
+//       }
+      
+//       p {
+//         color: $color-text-secondary;
+//         margin-bottom: $spacing-sm;
+//       }
+      
+//       .status-badge {
+//         display: inline-block;
+//         padding: $spacing-xs $spacing-sm;
+//         border-radius: $border-radius-pill;
+//         font-size: $font-size-sm;
+//         font-weight: $font-weight-medium;
+//         text-transform: uppercase;
+        
+//         &.status-draft {
+//           background-color: rgba($color-error, 0.1);
+//           color: $color-error;
+//         }
+        
+//         &.status-submitted {
+//           background-color: rgba($color-primary, 0.1);
+//           color: $color-primary;
+//         }
+        
+//         &.status-completed {
+//           background-color: rgba($color-success, 0.1);
+//           color: $color-success;
+//         }
+//       }
+//     }
+    
+//     .application-actions {
+//       display: flex;
+//       gap: $spacing-sm;
+      
+//       @include respond-to(xs) {
+//         width: 100%;
+//         justify-content: flex-start;
+//       }
+//     }
+//   }
+  
+//   .no-applications {
+//     @include card;
+//     text-align: center;
+//     padding: $spacing-2xl;
+//     color: $color-text-secondary;
+//   }
+// }
+
+// // New application section
+// .new-application {
+//   h2 {
+//     margin-bottom: $spacing-md;
+//     color: $color-primary;
+//   }
+  
+//   > p {
+//     margin-bottom: $spacing-lg;
+//     color: $color-text-secondary;
+//   }
+  
+//   .recommended-programs {
+//     display: grid;
+//     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+//     gap: $spacing-lg;
+//     margin-bottom: $spacing-xl;
+//   }
+  
+//   .program-card {
+//     @include card;
+//     padding: $spacing-lg;
+//     text-align: center;
+//     transition: all $transition-base;
+    
+//     &:hover {
+//       transform: translateY(-2px);
+//       box-shadow: $shadow-md;
+//     }
+    
+//     h3 {
+//       margin-bottom: $spacing-sm;
+//       color: $color-primary;
+//     }
+    
+//     > p {
+//       color: $color-text-secondary;
+//       margin-bottom: $spacing-md;
+//     }
+    
+//     .program-details {
+//       display: flex;
+//       justify-content: space-between;
+//       margin-bottom: $spacing-lg;
+//       padding: $spacing-sm 0;
+//       border-top: 1px solid $color-border;
+//       border-bottom: 1px solid $color-border;
+      
+//       span {
+//         font-size: $font-size-sm;
+//         color: $color-text-secondary;
+//         font-weight: $font-weight-medium;
+//       }
+//     }
+//   }
+  
+//   .browse-all {
+//     text-align: center;
+//   }
+// }
+
+// // Process info section
+// .process-info {
+//   h2 {
+//     margin-bottom: $spacing-lg;
+//     color: $color-primary;
+//     text-align: center;
+//   }
+  
+//   .process-steps {
+//     display: grid;
+//     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+//     gap: $spacing-lg;
+    
+//     @include respond-to(md) {
+//       grid-template-columns: repeat(2, 1fr);
+//     }
+    
+//     @include respond-to(xs) {
+//       grid-template-columns: 1fr;
+//     }
+//   }
+  
+//   .step {
+//     display: flex;
+//     align-items: flex-start;
+//     gap: $spacing-md;
+//     padding: $spacing-lg;
+//     background-color: white;
+//     border-radius: $border-radius-md;
+//     box-shadow: $shadow-sm;
+    
+//     .step-number {
+//       flex-shrink: 0;
+//       width: 40px;
+//       height: 40px;
+//       border-radius: 50%;
+//       background-color: $color-primary;
+//       color: white;
+//       display: flex;
+//       align-items: center;
+//       justify-content: center;
+//       font-weight: $font-weight-bold;
+//       font-size: $font-size-lg;
+//     }
+    
+//     .step-content {
+//       h3 {
+//         margin-bottom: $spacing-sm;
+//         color: $color-primary;
+//       }
+      
+//       p {
+//         color: $color-text-secondary;
+//         line-height: $line-height-relaxed;
+//         margin: 0;
+//       }
+//     }
+//   }
+// }

@@ -1,0 +1,163 @@
+// Campus Israel - Layout Component Styles
+
+// App container
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding-left: $space-30;
+  padding-right: $space-30;
+  box-sizing: border-box;
+
+  @include respond-to(xs) {
+    padding-inline: 5px;
+  }
+}
+
+// Header styles
+.app-header {
+  background-color: white;
+  box-shadow: $shadow-sm;
+  padding: $spacing-md 0;
+  position: sticky;
+  top: 0;
+  z-index: $z-index-sticky;
+}
+
+.app-navbar {
+  @include flex-between;
+
+  @include respond-to(xs) {
+    flex-direction: column;
+    align-items: flex-start;
+
+    >* {
+      margin-bottom: $spacing-md;
+    }
+  }
+}
+
+.app-logo {
+  max-width: 150px;
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 100%;
+  }
+}
+
+.app-nav {
+  ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    @include respond-to(xs) {
+      flex-direction: column;
+    }
+  }
+
+  li {
+    margin: 0 $spacing-md;
+
+    @include respond-to(xs) {
+      margin: $spacing-xs 0;
+    }
+  }
+
+  a {
+    text-decoration: none;
+    color: $color-text-primary;
+    font-weight: $font-weight-medium;
+    transition: color $transition-base;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+}
+
+// Main content
+main {
+  flex: 1;
+}
+
+// Features grid
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $spacing-lg;
+  margin-top: $spacing-xl;
+
+  @include respond-to(lg) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include respond-to(xs) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Footer styles
+.app-footer {
+  color: $color-primary;
+  padding: $spacing-2xl 0 $spacing-lg;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: $spacing-xl;
+  margin-bottom: $spacing-xl;
+
+  @include respond-to(md) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @include respond-to(xs) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.footer-logo {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  margin-bottom: $spacing-md;
+}
+
+.footer-links {
+  h4 {
+    // color: white;
+    margin-bottom: $spacing-md;
+  }
+
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    margin-bottom: $spacing-sm;
+  }
+
+  a {
+    // color: rgba(white, 0.8);
+    text-decoration: none;
+    transition: color $transition-base;
+
+    &:hover {
+      color: white;
+    }
+  }
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(white, 0.2);
+  padding-top: $spacing-md;
+  // color: rgba(white, 0.8);
+  font-size: $font-size-sm;
+}

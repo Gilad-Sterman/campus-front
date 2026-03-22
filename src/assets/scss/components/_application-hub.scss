@@ -1,0 +1,45 @@
+.application-hub {
+    position: relative;
+    // padding: 1rem;
+    margin-bottom: 3rem;
+    display: flex;
+    flex-direction: column;
+
+    &__content {
+        padding: 1rem .5rem;
+        background-color: $color-surface;
+    }
+
+    &__description {
+        max-width: 800px;
+        margin: auto;
+    }
+
+    &__info-text {
+        max-width: 800px;
+        margin: auto;
+    }
+
+
+
+    .apply-intro {
+        &__search-wrapper {
+            max-width: 700px;
+        }
+
+        &__search {
+            margin: 0;
+        }
+
+        &__dropdown {
+            position: relative;
+            max-width: 700px;
+            margin-top: .5rem;
+            max-height: 200px;
+        }
+    }
+
+    @include respond-to(xs) {
+        padding: 0;
+    }
+}

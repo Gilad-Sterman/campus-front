@@ -1,0 +1,255 @@
+// Profile Results Styles (V2 Update)
+
+
+
+.results-analysis {
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    padding-bottom: 1rem;
+  }
+
+  .section-description {
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+  }
+}
+
+// Priorities Grid (Academic, Campus, City)
+.priorities-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.priority-card {
+  padding: .5rem;
+  text-align: center;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+
+  .priority-value {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .priority-label {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+  }
+
+  .priority-bar {
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+
+    .priority-fill {
+      height: 100%;
+      // background: #3498db;
+      border-radius: 4px;
+      transition: width 1s ease-in-out;
+    }
+  }
+}
+
+// Analysis Grid (Big 5 etc)
+.analysis-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+
+  .analysis-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    h4 {
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+  }
+}
+
+.recommendations {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .card-icon {
+      font-size: 2rem;
+      color: #27ae60;
+      margin-bottom: 1rem;
+    }
+
+    h4 {
+      font-size: 1.2rem;
+      color: #2c3e50;
+      margin-bottom: 0.75rem;
+    }
+
+    p {
+      // color: #555;
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+  }
+
+.results-actions {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+  background-color: white;
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    padding: 1rem 1.5rem;
+  }
+}
+
+
+// No Results State
+.no-quiz-results {
+  text-align: center;
+  padding: $spacing-md;
+  background-color: $color-surface;
+
+  .no-results-icon {
+    margin-bottom: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    max-width: 500px;
+    margin: 0 auto 2rem;
+    line-height: 1.6;
+  }
+
+  .quiz-cta {
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 1rem 2.5rem;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 1.1rem;
+      text-decoration: none;
+      transition: all 0.2s;
+
+      &:hover {
+        background-color: #2980b9;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(52, 152, 219, 0.3);
+      }
+    }
+  }
+}
+
+// RIASEC Interest Profile Styles
+.riasec-scores {
+  margin-top: 2rem;
+
+  h4 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .section-description {
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+  }
+}
+
+.riasec-visualization {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+}
+
+.riasec-chart-container {
+  flex: 1;
+  min-width: 300px;
+  max-width: 400px;
+  
+  // Ensure chart is centered
+  display: flex;
+  justify-content: center;
+}
+
+.riasec-summary {
+  flex: 1;
+  min-width: 250px;
+  
+  h5 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #2c3e50;
+  }
+}
+
+.riasec-top-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.riasec-summary-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 0;
+  
+  .riasec-rank {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: $color-primary;
+    min-width: 2rem;
+  }
+  
+  .riasec-name {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #2c3e50;
+    flex: 1;
+  }
+  
+  .riasec-score {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #555;
+    background: #f8f9fa;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+  }
+}

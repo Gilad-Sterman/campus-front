@@ -1,0 +1,47 @@
+// Campus Israel - Main SCSS File
+
+// Import base styles
+@import 'base/fonts';
+@import 'base/vars';
+@import 'base/mixins';
+@import 'base/base';
+
+// Import component styles
+@import 'components/buttons';
+@import 'components/layout';
+@import 'components/navigation';
+@import 'components/header';
+@import 'components/hero';
+@import 'components/carousel';
+@import 'components/universities-carousel';
+@import 'components/features';
+@import 'components/contact-footer';
+@import 'components/AdminLayout';
+@import 'components/image-upload';
+// @import 'components/forms';
+// @import 'components/cards';
+@import 'components/quiz';
+@import 'components/study-buddy';
+@import 'components/booking';
+@import 'components/oauth';
+@import 'components/application-hub';
+@import 'components/protected-route';
+
+// Import page-specific styles
+@import 'pages/home';
+@import 'pages/universities';
+@import 'pages/university-details';
+@import 'pages/apply';
+@import 'pages/apply-page';
+@import 'pages/apply-intro';
+@import 'pages/login';
+@import 'pages/profile';
+@import 'pages/quiz';
+@import 'pages/domain';
+@import 'pages/forgot-password';
+@import 'pages/reset-password';
+@import 'pages/profile-results';
+@import 'pages/thank-you';
+@import 'pages/concierge';
+@import 'pages/program-details';
+@import 'pages/quiz-results-page';

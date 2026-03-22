@@ -1,0 +1,767 @@
+@import '../base/vars';
+@import '../base/mixins';
+
+.domain-page {
+  min-height: 100vh;
+
+  // Hero Section
+  .domain-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+
+    .domain-hero-title {
+      font-size: 2rem;
+      font-weight: 700;
+      color: $color-primary;
+      margin: 0;
+      text-align: left;
+      align-self: flex-start;
+      width: 100%;
+
+      @include respond-to(xs) {
+        font-size: 1.25rem;
+      }
+    }
+
+    .domain-hero-image {
+      width: 100%;
+      height: 300px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      @include respond-to(xs) {
+        height: 250px;
+      }
+    }
+
+    h2 {
+      text-align: start;
+      font-family: $font-family-display;
+      max-width: 800px;
+      width: 100%;
+      margin: auto;
+    }
+
+    .domain-hero-subtitle {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      color: $color-text-primary;
+      margin: 0;
+      max-width: 800px;
+
+      @include respond-to(xs) {
+        font-size: 1rem;
+      }
+    }
+
+    @include respond-to(xs) {
+      gap: 1.5rem;
+    }
+  }
+
+  // Container
+  .domain-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 0;
+  }
+
+  // Loading State
+  .domain-loading {
+    text-align: center;
+    padding: 3rem 0;
+    font-size: 1.2rem;
+    color: $color-text-secondary;
+  }
+
+  // Section Title
+  .domain-section-title {
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: $color-text-primary;
+    margin: 1rem auto;
+    max-width: 800px;
+
+    @include respond-to(xs) {
+      font-size: 1.5rem;
+    }
+  }
+
+  .domain-search-container {
+    // max-width: 800px;
+    margin: 0 auto;
+    background-color: $color-seafoam;
+    padding: $spacing-2xl;
+
+    @include respond-to(xs) {
+      padding: $spacing-md;
+    }
+  }
+
+  .domain-search-dropdown {
+    background: white;
+    border: 1px solid $color-border;
+    border-radius: $border-radius-lg;
+    box-shadow: $shadow-lg;
+    max-height: 400px;
+    max-width: 800px;
+    margin: auto;
+    overflow-y: auto;
+    z-index: $z-index-dropdown;
+    margin-top: $spacing-xs;
+  }
+
+  // Search Section
+  .domain-search-section {
+    margin-bottom: 3rem;
+  }
+
+  // Hierarchical Group Styles
+  .domain-discipline-group {
+    margin-bottom: $spacing-md;
+
+    .domain-discipline-header {
+      padding: $spacing-sm $spacing-md;
+      background: rgba($color-primary, 0.1);
+      border-left: 4px solid $color-primary;
+      font-weight: $font-weight-bold;
+      color: $color-primary;
+      font-size: $font-size-base;
+      margin-bottom: $spacing-xs;
+    }
+  }
+
+  .domain-degree-group {
+    margin: $spacing-sm;
+
+    .domain-degree-header {
+      font-weight: $font-weight-semibold;
+      font-size: $font-size-sm;
+      margin-bottom: $spacing-xs;
+    }
+  }
+
+  .domain-qualification-group {
+
+    .domain-qualification-header {
+      padding: $spacing-xs $spacing-sm;
+      font-weight: $font-weight-medium;
+      font-size: $font-size-xs;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+  }
+
+  // Selected Program Display (updated for unified search)
+  .domain-selected-program {
+    margin-block: $spacing-xl;
+    padding: $spacing-lg;
+    background: rgba($color-success, 0.3);
+    border: 1px solid rgba($color-success, 0.2);
+    border-radius: $border-radius-md;
+    box-shadow: $shadow-sm;
+    position: relative;
+
+    .clear-selection-btn {
+      position: absolute;
+      top: $spacing-sm;
+      right: $spacing-sm;
+      width: 24px;
+      height: 24px;
+      border: none;
+      background: rgba($color-error, 0.1);
+      color: $color-error;
+      border-radius: 50%;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: $color-error;
+        color: white;
+        transform: scale(1.1);
+      }
+
+      &:focus {
+        outline: 2px solid rgba($color-error, 0.3);
+        outline-offset: 2px;
+      }
+    }
+
+    .selected-program-header {
+      display: flex;
+      align-items: flex-start;
+      gap: $spacing-md;
+      margin-bottom: $spacing-md;
+
+      .program-image {
+        flex-shrink: 0;
+        width: 60px;
+        height: 60px;
+        border-radius: $border-radius-sm;
+        overflow: hidden;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid $color-border;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+
+      .selected-program-info {
+        flex: 1;
+
+        h4 {
+          margin: 0 0 $spacing-xs 0;
+          color: $color-primary;
+          font-size: $font-size-lg;
+          font-weight: $font-weight-semibold;
+          line-height: 1.2;
+        }
+
+        .university-name {
+          @include small-text;
+          color: $color-white;
+          margin: 0 0 $spacing-sm 0;
+          font-weight: $font-weight-medium;
+        }
+
+        .program-badges {
+          display: flex;
+          gap: $spacing-xs;
+          flex-wrap: wrap;
+
+          .degree-badge,
+          .discipline-badge,
+          .qualification-badge {
+            padding: $spacing-xs $spacing-sm;
+            border-radius: $border-radius-sm;
+            font-size: $font-size-xs;
+            font-weight: $font-weight-medium;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+          }
+
+          .degree-badge {
+            background-color: $color-secondary;
+            color: white;
+          }
+
+          .discipline-badge {
+            background-color: rgba($color-primary, 0.1);
+            color: $color-primary;
+          }
+
+          .qualification-badge {
+            background-color: rgba($color-success, 0.1);
+            color: $color-success;
+          }
+        }
+      }
+    }
+
+    .career-horizon {
+      @include small-text;
+      color: $color-primary;
+      margin-bottom: $spacing-md;
+      padding: $spacing-sm;
+      background: rgba($color-success, 0.5);
+      border-radius: $border-radius-sm;
+      border-left: 3px solid $color-success;
+
+      strong {
+        font-weight: $font-weight-semibold;
+      }
+    }
+
+    .program-description {
+      margin-bottom: $spacing-md;
+
+      p {
+        @include body-text;
+        color: $color-text-primary;
+        line-height: $line-height-relaxed;
+        margin: 0;
+      }
+    }
+
+    .program-details {
+      display: flex;
+      gap: $spacing-lg;
+      flex-wrap: wrap;
+
+      span {
+        @include small-text;
+        color: $color-white;
+        display: flex;
+        align-items: center;
+        gap: $spacing-xs;
+
+        strong {
+          font-weight: $font-weight-semibold;
+          color: $color-text-primary;
+        }
+      }
+    }
+
+    @include respond-to(xs) {
+      padding: $spacing-md;
+
+      .selected-program-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+        .program-image {
+          width: 50px;
+          height: 50px;
+        }
+      }
+
+      .program-details {
+        flex-direction: column;
+        gap: $spacing-xs;
+      }
+    }
+  }
+
+  // University Section
+  .university-section {
+    @include card;
+    border-radius: 0;
+    margin-bottom: $spacing-xl;
+    background-color: $color-seafoam;
+    transition: all $transition-base;
+
+    &:hover {
+      border-color: rgba($color-secondary, 0.3);
+      box-shadow: $shadow-md;
+    }
+
+    .university-header {
+      margin-bottom: $spacing-xl;
+      max-width: 800px;
+      margin: 1rem auto;
+
+      .university-name {
+        font-size: $font-size-xl;
+        font-weight: $font-weight-semibold;
+        color: $color-primary;
+        margin: 0 0 $spacing-sm 0;
+      }
+
+      .university-location {
+        @include small-text;
+        font-weight: $font-weight-medium;
+        margin: 0 0 $spacing-sm 0;
+      }
+
+      .university-program-count {
+        @include small-text;
+        color: $color-text-secondary;
+        padding: $spacing-xs $spacing-sm;
+        border: 1px solid $color-border;
+        border-radius: $border-radius-sm;
+        display: inline-block;
+        margin: 0;
+      }
+    }
+
+    .university-search {
+      position: relative;
+      max-width: 800px;
+      margin: auto;
+
+      .university-search-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        background: white;
+        border: 2px solid $color-border;
+        border-radius: $border-radius-pill;
+        transition: all $transition-base;
+
+        &:focus-within {
+          border-color: $color-primary;
+          box-shadow: 0 0 0 3px rgba($color-primary, 0.1);
+        }
+
+        .university-search-icon {
+          position: absolute;
+          left: $spacing-md;
+          color: $color-text-secondary;
+          z-index: 2;
+          font-size: $font-size-base;
+        }
+
+        .university-search-input {
+          width: 100%;
+          padding: $spacing-md $spacing-2xl $spacing-md calc(#{$spacing-md} + #{$font-size-base} + #{$spacing-sm});
+          border: none;
+          border-radius: $border-radius-pill;
+          font-size: $font-size-base;
+          background: transparent;
+          transition: all $transition-base;
+          margin: 0;
+
+          &:focus {
+            outline: none;
+          }
+
+          &::placeholder {
+            color: $color-text-secondary;
+          }
+        }
+
+        .university-dropdown-icon {
+          position: absolute;
+          right: $spacing-md;
+          color: $color-text-secondary;
+          cursor: pointer;
+          transition: transform $transition-base;
+          font-size: $font-size-base;
+
+          &.university-dropdown-icon--open {
+            transform: rotate(180deg);
+          }
+        }
+      }
+
+      .university-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        border: 1px solid $color-border;
+        border-radius: $border-radius-md;
+        box-shadow: $shadow-lg;
+        max-height: 400px;
+        overflow-y: auto;
+        z-index: $z-index-dropdown;
+        margin-top: $spacing-xs;
+
+        .university-dropdown-header {
+          padding: $spacing-md $spacing-lg;
+          background: rgba($color-primary, 0.02);
+          border-bottom: 1px solid rgba($color-primary, 0.1);
+          font-weight: $font-weight-bold;
+          color: $color-primary;
+          font-size: $font-size-sm;
+        }
+
+        .university-dropdown-item {
+          padding: $spacing-md;
+          cursor: pointer;
+          transition: all $transition-base;
+          border-bottom: 1px solid rgba($color-divider, 0.5);
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          &:hover {
+            background-color: rgba($color-secondary, 0.05);
+          }
+
+          &.university-dropdown-item--selected {
+            background-color: rgba($color-secondary, 0.1);
+            border-left: 3px solid $color-secondary;
+          }
+
+          .university-dropdown-item-main {
+            @include flex-between;
+            margin-bottom: $spacing-xs;
+          }
+
+          .university-dropdown-item-name {
+            font-weight: $font-weight-medium;
+            color: $color-primary;
+            font-size: $font-size-base;
+          }
+
+          .university-dropdown-item-degree {
+            background-color: $color-secondary;
+            color: white;
+            padding: $spacing-xs $spacing-sm;
+            border-radius: $border-radius-sm;
+            font-size: $font-size-xs;
+            font-weight: $font-weight-medium;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+          }
+
+          .university-dropdown-item-discipline {
+            @include small-text;
+            margin-bottom: $spacing-xs;
+            font-weight: $font-weight-medium;
+          }
+
+          .university-dropdown-item-career {
+            @include small-text;
+            color: $color-success;
+            font-style: italic;
+            margin-bottom: $spacing-sm;
+          }
+
+          .university-dropdown-item-info {
+            @include button-base;
+            background-color: transparent;
+            color: $color-secondary;
+            border: 1px solid $color-secondary;
+            padding: $spacing-xs $spacing-sm;
+            font-size: $font-size-xs;
+            border-radius: $border-radius-sm;
+
+            &:hover {
+              background-color: $color-secondary;
+              color: white;
+            }
+          }
+        }
+      }
+
+      .university-selected-program {
+        margin-top: $spacing-md;
+        padding: $spacing-lg;
+        background: rgba($color-success, 0.3);
+        border: 1px solid rgba($color-success, 0.2);
+        border-radius: $border-radius-md;
+        box-shadow: $shadow-sm;
+        position: relative;
+
+        .clear-selection-btn {
+          position: absolute;
+          top: $spacing-sm;
+          right: $spacing-sm;
+          width: 24px;
+          height: 24px;
+          border: none;
+          background: rgba($color-error, 0.1);
+          color: $color-error;
+          border-radius: 50%;
+          font-size: 16px;
+          font-weight: bold;
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          line-height: 1;
+          transition: all 0.2s ease;
+
+          &:hover {
+            background: $color-error;
+            color: white;
+            transform: scale(1.1);
+          }
+
+          &:focus {
+            outline: 2px solid rgba($color-error, 0.3);
+            outline-offset: 2px;
+          }
+        }
+
+        .selected-program-header {
+          display: flex;
+          align-items: flex-start;
+          gap: $spacing-md;
+          margin-bottom: $spacing-md;
+
+          .program-image {
+            flex-shrink: 0;
+            width: 60px;
+            height: 60px;
+            border-radius: $border-radius-sm;
+            overflow: hidden;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid $color-border;
+
+            img {
+              width: 100%;
+              height: 100%;
+              object-fit: contain;
+            }
+          }
+
+          .selected-program-info {
+            flex: 1;
+
+            h4 {
+              margin: 0 0 $spacing-xs 0;
+              color: $color-primary;
+              font-size: $font-size-lg;
+              font-weight: $font-weight-semibold;
+              line-height: 1.2;
+            }
+
+            .university-name {
+              @include small-text;
+              color: $color-white;
+              margin: 0 0 $spacing-sm 0;
+              font-weight: $font-weight-medium;
+            }
+
+            .program-badges {
+              display: flex;
+              gap: $spacing-xs;
+              flex-wrap: wrap;
+
+              .degree-badge,
+              .discipline-badge {
+                padding: $spacing-xs $spacing-sm;
+                border-radius: $border-radius-sm;
+                font-size: $font-size-xs;
+                font-weight: $font-weight-medium;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+              }
+
+              .degree-badge {
+                background-color: $color-secondary;
+                color: white;
+              }
+
+              .discipline-badge {
+                background-color: rgba($color-primary, 0.1);
+                color: $color-primary;
+              }
+            }
+          }
+        }
+
+        .career-horizon {
+          @include small-text;
+          color: $color-primary;
+          margin-bottom: $spacing-md;
+          padding: $spacing-sm;
+          background: rgba($color-success, 0.5);
+          border-radius: $border-radius-sm;
+          border-left: 3px solid $color-success;
+
+          strong {
+            font-weight: $font-weight-semibold;
+          }
+        }
+
+        .program-description {
+          margin-bottom: $spacing-md;
+
+          p {
+            @include body-text;
+            color: $color-text-primary;
+            line-height: $line-height-relaxed;
+            margin: 0;
+          }
+        }
+
+        .program-details {
+          display: flex;
+          gap: $spacing-lg;
+          flex-wrap: wrap;
+
+          span {
+            @include small-text;
+            color: $color-white;
+            display: flex;
+            align-items: center;
+            gap: $spacing-xs;
+
+            strong {
+              font-weight: $font-weight-semibold;
+              color: $color-text-primary;
+            }
+          }
+        }
+
+        @include respond-to(xs) {
+          padding: $spacing-md;
+
+          .selected-program-header {
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+
+            .program-image {
+              width: 50px;
+              height: 50px;
+            }
+          }
+
+          .program-details {
+            flex-direction: column;
+            gap: $spacing-xs;
+          }
+        }
+      }
+    }
+  }
+
+  &__actions {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+
+    button {
+      font-size: 1.25rem;
+      padding: 1rem 3rem;
+    }
+  }
+
+  // Responsive Design
+  @include respond-to(xs) {
+
+    .university-section {
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+
+      .university-header {
+        .university-name {
+          font-size: 1.3rem;
+        }
+      }
+
+      .university-search {
+        .university-dropdown {
+          .university-dropdown-item {
+            padding: 0.75rem 1rem;
+
+            .university-dropdown-item-main {
+              flex-direction: column;
+              align-items: flex-start;
+              gap: 0.5rem;
+            }
+          }
+        }
+      }
+    }
+
+    .domain-actions {
+      .domain-apply-btn {
+        width: 100%;
+        max-width: 300px;
+      }
+    }
+  }
+}

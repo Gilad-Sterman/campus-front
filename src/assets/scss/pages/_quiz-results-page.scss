@@ -1,0 +1,143 @@
+.quiz-results-page {
+
+    h2 {
+        font-family: $font-family-display;
+    }
+
+    .profile-section {
+        max-width: 100%;
+    }
+
+    .results-page-content {
+        background-color: $color-surface;
+    }
+
+    .quiz-results {
+        max-width: 800px;
+        margin: auto;
+    }
+
+    .compare-table {
+        margin-top: $spacing-md;
+
+        h2 {
+            text-align: center;
+        }
+    }
+
+    .journey-progress {
+        // margin-top: 1rem;
+        padding: 2rem;
+        color: white;
+        background-color: $color-surface;
+
+        h2 {
+            text-align: center;
+            font-family: $font-family-display;
+            letter-spacing: 1px;
+        }
+
+        .progress-container {
+            position: relative;
+            // max-width: 600px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+
+        .progress-bar {
+            height: 48px;
+            background-color: #B5D2E7;
+            border-radius: $border-radius-pill;
+            position: relative;
+            margin: 2rem 0;
+
+            .progress-fill {
+                height: 100%;
+                background-color: #19364B;
+                width: 62%; // 2 out of 3 steps completed
+                border-radius: $border-radius-pill;
+                transition: width 0.3s ease;
+
+                @include respond-to(xs){
+                    width: 65%;
+                }
+            }
+        }
+
+        .progress-steps {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            pointer-events: none;
+            padding: 0 20px;
+        }
+
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: absolute;
+            pointer-events: auto;
+
+            &:first-child {
+                left: 5px;
+            }
+
+            &:nth-child(2) {
+                left: 60%;
+                transform: translateX(-50%);
+            }
+
+            &:last-child {
+                right: 5px;
+            }
+
+            .step-icon {
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-weight: bold;
+                font-size: 1.2rem;
+                border: 3px solid transparent;
+                transition: all 0.3s ease;
+                position: relative;
+                z-index: 2;
+            }
+
+            .step-label {
+                font-weight: 600;
+                font-size: 0.9rem;
+                text-align: center;
+                white-space: nowrap;
+                position: absolute;
+                color: $color-primary;
+                top: 50px;
+            }
+
+            &.completed {
+                .step-icon {
+                    background-color: #42C500;
+                    ;
+                    color: white;
+                    // border-color: #2ECC71;
+                }
+            }
+
+            &.current {
+                .step-icon {
+                    background-color: #42C500;
+                    color: white;
+                    // border-color: #2ECC71;
+                }
+            }
+        }
+    }
+}

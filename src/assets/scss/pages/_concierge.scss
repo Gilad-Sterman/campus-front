@@ -1,0 +1,510 @@
+// Concierge Page
+.concierge-page {
+  min-height: 100vh;
+  background-color: $color-background;
+
+  &__header {
+    @include flex-between;
+    padding: $spacing-md $spacing-xl;
+    background-color: $color-primary;
+    color: white;
+  }
+
+  &__header-left {
+    display: flex;
+    align-items: baseline;
+    gap: $spacing-md;
+  }
+
+  &__title {
+    font-size: $font-size-xl;
+    font-weight: $font-weight-bold;
+    margin: 0;
+  }
+
+  &__subtitle {
+    font-size: $font-size-sm;
+    opacity: 0.7;
+  }
+
+  &__header-right {
+    display: flex;
+    align-items: center;
+    gap: $spacing-lg;
+  }
+
+  &__user {
+    font-size: $font-size-sm;
+    opacity: 0.8;
+  }
+
+  &__logout {
+    @include button-base;
+    background: transparent;
+    color: white;
+    font-size: $font-size-sm;
+    padding: $spacing-xs $spacing-md;
+    border: 1px solid rgba(white, 0.3);
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+
+    &:hover {
+      background: rgba(white, 0.1);
+      border-color: rgba(white, 0.5);
+    }
+  }
+
+  &__tabs {
+    display: flex;
+    gap: 0;
+    padding: 0 $spacing-xl;
+    background-color: white;
+    border-bottom: 1px solid $color-border;
+  }
+
+  &__tab {
+    @include button-base;
+    background: transparent;
+    color: $color-text-secondary;
+    border-radius: 0;
+    padding: $spacing-md $spacing-lg;
+    font-size: $font-size-base;
+    border-bottom: 2px solid transparent;
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+
+    &:hover {
+      color: $color-text-primary;
+      background-color: rgba($color-primary, 0.03);
+    }
+
+    &--active {
+      color: $color-primary;
+      border-bottom-color: $color-primary;
+      font-weight: $font-weight-semibold;
+    }
+  }
+
+  &__content {
+    padding: $spacing-xl;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  &__loading {
+    @include flex-center;
+    padding: $spacing-3xl;
+    color: $color-text-secondary;
+    font-size: $font-size-md;
+  }
+}
+
+// Calendar Connection Component
+.concierge-calendar {
+  &__connect-card {
+    @include card;
+    text-align: center;
+    padding: $spacing-3xl $spacing-xl;
+  }
+
+  &__icon {
+    font-size: 3rem;
+    color: $color-text-secondary;
+    margin-bottom: $spacing-lg;
+  }
+
+  &__connect-card h2 {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-semibold;
+    margin: 0 0 $spacing-md;
+    color: $color-text-primary;
+  }
+
+  &__connect-card p {
+    @include body-text;
+    color: $color-text-secondary;
+    max-width: 500px;
+    margin: 0 auto $spacing-xl;
+  }
+
+  &__permissions {
+    text-align: left;
+    max-width: 420px;
+    margin: 0 auto $spacing-xl;
+    padding: $spacing-lg;
+    background-color: $color-background;
+    border-radius: $border-radius-md;
+
+    h3 {
+      font-size: $font-size-sm;
+      font-weight: $font-weight-semibold;
+      color: $color-text-secondary;
+      margin: 0 0 $spacing-sm;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    li {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+      padding: $spacing-xs 0;
+      font-size: $font-size-sm;
+      color: $color-text-primary;
+    }
+
+    .icon-success {
+      color: $color-success;
+      flex-shrink: 0;
+    }
+  }
+
+  &__connect-btn {
+    @include button-primary;
+    padding: $spacing-md $spacing-xl;
+    font-size: $font-size-md;
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-sm;
+  }
+
+  &__error {
+    color: $color-error;
+    font-size: $font-size-sm;
+    margin-bottom: $spacing-md;
+    padding: $spacing-sm $spacing-md;
+    background-color: rgba($color-error, 0.08);
+    border-radius: $border-radius-sm;
+  }
+
+  // Connected state
+  &__status-card {
+    @include card;
+  }
+
+  &__status-header {
+    @include flex-between;
+    margin-bottom: $spacing-lg;
+    padding-bottom: $spacing-md;
+    border-bottom: 1px solid $color-border;
+  }
+
+  &__status-indicator {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    font-weight: $font-weight-semibold;
+    font-size: $font-size-md;
+
+    &--connected {
+      color: $color-success;
+    }
+  }
+
+  &__refresh-btn {
+    @include button-base;
+    background: transparent;
+    color: $color-text-secondary;
+    padding: $spacing-xs;
+    font-size: $font-size-base;
+
+    &:hover {
+      color: $color-text-primary;
+    }
+  }
+
+  &__details {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-md;
+    margin-bottom: $spacing-lg;
+
+    @include respond-to(xs) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__detail-item {
+    label {
+      display: block;
+      font-size: $font-size-xs;
+      color: $color-text-secondary;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: $spacing-xs;
+    }
+
+    span {
+      display: flex;
+      align-items: center;
+      gap: $spacing-xs;
+      font-size: $font-size-sm;
+      color: $color-text-primary;
+    }
+  }
+
+  &__info {
+    padding: $spacing-md;
+    background-color: $color-background;
+    border-radius: $border-radius-md;
+    margin-bottom: $spacing-lg;
+
+    p {
+      @include small-text;
+      margin: 0;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  &__disconnect-btn {
+    @include button-base;
+    background: transparent;
+    color: $color-error;
+    border: 1px solid $color-error;
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-size-sm;
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+
+    &:hover:not(:disabled) {
+      background-color: rgba($color-error, 0.08);
+    }
+  }
+}
+
+// Appointments Component
+.concierge-appointments {
+  &__header {
+    @include flex-between;
+    margin-bottom: $spacing-lg;
+  }
+
+  &__filters {
+    display: flex;
+    gap: $spacing-xs;
+  }
+
+  &__filter {
+    @include button-base;
+    background: transparent;
+    color: $color-text-secondary;
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-size-sm;
+    border: 1px solid $color-border;
+    border-radius: $border-radius-pill;
+
+    &:hover {
+      border-color: $color-text-secondary;
+      color: $color-text-primary;
+    }
+
+    &--active {
+      background-color: $color-primary;
+      color: white;
+      border-color: $color-primary;
+
+      &:hover {
+        background-color: $color-primary;
+        color: white;
+        border-color: $color-primary;
+      }
+    }
+  }
+
+  &__refresh {
+    @include button-base;
+    background: transparent;
+    color: $color-text-secondary;
+    padding: $spacing-xs;
+    font-size: $font-size-base;
+
+    &:hover {
+      color: $color-text-primary;
+    }
+  }
+
+  &__loading,
+  &__error {
+    @include flex-center;
+    padding: $spacing-3xl;
+    color: $color-text-secondary;
+  }
+
+  &__error {
+    color: $color-error;
+  }
+
+  &__empty {
+    @include flex-column;
+    align-items: center;
+    padding: $spacing-3xl;
+    text-align: center;
+    color: $color-text-secondary;
+
+    h3 {
+      margin: $spacing-md 0 $spacing-sm;
+      color: $color-text-primary;
+    }
+
+    p {
+      @include small-text;
+      max-width: 400px;
+    }
+  }
+
+  &__empty-icon {
+    font-size: 2.5rem;
+    opacity: 0.3;
+  }
+
+  &__list {
+    @include flex-column;
+    gap: $spacing-md;
+  }
+
+  &__card {
+    @include card;
+    display: grid;
+    grid-template-columns: 140px 1fr auto;
+    gap: $spacing-lg;
+    align-items: center;
+
+    @include respond-to(xs) {
+      grid-template-columns: 1fr;
+      gap: $spacing-md;
+    }
+  }
+
+  &__card-time {
+    @include flex-column;
+    gap: $spacing-xs;
+  }
+
+  &__date {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+  }
+
+  &__time {
+    font-size: $font-size-lg;
+    font-weight: $font-weight-bold;
+    color: $color-primary;
+  }
+
+  &__duration {
+    font-size: $font-size-xs;
+    color: $color-text-secondary;
+  }
+
+  &__student {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    font-size: $font-size-sm;
+    color: $color-text-primary;
+  }
+
+  &__student-email {
+    color: $color-text-secondary;
+    font-size: $font-size-xs;
+  }
+
+  &__notes {
+    @include small-text;
+    margin: $spacing-sm 0 0;
+    font-style: italic;
+  }
+
+  &__card-actions {
+    @include flex-column;
+    align-items: flex-end;
+    gap: $spacing-sm;
+  }
+
+  &__status {
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $border-radius-sm;
+
+    &.status--scheduled {
+      color: $color-secondary;
+      background-color: rgba($color-secondary, 0.1);
+    }
+
+    &.status--completed {
+      color: $color-success;
+      background-color: rgba($color-success, 0.1);
+    }
+
+    &.status--cancelled {
+      color: $color-error;
+      background-color: rgba($color-error, 0.1);
+    }
+  }
+
+  &__meeting-link {
+    @include button-base;
+    background-color: $color-secondary;
+    color: white;
+    padding: $spacing-xs $spacing-md;
+    font-size: $font-size-xs;
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+    text-decoration: none;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  &__action-btns {
+    display: flex;
+    gap: $spacing-xs;
+  }
+
+  &__btn {
+    @include button-base;
+    padding: $spacing-xs $spacing-sm;
+    font-size: $font-size-xs;
+    display: flex;
+    align-items: center;
+    gap: $spacing-xs;
+
+    &--complete {
+      background-color: $color-success;
+      color: white;
+
+      &:hover:not(:disabled) {
+        opacity: 0.9;
+      }
+    }
+
+    &--cancel {
+      background: transparent;
+      color: $color-error;
+      border: 1px solid $color-error;
+
+      &:hover:not(:disabled) {
+        background-color: rgba($color-error, 0.08);
+      }
+    }
+  }
+}

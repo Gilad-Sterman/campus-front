@@ -1,0 +1,622 @@
+// Student Booking UI
+
+// Tabs
+.booking-tabs {
+  display: flex;
+  gap: $spacing-xs;
+  margin-bottom: $spacing-xl;
+  border-bottom: 2px solid $color-divider;
+
+  &__tab {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-lg;
+    font-family: $font-family-primary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    color: $color-text-secondary;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    cursor: pointer;
+    transition: all $transition-fast;
+
+    &:hover {
+      color: $color-text-primary;
+    }
+
+    &--active {
+      color: $color-secondary;
+      border-bottom-color: $color-secondary;
+    }
+  }
+}
+
+// Student Appointments
+.student-appointments {
+  &__loading {
+    @include flex-center;
+    gap: $spacing-sm;
+    padding: $spacing-xl;
+    color: $color-text-secondary;
+    font-size: $font-size-sm;
+
+    .spin {
+      animation: spin 1s linear infinite;
+    }
+  }
+
+  &__empty {
+    @include flex-column;
+    align-items: center;
+    text-align: center;
+    padding: $spacing-xl;
+    color: $color-text-secondary;
+
+    svg {
+      font-size: 1.5rem;
+      opacity: 0.3;
+      margin-bottom: $spacing-sm;
+    }
+
+    p {
+      @include small-text;
+      margin: 0;
+    }
+  }
+
+  &__section {
+    margin-bottom: $spacing-xl;
+  }
+
+  &__section-title {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: $color-text-secondary;
+    margin: 0 0 $spacing-md;
+  }
+
+  &__card {
+    @include card;
+    margin-bottom: $spacing-md;
+
+    &--past {
+      opacity: 0.7;
+    }
+  }
+
+  &__card-header {
+    margin-bottom: $spacing-md;
+  }
+
+  &__status {
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-xs;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    padding: $spacing-xs $spacing-sm;
+    border-radius: $border-radius-pill;
+
+    &.status--scheduled {
+      color: $color-secondary;
+      background-color: rgba($color-secondary, 0.1);
+    }
+
+    &.status--completed {
+      color: $color-success;
+      background-color: rgba($color-success, 0.1);
+    }
+
+    &.status--cancelled {
+      color: $color-error;
+      background-color: rgba($color-error, 0.1);
+    }
+  }
+
+  &__card-body {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-md $spacing-xl;
+  }
+
+  &__detail {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    font-size: $font-size-sm;
+    color: $color-text-primary;
+
+    svg {
+      color: $color-text-secondary;
+      font-size: $font-size-xs;
+      flex-shrink: 0;
+    }
+
+    a {
+      color: $color-secondary;
+      text-decoration: none;
+      font-weight: $font-weight-medium;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.booking-error {
+  color: $color-error;
+  font-size: $font-size-sm;
+  padding: $spacing-sm $spacing-md;
+  background-color: rgba($color-error, 0.08);
+  border-radius: $border-radius-sm;
+  margin-bottom: $spacing-lg;
+}
+
+.booking-empty {
+  @include flex-column;
+  align-items: center;
+  text-align: center;
+  padding: $spacing-3xl $spacing-xl;
+  color: $color-text-secondary;
+
+  &__icon {
+    font-size: 2.5rem;
+    opacity: 0.3;
+    margin-bottom: $spacing-md;
+  }
+
+  h3 {
+    margin: 0 0 $spacing-sm;
+    color: $color-text-primary;
+  }
+
+  p {
+    @include small-text;
+    max-width: 400px;
+  }
+}
+
+// Concierge selector (when multiple)
+.booking-concierge-select {
+  margin-bottom: $spacing-xl;
+
+  h3 {
+    font-size: $font-size-md;
+    font-weight: $font-weight-semibold;
+    margin: 0 0 $spacing-md;
+    color: $color-text-primary;
+  }
+
+  .info-cards {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    .card {
+      border-radius: $border-radius-pill;
+      border: 1px solid $color-text-primary;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      // justify-content: center;
+      gap: $spacing-sm;
+      text-align: center;
+      height: 300px;
+      width: 200px;
+
+      img {
+        width: 50px;
+        height: 50px;
+      }
+
+      h4 {
+        font-size: $font-size-md;
+        font-weight: $font-weight-medium;
+        margin: 0;
+        color: $color-text-primary;
+      }
+    }
+
+    @include respond-to(xs) {
+      flex-direction: column;
+      gap: $spacing-md;
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    flex-wrap: wrap;
+  }
+
+  &__item {
+    // @include button-base;
+    background: white;
+    color: $color-text-primary;
+    border: 1px solid $color-border;
+    border-radius: $border-radius-md;
+    padding: $spacing-lg $spacing-sm;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-sm;
+
+    span {
+      display: flex;
+      align-items: center;
+      gap: $spacing-sm;
+    }
+
+    svg {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid$color-primary;
+      border-radius: 50%;
+      // padding: 1rem;
+    }
+
+    // &:hover {
+    //   border-color: $color-secondary;
+    //   color: $color-secondary;
+    // }
+
+    &--selected {
+      // background-color: $color-seafoam;
+      // color: white;
+      color: $color-surface;
+
+      &:hover {
+        border-color: $color-secondary;
+      }
+    }
+  }
+}
+
+// Main booking layout (calendar + slots side by side)
+.booking-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-xl;
+  margin-bottom: $spacing-xl;
+
+  @include respond-to(xs) {
+    grid-template-columns: 1fr;
+  }
+
+  h3 {
+    font-size: $font-size-md;
+    font-weight: $font-weight-semibold;
+    margin: 0 0 $spacing-md;
+    color: $color-text-primary;
+  }
+}
+
+// Custom Date Picker
+.booking-datepicker {
+  @include card;
+
+  &__header {
+    @include flex-between;
+    margin-bottom: $spacing-md;
+  }
+
+  &__month {
+    font-size: $font-size-base;
+    font-weight: $font-weight-semibold;
+    color: $color-text-primary;
+  }
+
+  &__nav {
+    background: transparent;
+    border: none;
+    color: $color-text-secondary;
+    cursor: pointer;
+    padding: $spacing-xs;
+    font-size: $font-size-sm;
+    border-radius: $border-radius-sm;
+
+    &:hover:not(:disabled) {
+      color: $color-text-primary;
+      background-color: $color-background;
+    }
+
+    &:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+  }
+
+  &__day-label {
+    text-align: center;
+    font-size: $font-size-xs;
+    font-weight: $font-weight-semibold;
+    color: $color-text-secondary;
+    padding: $spacing-xs 0;
+    text-transform: uppercase;
+  }
+
+  &__day {
+    text-align: center;
+    padding: $spacing-sm $spacing-xs;
+    font-size: $font-size-sm;
+    border: none;
+    background: transparent;
+    border-radius: $border-radius-sm;
+    cursor: pointer;
+    color: $color-text-primary;
+    transition: all $transition-fast;
+
+    &:hover:not(:disabled) {
+      background-color: rgba($color-secondary, 0.1);
+      color: $color-secondary;
+    }
+
+    &--other {
+      color: $color-disabled;
+    }
+
+    &--disabled {
+      color: $color-disabled;
+      cursor: not-allowed;
+
+      &:hover {
+        background: transparent;
+        color: $color-disabled;
+      }
+    }
+
+    &--today {
+      font-weight: $font-weight-bold;
+      border: 1px solid $color-secondary;
+    }
+
+    &--selected {
+      background-color: $color-secondary;
+      color: white;
+      font-weight: $font-weight-semibold;
+
+      &:hover:not(:disabled) {
+        background-color: $color-secondary;
+        color: white;
+      }
+    }
+  }
+}
+
+// Time Slots
+.booking-timeslots {
+  &__title {
+    font-size: $font-size-md;
+    font-weight: $font-weight-semibold;
+    margin: 0 0 $spacing-md;
+    color: $color-text-primary;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-sm;
+
+    @include respond-to(xs) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  &__slot {
+    @include button-base;
+    background: white;
+    color: $color-text-primary;
+    border: 1px solid $color-border;
+    padding: $spacing-sm $spacing-md;
+    font-size: $font-size-sm;
+
+    &:hover:not(:disabled) {
+      border-color: $color-secondary;
+      color: $color-secondary;
+    }
+
+    &--selected {
+      background-color: $color-secondary;
+      color: white;
+      border-color: $color-secondary;
+
+      &:hover:not(:disabled) {
+        background-color: $color-secondary;
+        color: white;
+        border-color: $color-secondary;
+      }
+    }
+  }
+
+  &__loading {
+    @include flex-center;
+    padding: $spacing-xl;
+    // color: $color-text-secondary;
+    font-size: $font-size-sm;
+  }
+
+  &__empty {
+    @include flex-column;
+    align-items: center;
+    text-align: center;
+    padding: $spacing-xl;
+    
+    svg {
+      font-size: 1.5rem;
+      opacity: 0.3;
+      margin-bottom: $spacing-sm;
+    }
+    
+    p {
+      @include small-text;
+      color: $color-text-primary;
+      margin: 0;
+    }
+  }
+}
+
+// Confirm section
+.booking-confirm {
+  @include card;
+  border-top: 3px solid $color-secondary;
+
+  h3 {
+    font-size: $font-size-md;
+    font-weight: $font-weight-semibold;
+    margin: 0 0 $spacing-lg;
+    color: $color-text-primary;
+  }
+
+  &__summary {
+    margin-bottom: $spacing-lg;
+  }
+
+  &__row {
+    @include flex-between;
+    padding: $spacing-sm 0;
+    border-bottom: 1px solid $color-divider;
+    font-size: $font-size-sm;
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  &__label {
+    color: $color-text-secondary;
+    font-weight: $font-weight-medium;
+  }
+
+  &__notes {
+    margin-bottom: $spacing-lg;
+
+    label {
+      display: block;
+      font-size: $font-size-sm;
+      font-weight: $font-weight-medium;
+      color: $color-text-secondary;
+      margin-bottom: $spacing-xs;
+    }
+
+    textarea {
+      @include input-base;
+      resize: vertical;
+      min-height: 80px;
+    }
+  }
+
+  &__btn {
+    @include button-primary;
+    width: 100%;
+    padding: $spacing-md;
+    font-size: $font-size-md;
+  }
+}
+
+// Success state
+.booking-success {
+  text-align: center;
+  padding: $spacing-xl 0;
+
+  &__icon {
+    font-size: 3rem;
+    color: $color-success;
+    margin-bottom: $spacing-md;
+  }
+
+  h2 {
+    font-size: $font-size-2xl;
+    font-weight: $font-weight-semibold;
+    margin: 0 0 $spacing-sm;
+    color: $color-text-primary;
+  }
+
+  >p {
+    @include body-text;
+    color: $color-text-secondary;
+    margin: 0 0 $spacing-xl;
+  }
+
+  &__details {
+    @include card;
+    text-align: left;
+    max-width: 400px;
+    margin: 0 auto $spacing-xl;
+  }
+
+  &__detail {
+    display: flex;
+    align-items: flex-start;
+    gap: $spacing-md;
+    padding: $spacing-sm 0;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid $color-divider;
+      padding-bottom: $spacing-md;
+      margin-bottom: $spacing-sm;
+    }
+
+    >svg {
+      color: $color-secondary;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    div {
+      @include flex-column;
+      gap: 2px;
+    }
+
+    strong {
+      font-size: $font-size-sm;
+      color: $color-text-primary;
+    }
+
+    span {
+      font-size: $font-size-xs;
+      color: $color-text-secondary;
+    }
+
+    a {
+      font-size: $font-size-sm;
+      color: $color-secondary;
+      text-decoration: none;
+      font-weight: $font-weight-medium;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &__btn {
+    @include button-secondary;
+    padding: $spacing-sm $spacing-xl;
+  }
+}

@@ -1,0 +1,122 @@
+// OAuth Components Styling
+// Google OAuth Button
+.btn-google-oauth {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $spacing-sm;
+  width: 100%;
+  padding: $spacing-md $spacing-lg;
+  background-color: $color-white;
+  border: 1px solid $color-border;
+  border-radius: $border-radius-md;
+  color: $color-text-primary;
+  font-family: $font-family-primary;
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all $transition-base;
+  box-shadow: $shadow-sm;
+
+  &:hover:not(:disabled) {
+    background-color: #f8f9fa;
+    border-color: #dadce0;
+    box-shadow: $shadow-md;
+    transform: translateY(-1px);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: $shadow-sm;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: $color-disabled;
+    border-color: $color-disabled;
+  }
+
+  .google-icon {
+    font-size: $font-size-lg;
+    color: #4285f4;
+  }
+}
+
+// OAuth Divider
+.oauth-divider {
+  display: flex;
+  align-items: center;
+  margin: $spacing-lg 0;
+  text-align: center;
+
+  &::before,
+  &::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background-color: $color-divider;
+  }
+
+  span {
+    padding: 0 $spacing-md;
+    color: $color-text-secondary;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    background-color: $color-white;
+  }
+}
+
+// OAuth Callback Page
+.oauth-callback-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $color-background;
+
+  .oauth-callback-container {
+    text-align: center;
+    padding: $spacing-2xl;
+    background-color: $color-white;
+    border-radius: $border-radius-lg;
+    box-shadow: $shadow-lg;
+    max-width: 400px;
+    width: 100%;
+
+    h2 {
+      margin: $spacing-lg 0 $spacing-sm 0;
+      color: $color-text-primary;
+      font-size: $font-size-xl;
+      font-weight: $font-weight-semibold;
+    }
+
+    p {
+      color: $color-text-secondary;
+      font-size: $font-size-base;
+      margin: 0;
+    }
+  }
+}
+
+// Loading Spinner
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  margin-bottom: $spacing-lg;
+
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid $color-divider;
+    border-top: 3px solid $color-secondary;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

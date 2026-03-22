@@ -1,0 +1,210 @@
+// Universities Carousel Component Styles
+
+.universities-section {
+  padding: $spacing-2xl $spacing-md;
+
+  .section-header {
+    text-align: center;
+    font-family: $font-family-display;
+    margin-bottom: $spacing-xl;
+
+    @include respond-to(xs) {
+      font-size: $font-size-lg;
+    }
+  }
+
+  .carousel-container {
+    position: relative;
+    padding: 0 $spacing-2xl;
+    margin: $spacing-xl 0;
+
+    @include respond-to(xs) {
+      padding: 0 $spacing-lg;
+    }
+  }
+
+  .carousel-track {
+    display: flex;
+    gap: $spacing-lg;
+    overflow: hidden;
+    justify-content: center;
+    align-items: stretch; // Make all cards same height
+
+    @include respond-to(xs) {
+      gap: $spacing-md;
+    }
+  }
+}
+
+.university-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+  transition: all $transition-base;
+  padding: $spacing-md;
+  border-radius: $border-radius-md;
+  background-color: white;
+  box-shadow: $shadow-sm;
+  min-height: 140px; // Minimum height, but can grow
+
+  // Responsive flex basis
+  flex: 0 0 calc(16.666% - #{$spacing-lg}); // 6 tiles on xl screens
+  min-width: 140px;
+  max-width: 200px;
+
+  @include respond-to(xl) {
+    flex: 0 0 calc(16.666% - #{$spacing-lg}); // 6 tiles
+  }
+
+  @include respond-to(lg) {
+    flex: 0 0 calc(20% - #{$spacing-lg}); // 5 tiles
+  }
+
+  @include respond-to(md) {
+    flex: 0 0 calc(25% - #{$spacing-lg}); // 4 tiles
+  }
+
+  @include respond-to(sm) {
+    flex: 0 0 calc(33.333% - #{$spacing-md}); // 3 tiles
+  }
+
+  @include respond-to(xs) {
+    flex: 0 0 calc(50% - #{$spacing-md}); // 2 tiles
+    min-width: 120px;
+    min-height: 120px; // Minimum height for mobile, but can grow
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-md;
+  }
+
+  .university-logo-container {
+    width: 180px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: $spacing-md;
+    padding: $spacing-sm;
+    border-radius: $border-radius-sm;
+    background-color: $color-background;
+    border: 1px solid $color-border;
+
+    @include respond-to(xs) {
+      width: 140px;
+      height: 60px;
+    }
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      object-position: center;
+
+      // Prevent upscaling of small images
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+    }
+  }
+
+  .university-name {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+    text-align: center;
+    color: $color-text-primary;
+    margin: 0;
+    line-height: $line-height-tight;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-xs 0;
+    word-wrap: break-word;
+    hyphens: auto;
+    // Allow text to wrap naturally without cutting off
+
+    @include respond-to(xs) {
+      font-size: $font-size-xs;
+    }
+  }
+}
+
+// Carousel arrows - reuse existing styles but ensure proper positioning
+.universities-section {
+  .carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: rgba(white, 0.9);
+    border: 1px solid $color-border;
+    box-shadow: $shadow-sm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: $font-size-lg;
+    cursor: pointer;
+    z-index: 2;
+    transition: all $transition-base;
+
+    &:hover {
+      background-color: $color-primary;
+      color: white;
+    }
+
+    &-prev {
+      left: -5px;
+    }
+
+    &-next {
+      right: -5px;
+    }
+
+    @include respond-to(xs) {
+      width: 32px;
+      height: 32px;
+      font-size: $font-size-md;
+      background-color: rgba(white, 0.8);
+      border: none;
+      box-shadow: none;
+
+      &-prev {
+        left: -8px;
+      }
+
+      &-next {
+        right: -8px;
+      }
+    }
+  }
+
+  .carousel-indicators {
+    display: flex;
+    justify-content: center;
+    gap: $spacing-sm;
+    margin-top: $spacing-lg;
+  }
+
+  .carousel-indicator {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: $color-border;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all $transition-base;
+
+    &.active {
+      background-color: $color-primary;
+      transform: scale(1.2);
+    }
+  }
+}

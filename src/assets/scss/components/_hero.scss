@@ -1,0 +1,313 @@
+// Campus Israel - Hero Section Styles
+
+.hero-section {
+  position: relative;
+  min-height: calc(100vh - 80px); // Account for header height
+  padding: 0 0;
+  // background-image: url('https://res.cloudinary.com/dollaguij/image/upload/v1722260037/OCEAN%20Gr/hero1_qjxois.jpg');
+  background-size: cover;
+  background-position: center;
+  overflow-x: hidden;
+  width: 100%;
+
+  @include respond-to(xs) {
+    min-height: calc(100vh - 60px); // Smaller header on mobile
+    padding: $spacing-sm 0;
+  }
+
+  // &::before {
+  //   content: '';
+  //   position: absolute;
+  //   top: 0;
+  //   left: 0;
+  //   right: 0;
+  //   height: 100%;
+  //   background: linear-gradient(135deg, rgba($color-primary, 0.7) 0%, rgba(darken($color-primary, 20%), 0.5) 100%);
+  //   z-index: 0;
+  // }
+
+  .container {
+    border-radius: $border-radius-lg;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .hero-carousel {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    height: 420px;
+
+    @include respond-to(xs) {
+      height: 280px;
+    }
+
+
+    .carousel-item {
+      position: relative;
+      width: 100%;
+      height: 100%;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        filter: brightness(.5);
+      }
+
+      .carousel-caption {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, -0%);
+        width: 100%;
+        text-align: center;
+
+        h2 {
+          color: white;
+          z-index: 1;
+          // font-size: clamp(2rem, 4.6vw, 4rem);
+          font-weight: $font-weight-bold;
+        }
+      }
+    }
+
+    .carousel-nav {
+      display: flex;
+      justify-content: center;
+      margin-top: $spacing-md;
+
+      .carousel-dot {
+        // border-radius: 50%;
+        width: 10px;
+        height: 10px;
+        background-color: $color-border;
+        border: none;
+        margin: 0 $spacing-xs;
+        cursor: pointer;
+        transform: rotate(45deg);
+
+        &.active {
+          background-color: $color-surface;
+        }
+      }
+    }
+  }
+}
+
+.hero-nav {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: $spacing-md;
+
+  @include respond-to(xs) {
+    margin-bottom: $spacing-sm;
+  }
+}
+
+.hero-content {
+  max-width: 1180px;
+  margin-block: 2rem;
+  margin-inline: auto;
+  text-align: center;
+  border-top: 1px solid $color-primary;
+
+  h1 {
+    font-family: $font-family-hero;
+    font-weight: $font-weight-bold;
+    padding-bottom: $spacing-md;
+    border-bottom: 1px solid $color-primary;
+    color: $color-primary;
+
+    @include respond-to(xs) {
+      margin-block: $spacing-sm;
+    }
+  }
+
+  h2 {
+    font-family: $font-family-hero;
+    font-weight: $font-weight-bold;
+    margin-block: $spacing-md;
+    color: $color-primary;
+
+    @include respond-to(xs) {
+      margin-block: $spacing-sm;
+    }
+  }
+
+  .second-title {
+    border-bottom: 1px solid $color-primary;
+  }
+
+  .hero-subheadline {
+    font-size: $font-size-lg;
+    color: $color-text-tertiary;
+    margin-bottom: $spacing-md;
+
+    @include respond-to(xs) {
+      font-size: $font-size-md;
+      margin-bottom: $spacing-sm;
+    }
+  }
+}
+
+// Help you decide section
+.hero-decide-section {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: $border-radius-lg;
+  padding: $spacing-md;
+  margin-bottom: $spacing-md;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+
+  h3 {
+    font-size: $font-size-xl;
+    color: white;
+    margin-bottom: $spacing-sm;
+    font-weight: $font-weight-semibold;
+
+    @include respond-to(xs) {
+      font-size: $font-size-lg;
+    }
+  }
+
+  p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: $spacing-sm;
+    font-size: $font-size-base;
+
+    @include respond-to(xs) {
+      font-size: $font-size-sm;
+      margin-bottom: $spacing-xs;
+    }
+  }
+
+  @include respond-to(xs) {
+    padding: $spacing-sm;
+    margin-bottom: $spacing-sm;
+  }
+}
+
+// Help you apply section
+.hero-apply-section {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: $border-radius-lg;
+  padding: $spacing-md;
+  margin-bottom: $spacing-md;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+
+  h3 {
+    font-size: $font-size-xl;
+    color: white;
+    margin-bottom: $spacing-sm;
+    font-weight: $font-weight-semibold;
+
+    @include respond-to(xs) {
+      font-size: $font-size-lg;
+    }
+  }
+
+  p {
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: $spacing-sm;
+    font-size: $font-size-base;
+
+    @include respond-to(xs) {
+      font-size: $font-size-sm;
+      margin-bottom: $spacing-xs;
+    }
+  }
+
+  @include respond-to(xs) {
+    padding: $spacing-sm;
+    margin-bottom: $spacing-sm;
+  }
+}
+
+// CTA container for individual buttons
+.hero-cta-container {
+  display: flex;
+  justify-content: center;
+  padding-block: $spacing-md;
+
+  .btn {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: $font-size-sm;
+    max-width: 200px;
+    white-space: normal;
+    text-align: center;
+    padding: 10px 20px;
+
+    span {
+      font-size: $font-size-lg;
+    }
+  }
+}
+
+.hero-tertiary-cta {
+  margin-top: $spacing-lg;
+
+  p {
+    margin-bottom: $spacing-xs;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .text-link {
+    font-weight: $font-weight-medium;
+    text-decoration: underline;
+    color: white;
+    transition: all $transition-base;
+
+    &:hover {
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+}
+
+.concierge-sticky {
+  position: fixed;
+  right: $spacing-sm;
+  bottom: $spacing-xl;
+  z-index: $z-index-sticky;
+  max-width: calc(100vw - #{$spacing-md}); // Prevent overflow
+
+  .btn-concierge {
+    background-color: $color-secondary-light;
+    color: white;
+    padding: $spacing-sm $spacing-lg;
+    border-radius: $border-radius-pill;
+    box-shadow: $shadow-md;
+    transition: all $transition-base;
+    white-space: nowrap;
+    font-weight: $font-weight-semibold;
+    text-decoration: none;
+
+    &:hover {
+      background-color: darken($color-success, 10%);
+      transform: translateY(-2px);
+      box-shadow: $shadow-lg;
+    }
+  }
+
+  @include respond-to(xs) {
+    right: $spacing-xs;
+    bottom: $spacing-lg;
+
+    .btn-concierge {
+      padding: $spacing-xs $spacing-md;
+      font-size: $font-size-sm;
+    }
+  }
+}

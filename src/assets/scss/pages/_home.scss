@@ -1,0 +1,61 @@
+// Campus Israel - Home Page Styles
+
+.home {
+  &-hero {
+    padding: $spacing-2xl 0;
+    text-align: center;
+    
+    h1 {
+      margin-bottom: $spacing-lg;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    p {
+      font-size: $font-size-lg;
+      color: $color-text-secondary;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: $spacing-xl;
+    }
+  }
+  
+  &-features {
+    padding: $spacing-2xl 0;
+    background-color: $color-surface;
+    
+    .feature-card {
+      @include card;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      
+      h3 {
+        margin-bottom: $spacing-md;
+      }
+      
+      p {
+        color: $color-text-secondary;
+        flex-grow: 1;
+      }
+    }
+  }
+  
+  &-cta {
+    padding: $spacing-2xl 0;
+    text-align: center;
+    
+    h2 {
+      margin-bottom: $spacing-lg;
+    }
+    
+    p {
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      margin-bottom: $spacing-xl;
+    }
+  }
+}

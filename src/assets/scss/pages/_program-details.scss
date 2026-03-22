@@ -1,0 +1,321 @@
+// Program Details Page Styles
+.program-details-page {
+  min-height: 100vh;
+  padding: 30px;
+  
+  @include respond-to(xs) {
+    padding: 5px;
+  }
+
+  &__container {
+    @include container;
+    max-width: $container-max-lg;
+    padding-top: $spacing-2xl;
+    padding-bottom: $spacing-2xl;
+
+    h2 {
+      text-align: left;
+      font-family: $font-family-display;
+      max-width: 800px;
+      margin: 0 auto $spacing-md;
+      font-size: $font-size-2xl;
+      color: $color-primary;
+
+      @include respond-to(xs) {
+        font-size: $font-size-xl;
+      }
+    }
+  }
+
+  // Loading State
+  .program-details-loading {
+    @include flex-center;
+    @include flex-column;
+    min-height: 50vh;
+    text-align: center;
+
+    .loading-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba($color-primary, 0.3);
+      border-radius: 50%;
+      border-top-color: $color-primary;
+      animation: spin 1s ease-in-out infinite;
+      margin-bottom: $spacing-md;
+    }
+
+    p {
+      @include small-text;
+    }
+  }
+
+  // Error State
+  .program-details-error {
+    @include flex-center;
+    @include flex-column;
+    min-height: 50vh;
+    text-align: center;
+    padding: $spacing-xl;
+
+    h2 {
+      color: $color-error;
+      margin-bottom: $spacing-md;
+    }
+
+    p {
+      @include small-text;
+      margin-bottom: $spacing-lg;
+    }
+  }
+
+  // Hero Section - following domain/apply intro patterns
+  &__hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+
+    @include respond-to(xs) {
+      gap: 1.5rem;
+    }
+  }
+
+  &__back-btn {
+    @include button-secondary;
+    position: fixed;
+    top: $spacing-md;
+    right: $spacing-md;
+    padding: $spacing-xs $spacing-md;
+    font-size: $font-size-sm;
+    z-index: $z-index-sticky;
+    border-radius: $border-radius-pill;
+    box-shadow: $shadow-md;
+
+    @include respond-to(xs) {
+      top: $spacing-sm;
+      right: $spacing-sm;
+      padding: $spacing-xs $spacing-sm;
+      font-size: $font-size-xs;
+    }
+  }
+
+  &__hero-title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: $color-primary;
+    margin: 0;
+    text-align: left;
+    align-self: flex-start;
+    width: 100%;
+    font-family: $font-family-display;
+
+    @include respond-to(xs) {
+      font-size: 2rem;
+    }
+  }
+
+  &__hero-image {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    @include respond-to(xs) {
+      height: 250px;
+    }
+  }
+
+  &__hero-subtitle {
+    text-align: start;
+    font-family: $font-family-display;
+    max-width: 800px;
+    width: 100%;
+    margin: auto;
+    font-size: $font-size-2xl;
+    color: $color-primary;
+
+    @include respond-to(xs) {
+      font-size: $font-size-xl;
+    }
+  }
+
+  &__hero-location {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: $color-text-primary;
+    margin: 0;
+    max-width: 800px;
+
+    @include respond-to(xs) {
+      font-size: 1rem;
+    }
+  }
+
+  // Main Description
+  &__description {
+    margin-bottom: $spacing-xl;
+  }
+
+  &__main-text {
+    font-size: $font-size-xl;
+    line-height: $line-height-relaxed;
+    color: $color-primary;
+    max-width: 800px;
+    margin: 0 auto;
+
+    @include respond-to(xs) {
+      font-size: $font-size-lg;
+    }
+
+    p {
+      margin-bottom: $spacing-md;
+    }
+  }
+
+  // Program Information
+  &__info {
+    margin-bottom: $spacing-3xl;
+  }
+
+  &__info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: $spacing-md;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  &__info-item {
+    @include body-text;
+    padding: $spacing-md;
+    background: white;
+    border: 1px solid $color-border;
+    border-radius: $border-radius-md;
+    box-shadow: $shadow-sm;
+
+    strong {
+      color: $color-primary;
+      font-weight: $font-weight-semibold;
+    }
+  }
+
+  // Requirements Section
+  &__requirements {
+    @include academic-section;
+    text-align: center;
+
+    h2 {
+      @include section-header;
+      margin-bottom: $spacing-lg;
+    }
+  }
+
+  &__requirements-list {
+    display: flex;
+    gap: $spacing-sm;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  &__requirement-item {
+    background: rgba($color-secondary, 0.1);
+    color: $color-secondary;
+    padding: $spacing-xs $spacing-md;
+    border-radius: $border-radius-pill;
+    font-size: $font-size-sm;
+    font-weight: $font-weight-medium;
+  }
+
+  // Application Information
+  &__application {
+    @include academic-section;
+    text-align: center;
+
+    h2 {
+      @include section-header;
+      margin-bottom: $spacing-lg;
+    }
+  }
+
+  &__application-info {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: left;
+
+    p {
+      @include body-text;
+      margin-bottom: $spacing-md;
+      line-height: $line-height-relaxed;
+
+      strong {
+        color: $color-primary;
+        font-weight: $font-weight-semibold;
+      }
+
+      a {
+        @include hyperlink-inline;
+        color: $color-secondary;
+      }
+    }
+  }
+
+  // Action Buttons
+  &__actions {
+    text-align: center;
+    margin-top: $spacing-3xl;
+  }
+
+  &__apply-btn {
+    @include button-primary;
+    font-size: $font-size-lg;
+    padding: $spacing-md $spacing-2xl;
+    display: inline-flex;
+    align-items: center;
+    gap: $spacing-sm;
+
+    @include respond-to(xs) {
+      width: 100%;
+      max-width: 300px;
+    }
+  }
+
+  &__apply-icon {
+    font-size: $font-size-base;
+  }
+
+  // Animation
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+// More Information Button Styles (for both pages)
+.program-more-info-btn {
+  @include button-secondary;
+  font-weight: $font-weight-medium;
+  font-size: $font-size-sm;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: $shadow-md;
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.program-actions {
+  margin-top: $spacing-lg;
+  @include flex-center;
+}
