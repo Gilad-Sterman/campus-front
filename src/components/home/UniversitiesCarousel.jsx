@@ -110,6 +110,12 @@ const UniversitiesCarousel = ({ autoplayInterval = 5000 }) => {
   const getVisibleTiles = () => {
     if (israeliUniversities.length === 0) return [];
     
+    // If we have fewer universities than can fit on one screen,
+    // just return them all exactly as they are without duplicating.
+    if (israeliUniversities.length <= tilesPerView) {
+      return israeliUniversities;
+    }
+    
     const visibleTiles = [];
     for (let i = 0; i < tilesPerView; i++) {
       const index = (currentIndex + i) % israeliUniversities.length;
@@ -133,15 +139,15 @@ const UniversitiesCarousel = ({ autoplayInterval = 5000 }) => {
   const currentScreen = Math.floor(currentIndex / tilesPerView);
 
   return (
-    <section className="universities-section">
+    <section 
+      className="universities-section"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <div className="container">
         <h2 className="section-header">ISRAELI UNIVERSITIES</h2>
         
-        <div 
-          className="carousel-container"
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-        >
+        <div className="carousel-container">
           {showArrows && (
             <button
               className="carousel-arrow carousel-arrow-prev"

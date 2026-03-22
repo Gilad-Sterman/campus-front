@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, useLocation, Navigate } from 'react-router-dom'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import './assets/scss/main.scss'
 import { getCurrentUser } from './store/actions/authActions.js'
@@ -7,6 +7,10 @@ import { getCurrentUser } from './store/actions/authActions.js'
 // Layout components
 import Layout from './components/layout/Layout'
 import ProtectedRoute from './components/auth/ProtectedRoute'
+
+// Password Protection (Pre-launch)
+const ENABLE_SITE_LOCK = true; // Set to false to easily remove the password wall for launch
+import SiteLockScreen from './components/auth/SiteLockScreen'
 
 // Pages
 import HomePage from './pages/HomePage'
@@ -56,11 +60,19 @@ function ScrollToHash() {
 
 function App() {
   const dispatch = useDispatch();
+  const [isSiteUnlocked, setIsSiteUnlocked] = useState(
+    localStorage.getItem('siteUnlocked') === 'true'
+  );
 
   // Initialize authentication on app startup
   useEffect(() => {
     dispatch(getCurrentUser());
   }, [dispatch]);
+
+  // Pre-launch Password Wall Check
+  if (ENABLE_SITE_LOCK && !isSiteUnlocked) {
+    return <SiteLockScreen onUnlock={() => setIsSiteUnlocked(true)} />;
+  }
 
   return (
     <Router>

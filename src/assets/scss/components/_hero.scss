@@ -39,10 +39,10 @@
     max-width: 100%;
     box-sizing: border-box;
     position: relative;
-    height: 420px;
+    height: 65vh;
 
     @include respond-to(xs) {
-      height: 280px;
+      height: 60vh;
     }
 
 
@@ -70,7 +70,17 @@
           color: white;
           z-index: 1;
           // font-size: clamp(2rem, 4.6vw, 4rem);
+          margin: 0;
           font-weight: $font-weight-bold;
+        }
+
+        p {
+          color: white;
+          z-index: 1;
+          background-color: rgba(0, 0, 0, 0.615);
+          margin: 0;
+          padding: 10px;
+          // font-size: clamp(2rem, 4.6vw, 4rem);
         }
       }
     }
@@ -110,10 +120,14 @@
 
 .hero-content {
   max-width: 1180px;
-  margin-block: 2rem;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  margin-block: .5rem;
   margin-inline: auto;
   text-align: center;
-  border-top: 1px solid $color-primary;
+  // border-top: 1px solid $color-primary;
 
   h1 {
     font-family: $font-family-hero;
@@ -138,9 +152,9 @@
     }
   }
 
-  .second-title {
-    border-bottom: 1px solid $color-primary;
-  }
+  // .second-title {
+  //   border-bottom: 1px solid $color-primary;
+  // }
 
   .hero-subheadline {
     font-size: $font-size-lg;
@@ -238,7 +252,7 @@
 .hero-cta-container {
   display: flex;
   justify-content: center;
-  padding-block: $spacing-md;
+  // padding-block: $spacing-md;
 
   .btn {
     display: flex;

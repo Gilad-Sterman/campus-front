@@ -13,21 +13,21 @@ const HeroSection = ({ isLoggedIn, hasTakenQuiz, hasChurnedQuiz }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const heroImgs = [
+    // {
+    //   title: "Collective power",
+    //   img: "https://res.cloudinary.com/dollaguij/image/upload/v1771457686/7b4bfb700143bb62038799f5b130db8f2768224f_k0yh9w.png"
+    // },
     {
-      title: "Collective power",
-      img: "https://res.cloudinary.com/dollaguij/image/upload/v1771457686/7b4bfb700143bb62038799f5b130db8f2768224f_k0yh9w.png"
+      title: "LAUNCH YOUR LIFE ",
+      img: "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/GettyImages-2248592663.jpg"
     },
+    // {
+    //   title: "Daring to try",
+    //   img: "https://mzyjtmyoxpsnnxsvucup.supabase.co/storage/v1/object/public/university-logos/GettyImages-2205739506.jpg"
+    // },
     {
-      title: "Education that’s yours ",
-      img: "https://mzyjtmyoxpsnnxsvucup.supabase.co/storage/v1/object/public/university-logos/GettyImages-2248592663.jpg"
-    },
-    {
-      title: "Daring to try",
-      img: "https://mzyjtmyoxpsnnxsvucup.supabase.co/storage/v1/object/public/university-logos/GettyImages-2205739506.jpg"
-    },
-    {
-      title: "Where hearts & minds meet",
-      img: "https://res.cloudinary.com/dollaguij/image/upload/v1771457889/060016fc79605e1c5c4d84e748bf7cf946570e49_uwkr2s.png"
+      title: "Collage. Reclaimed.",
+      img: "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/GettyImages-2158556312.jpg"
     },
     {
       title: "Work hard play hard",
@@ -46,11 +46,11 @@ const HeroSection = ({ isLoggedIn, hasTakenQuiz, hasChurnedQuiz }) => {
   const renderPrimaryCta = () => {
     if (hasTakenQuiz) {
       const resultsLink = isLoggedIn ? '/quiz/results' : '/quiz';
-      return <Link to={resultsLink} className="btn btn-secondary">See My Results</Link>;
+      return <Link to={resultsLink} className="btn btn-primary">See My Results</Link>;
     } else if (hasChurnedQuiz) {
-      return <Link to="/quiz" className="btn btn-secondary">Continue Quiz</Link>;
+      return <Link to="/quiz" className="btn btn-primary">Continue Quiz</Link>;
     } else {
-      return <Link to="/quiz" className="btn btn-secondary"><span>Discover </span>your best options with our PathFinder quiz</Link>;
+      return <Link to="/quiz" className="btn btn-primary"><span>Discover </span>your best options with our PathFinder quiz</Link>;
     }
   };
 
@@ -64,6 +64,15 @@ const HeroSection = ({ isLoggedIn, hasTakenQuiz, hasChurnedQuiz }) => {
             <img src={heroImgs[currentIndex].img} alt="" />
             <div className="carousel-caption">
               <h2 className="hero-headline">{heroImgs[currentIndex].title}</h2>
+              <p className="hero-subheadline">With a world class degree in Israel</p>
+            </div>
+          </div>
+          <div className="hero-content">
+            <div className="hero-cta-container second-title">
+              {renderPrimaryCta()}
+            </div>
+            <div className="hero-cta-container">
+              <Link to={"/apply/intro"} className="btn btn-primary btn-lg"><span>Apply!</span>search, manage with our Cancierge service</Link>
             </div>
           </div>
           <div className='carousel-nav'>
@@ -72,20 +81,7 @@ const HeroSection = ({ isLoggedIn, hasTakenQuiz, hasChurnedQuiz }) => {
             ))}
           </div>
         </div>
-        <div className="hero-content">
 
-          <h2>STILL NOT SURE WHAT TO STUDY?</h2>
-          {/* Help you decide section */}
-          <div className="hero-cta-container second-title">
-            {renderPrimaryCta()}
-          </div>
-
-          <h2>I KNOW WHAT I WANT TO STUDY</h2>
-          {/* Help you apply section */}
-          <div className="hero-cta-container">
-            <Link to={"/apply/intro"} className="btn btn-primary btn-lg"><span>Apply!</span>search, manage with our Cancierge service</Link>
-          </div>
-        </div>
       </div>
 
       <div className="concierge-sticky">

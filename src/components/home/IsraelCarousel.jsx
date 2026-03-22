@@ -3,11 +3,11 @@ import React, { useState, useEffect } from 'react';
 const IsraelTile = ({ imageUrl, imageAlt, headline, description }) => {
   return (
     <div className="israel-tile">
-      <h3 className="israel-headline">{headline}</h3>
       <div className="israel-image">
         <img src={imageUrl} alt={imageAlt || headline} />
       </div>
-      <p>{description}</p>
+      <h3 className="israel-headline">{headline}</h3>
+      {/* <p>{description}</p> */}
     </div>
   );
 };

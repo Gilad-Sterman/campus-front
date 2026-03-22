@@ -67,17 +67,17 @@ const ProfilePage = () => {
   const renderActiveSectionHero = () => {
     switch (activeSection) {
       case 'my-applications':
-        return "https://res.cloudinary.com/dollaguij/image/upload/v1770767937/3368d3e5984dfa1bbf7945351aabf3be6810d930_z8a6ou.png";
+        return "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/GettyImages-1147779453.jpg";
       case 'quiz-results':
-        return "https://res.cloudinary.com/dollaguij/image/upload/v1770767937/3368d3e5984dfa1bbf7945351aabf3be6810d930_z8a6ou.png";
+        return "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/GettyImages-1147779453.jpg";
       case 'cost-calculator':
-        return "https://res.cloudinary.com/dollaguij/image/upload/v1770767937/3368d3e5984dfa1bbf7945351aabf3be6810d930_z8a6ou.png";
+        return "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/GettyImages-1147779453.jpg";
       case 'study-buddy':
-        return "https://res.cloudinary.com/dollaguij/image/upload/v1770767937/3368d3e5984dfa1bbf7945351aabf3be6810d930_z8a6ou.png";
+        return "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/GettyImages-1147779453.jpg";
       case 'concierge':
-        return "https://res.cloudinary.com/dollaguij/image/upload/v1770767937/3368d3e5984dfa1bbf7945351aabf3be6810d930_z8a6ou.png";
+        return "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/GettyImages-1147779453.jpg";
       default:
-        return "https://res.cloudinary.com/dollaguij/image/upload/v1770767937/3368d3e5984dfa1bbf7945351aabf3be6810d930_z8a6ou.png";
+        return "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/GettyImages-1147779453.jpg";
     }
   };
 

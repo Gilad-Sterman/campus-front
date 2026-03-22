@@ -56,8 +56,8 @@
 // Typography Classes
 .hero-headline {
   font-family: 'Druk Wide Super', 'Arial Black', Impact, sans-serif;
-  font-size: 120px;
-  line-height: 94px;
+  font-size: 80px;
+  line-height: 84px;
   text-transform: uppercase;
   font-weight: normal;
   letter-spacing: -0.02em;
@@ -72,9 +72,13 @@
   font-family: 'Druk Wide Super', 'Arial Black', Impact, sans-serif;
   font-size: 55px;
   line-height: 50px;
-  text-transform: uppercase;
   font-weight: normal;
   letter-spacing: -0.01em;
+
+  @media (max-width: 568px) {
+    font-size: 30px;
+    line-height: 35px;
+  }
 }
 
 // NB International Typography Classes
