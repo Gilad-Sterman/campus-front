@@ -4,7 +4,7 @@
 // Color Palette
 $color-white: #FFFFFF;
 $color-accent-blue: #00BAFF;
-$color-accent-blue1:  #52B4F9;
+$color-accent-blue1: #52B4F9;
 $color-seafoam: #00DFAA;
 $color-neutral-gray: #D9D9D9;
 $color-cta-orange: #FF3B00;
@@ -17,7 +17,8 @@ $color-surface: $color-accent-blue1;
 $color-success: #42C500; // Muted green for success/progress
 $color-error: #a64452; // Subdued red for errors
 $color-text-primary: #1c1e22; // Primary text color (charcoal)
-$color-text-secondary: #858585; // Secondary text color
+$color-text-secondary: #565050; // Secondary text color
+// $color-text-secondary: #858585; // Secondary text color
 $color-text-tertiary: #6e6e6e; // Tertiary text color
 $color-gray: $color-neutral-gray;
 $color-border: #e0e0e0; // Border color
@@ -43,6 +44,7 @@ $font-size-lg: 1.25rem; // 20px
 $font-size-xl: 1.5rem; // 24px
 $font-size-2xl: 1.875rem; // 30px
 $font-size-3xl: 2.25rem; // 36px
+$font-size-4xl: 3rem; // 48px
 
 // Font Weights
 $font-weight-regular: 400;
@@ -110,7 +112,7 @@ $container-max-md: 720px;
 $container-max-lg: 1080px;
 $container-max-xl: 1240px;
 $container-max-2xl: 1380px;
-$container-max-3xl: 1560px;
+$container-max-3xl: 1440px;
 
 // Quiz-specific variables
 $quiz-progress-height: 20px;

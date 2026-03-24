@@ -26,7 +26,7 @@ const HeroSection = ({ isLoggedIn, hasTakenQuiz, hasChurnedQuiz }) => {
     //   img: "https://mzyjtmyoxpsnnxsvucup.supabase.co/storage/v1/object/public/university-logos/GettyImages-2205739506.jpg"
     // },
     {
-      title: "Collage. Reclaimed.",
+      title: "College. Reclaimed.",
       img: "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/GettyImages-2158556312.jpg"
     },
     {

@@ -323,9 +323,9 @@ const CostCalculator = () => {
                   <thead>
                     <tr>
                       <th>Category</th>
-                      <th className='right'>{getUniversityById(university1)?.name}</th>
-                      <th className='right'>{getUniversityById(university2)?.name}</th>
-                      {usBenchmark && <th className='right white'>{getUniversityById(usBenchmark)?.name}</th>}
+                      <th>{getUniversityById(university1)?.name}</th>
+                      <th>{getUniversityById(university2)?.name}</th>
+                      {usBenchmark && <th className='white'>{getUniversityById(usBenchmark)?.name}</th>}
                     </tr>
                   </thead>
                   <tbody>

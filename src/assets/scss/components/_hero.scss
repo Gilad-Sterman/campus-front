@@ -2,17 +2,16 @@
 
 .hero-section {
   position: relative;
-  min-height: calc(100vh - 80px); // Account for header height
+  // Removed min-height: calc(100vh - ... ) to prevent extra whitespace
   padding: 0 0;
-  // background-image: url('https://res.cloudinary.com/dollaguij/image/upload/v1722260037/OCEAN%20Gr/hero1_qjxois.jpg');
   background-size: cover;
   background-position: center;
-  overflow-x: hidden;
   width: 100%;
+  margin-bottom: $spacing-xl; // Add space between hero and domain section
 
   @include respond-to(xs) {
-    min-height: calc(100vh - 60px); // Smaller header on mobile
     padding: $spacing-sm 0;
+    margin-bottom: $spacing-lg;
   }
 
   // &::before {
@@ -39,17 +38,16 @@
     max-width: 100%;
     box-sizing: border-box;
     position: relative;
-    height: 65vh;
-
-    @include respond-to(xs) {
-      height: 60vh;
-    }
-
+    height: auto; // Allow container to expand for the content below carousel-item
 
     .carousel-item {
       position: relative;
       width: 100%;
-      height: 100%;
+      height: 55vh; // Set the image size here
+
+      @include respond-to(xs) {
+        height: 60vh;
+      }
 
       img {
         width: 100%;
@@ -69,6 +67,7 @@
         h2 {
           color: white;
           z-index: 1;
+          letter-spacing: -4px;
           // font-size: clamp(2rem, 4.6vw, 4rem);
           margin: 0;
           font-weight: $font-weight-bold;
@@ -122,7 +121,7 @@
   max-width: 1180px;
   display: flex;
   gap: 10px;
-  align-items: center;
+  // align-items: center;
   justify-content: center;
   margin-block: .5rem;
   margin-inline: auto;

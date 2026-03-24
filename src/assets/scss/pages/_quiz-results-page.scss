@@ -1,4 +1,6 @@
 .quiz-results-page {
+    max-width: $container-max-3xl;
+    margin: auto;
 
     h2 {
         font-family: $font-family-display;
@@ -58,7 +60,7 @@
                 border-radius: $border-radius-pill;
                 transition: width 0.3s ease;
 
-                @include respond-to(xs){
+                @include respond-to(xs) {
                     width: 65%;
                 }
             }

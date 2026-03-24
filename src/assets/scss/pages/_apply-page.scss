@@ -1,6 +1,8 @@
 // Apply Page Styles
 .apply-page {
   min-height: 100vh;
+  max-width: $container-max-3xl;
+  margin-inline: auto;
 
   // Hero Section
   &__hero {

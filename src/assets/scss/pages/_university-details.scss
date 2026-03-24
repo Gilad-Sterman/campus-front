@@ -1,5 +1,7 @@
 .university-details-page {
   min-height: 100vh;
+  max-width: $container-max-3xl;
+  margin-inline: auto;
 
   // Hero Section - following domain/apply intro patterns
   .university-hero {
@@ -114,7 +116,7 @@
     // Visit Us Button
     .university-visit-btn {
       align-self: flex-start;
-      
+
       .btn {
         padding: $spacing-md $spacing-xl;
         font-size: $font-size-md;
@@ -160,50 +162,50 @@
   .university-content {
     max-width: 800px;
     margin: 0 auto;
-    
+
     .university-section {
       margin-bottom: $spacing-2xl;
-      
+
       .university-section-text {
         @include body-text;
         line-height: $line-height-relaxed;
         margin-bottom: $spacing-md;
       }
     }
-    
+
     .tuition-ranges {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: $spacing-lg;
-      
+
       .tuition-item {
         @include card;
-        
+
         h3 {
           font-size: $font-size-lg;
           font-weight: $font-weight-semibold;
           color: $color-primary;
           margin: 0 0 $spacing-sm 0;
         }
-        
+
         p {
           @include body-text;
           margin: 0;
         }
       }
     }
-    
+
     .campus-info {
       .info-item {
         @include card;
-        
+
         h3 {
           font-size: $font-size-lg;
           font-weight: $font-weight-semibold;
           color: $color-primary;
           margin: 0 0 $spacing-sm 0;
         }
-        
+
         p {
           @include body-text;
           margin: 0;
@@ -217,41 +219,41 @@
     background-color: $color-seafoam;
     padding: $spacing-2xl;
     margin: $spacing-2xl 0;
-    
+
     .university-section-title {
       text-align: center;
       margin-bottom: $spacing-xl;
     }
-    
+
     .programs-loading {
       text-align: center;
       color: $color-text-secondary;
       font-style: italic;
       padding: $spacing-lg;
     }
-    
+
     .no-programs {
       text-align: center;
       padding: $spacing-lg;
-      
+
       p {
         @include body-text;
         color: $color-text-secondary;
         margin: 0;
       }
     }
-    
+
     .programs-search {
       max-width: 800px;
       margin: 0 auto;
     }
-    
+
     .program-selector {
       position: relative;
-      
+
       .dropdown-container {
         position: relative;
-        
+
         .dropdown-trigger {
           width: 100%;
           padding: $spacing-md $spacing-2xl $spacing-md $spacing-md;
@@ -265,23 +267,23 @@
           display: flex;
           justify-content: space-between;
           align-items: center;
-          
+
           &:hover {
             border-color: $color-primary;
           }
-          
+
           &:focus {
             outline: none;
             border-color: $color-primary;
             box-shadow: 0 0 0 3px rgba($color-primary, 0.1);
           }
-          
+
           .dropdown-arrow {
             color: $color-text-secondary;
             transition: transform $transition-base;
           }
         }
-        
+
         .dropdown-menu {
           position: absolute;
           top: 100%;
@@ -295,21 +297,21 @@
           overflow-y: auto;
           z-index: $z-index-dropdown;
           margin-top: $spacing-xs;
-          
+
           .dropdown-item {
             padding: $spacing-md;
             cursor: pointer;
             transition: all $transition-base;
             border-bottom: 1px solid rgba($color-divider, 0.5);
-            
+
             &:last-child {
               border-bottom: none;
             }
-            
+
             &:hover {
               background-color: rgba($color-secondary, 0.05);
             }
-            
+
             .program-info {
               h4 {
                 font-size: $font-size-base;
@@ -317,11 +319,11 @@
                 color: $color-primary;
                 margin: 0 0 $spacing-xs 0;
               }
-              
+
               p {
                 @include small-text;
                 margin: 0 0 $spacing-xs 0;
-                
+
                 &.program-description {
                   color: $color-text-secondary;
                   font-style: italic;
@@ -332,17 +334,17 @@
         }
       }
     }
-    
+
     .program-actions {
       text-align: center;
       margin-top: $spacing-lg;
-      
+
       .btn {
         @include button-secondary;
         padding: $spacing-md $spacing-xl;
       }
     }
-    
+
     @include respond-to(xs) {
       padding: $spacing-md;
       margin: $spacing-xl 0;
