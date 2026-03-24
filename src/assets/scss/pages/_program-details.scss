@@ -117,8 +117,8 @@
   }
 
   &__hero-image {
-    width: 100%;
-    height: 300px;
+    @include full-width-breakout;
+    height: 40vh;
     overflow: hidden;
 
     img {

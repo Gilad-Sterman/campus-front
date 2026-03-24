@@ -34,7 +34,7 @@ const QuizStartPage = ({ onStart }) => {
           <img src="https://mzyjtmyoxpsnnxsvucup.supabase.co/storage/v1/object/public/university-logos/GettyImages-2248592663.jpg" alt="Quiz Welcome" />
         </div>
         <div className="quiz-hero-description">
-        <h2>READY TO DISCOVER YOUR ACADEMIC FIT IN ISRAEL?</h2>
+          <h1>READY TO DISCOVER YOUR ACADEMIC FIT IN ISRAEL?</h1>
           <p>Understand what you’re great at and find where you’ll thrive. Academically, culturally, and socially.</p>
           <p>Takes less than 5 minutes. No commitment – just insight.</p>
           <p>Your future is waiting.</p>

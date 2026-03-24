@@ -1,6 +1,5 @@
 .university-details-page {
   min-height: 100vh;
-  max-width: $container-max-3xl;
   margin-inline: auto;
 
   // Hero Section - following domain/apply intro patterns
@@ -15,9 +14,12 @@
       display: flex;
       gap: 1rem;
       align-items: center;
-      margin: 0;
+      margin: 0 auto;
       text-align: left;
       align-self: flex-start;
+      width: 100%;
+      max-width: $container-max-3xl;
+
     }
 
     .university-hero-title {
@@ -61,8 +63,8 @@
 
     // University Hero Image
     .university-hero-image {
-      width: 100%;
-      height: 300px;
+      @include full-width-breakout;
+      height: 40vh;
       overflow: hidden;
 
       img {
@@ -132,7 +134,7 @@
   // Container
   .university-container {
     @include container;
-    max-width: $container-max-lg;
+    max-width: $container-max-3xl;
     padding-top: $spacing-2xl;
     padding-bottom: $spacing-2xl;
   }

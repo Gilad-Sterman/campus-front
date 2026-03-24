@@ -77,6 +77,14 @@
   }
 }
 
+// Breakout mixin for full-width edge-to-edge elements
+@mixin full-width-breakout {
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
 // Typography mixins
 @mixin section-header {
   font-family: $font-family-headers;

@@ -19,10 +19,11 @@
       font-size: 3rem;
       font-weight: 700;
       color: $color-primary;
-      margin: 0;
+      margin: auto;
       text-align: left;
       align-self: flex-start;
       width: 100%;
+      max-width: 1380px;
 
       @include respond-to(xs) {
         font-size: 2rem;
@@ -30,8 +31,8 @@
     }
 
     .quiz-hero-image {
-      width: 100%;
-      height: 300px;
+      @include full-width-breakout;
+      height: 40vh;
       overflow: hidden;
 
       img {
@@ -49,7 +50,7 @@
     .quiz-hero-description {
       max-width: 700px;
 
-      h2 {
+      h1 {
         font-family: $font-family-display;
         letter-spacing: -4px;
 
@@ -487,6 +488,7 @@
 
 .quiz-container {
   @include container;
+  max-width: 100%;
 }
 
 // Quiz Page Layout

@@ -13,6 +13,11 @@
   @include respond-to(xs) {
     padding-inline: 5px;
   }
+
+  @media (min-width: $container-max-2xl) {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 // Header styles

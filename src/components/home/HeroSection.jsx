@@ -61,7 +61,7 @@ const HeroSection = ({ isLoggedIn, hasTakenQuiz, hasChurnedQuiz }) => {
       <div className="container">
         <div className='hero-carousel'>
           <div className='carousel-item'>
-            <img src={heroImgs[currentIndex].img} alt="" />
+            <img src={heroImgs[currentIndex].img} alt="" className={heroImgs[currentIndex].title === "College. Reclaimed." ? "top" : ""} />
             <div className="carousel-caption">
               <h2 className="hero-headline">{heroImgs[currentIndex].title}</h2>
               <p className="hero-subheadline">With a world class degree in Israel</p>
