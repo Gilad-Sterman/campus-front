@@ -28,7 +28,7 @@
     margin-bottom: $spacing-lg;
     font-family: $font-family-display;
     font-weight: 1000;
-    letter-spacing: -4px;
+    // letter-spacing: -4px;
 
     &:last-child {
       margin-bottom: 0;
@@ -36,7 +36,7 @@
 
     @include respond-to(xs) {
       font-size: $font-size-lg;
-      letter-spacing: -2px;
+      // letter-spacing: -2px;
     }
   }
 }
