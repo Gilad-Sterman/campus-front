@@ -19,7 +19,7 @@ const HeroSection = ({ isLoggedIn, hasTakenQuiz, hasChurnedQuiz }) => {
     // },
     {
       title: "LAUNCH YOUR LIFE ",
-      img: "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/GettyImages-2248592663.jpg"
+      img: "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/hero_img.jpg"
     },
     // {
     //   title: "Daring to try",
@@ -27,11 +27,11 @@ const HeroSection = ({ isLoggedIn, hasTakenQuiz, hasChurnedQuiz }) => {
     // },
     {
       title: "College. Reclaimed.",
-      img: "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/GettyImages-2158556312.jpg"
+      img: "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/hero_img_2.jpg"
     },
     {
       title: "Work hard play hard",
-      img: "https://res.cloudinary.com/dollaguij/image/upload/v1771457890/ffe2e54551c52556aea8dfa0050e68f9c2b0e7b9_rixjgy.png"
+      img: "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/hero_img_3.png"
     },
   ]
 
@@ -61,7 +61,7 @@ const HeroSection = ({ isLoggedIn, hasTakenQuiz, hasChurnedQuiz }) => {
       <div className="container">
         <div className='hero-carousel'>
           <div className='carousel-item'>
-            <img src={heroImgs[currentIndex].img} alt="" className={heroImgs[currentIndex].title === "College. Reclaimed." ? "top" : ""} />
+            <img src={heroImgs[currentIndex].img} alt="" className={heroImgs[currentIndex].title === "Work hard play hard" ? "" : "top"} />
             <div className="carousel-caption">
               <h2 className="hero-headline">{heroImgs[currentIndex].title}</h2>
               <p className="hero-subheadline">With a world class degree in Israel</p>

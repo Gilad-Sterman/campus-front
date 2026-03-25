@@ -31,7 +31,7 @@ const QuizStartPage = ({ onStart }) => {
       <div className="quiz-start-hero">
         <h1 className="quiz-hero-title">PathFinder</h1>
         <div className="quiz-hero-image">
-          <img src="https://mzyjtmyoxpsnnxsvucup.supabase.co/storage/v1/object/public/university-logos/GettyImages-2248592663.jpg" alt="Quiz Welcome" />
+          <img src="https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/AmitaiRos_9716.JPG" alt="Quiz Welcome" />
         </div>
         <div className="quiz-hero-description">
           <h1>READY TO DISCOVER YOUR ACADEMIC FIT IN ISRAEL?</h1>
