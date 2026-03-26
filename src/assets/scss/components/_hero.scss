@@ -44,7 +44,7 @@
     .carousel-item {
       position: relative;
       width: 100%;
-      height: 55vh; // Set the image size here
+      height: calc(100vh - 104px - 90px - 26px); // Set the image size here
 
       @include respond-to(xs) {
         height: 60vh;
