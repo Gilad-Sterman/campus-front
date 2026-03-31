@@ -83,9 +83,10 @@ function UniversitiesTab() {
     // Check if all required fields are filled
     const isFormValid = () => {
         const requiredFields = ['name', 'city', 'region', 'description', 'application_url', 'tuition_avg_usd', 'living_cost_usd', 'logo_url'];
-        return requiredFields.every(field => 
+        const fieldsFilled = requiredFields.every(field => 
             formData[field] && formData[field].toString().trim() !== ''
         );
+        return fieldsFilled && formData.description.length <= 1100;
     };
 
     const openEditForm = (university) => {
@@ -134,6 +135,11 @@ function UniversitiesTab() {
                 alert(`${label} is required`);
                 return;
             }
+        }
+
+        if (formData.description.length > 1100) {
+            alert('Description must be 1100 characters or less');
+            return;
         }
 
 
@@ -365,7 +371,11 @@ function UniversitiesTab() {
                                     value={formData.description}
                                     onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                                     placeholder="Enter university description for Career Path pages"
+                                    maxLength="1100"
                                 />
+                                <small style={{ color: formData.description.length >= 1100 ? '#a64452' : '#666' }}>
+                                    {formData.description.length}/1100 characters
+                                </small>
                             </div>
                             <div className="admin-form__group">
                                 <label>University Logo *</label>
