@@ -135,7 +135,7 @@
 .category-section {
   padding: $spacing-2xl $spacing-md;
   background-color: $color-surface;
-  max-width: $container-max-3xl;
+  max-width: 100%;
   margin: 0 auto;
 
   .section-header {
@@ -228,7 +228,7 @@
   padding: $spacing-2xl $spacing-md;
   background-color: $color-surface;
   text-align: center;
-  max-width: $container-max-3xl;
+  max-width: 100%;
   margin: 0 auto;
 
   .section-header {

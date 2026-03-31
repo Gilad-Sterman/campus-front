@@ -148,9 +148,9 @@ const ProgramDetailsPage = () => {
                 <strong>Region:</strong> {program.university?.region}
               </div>
             )}
-            {program.living_cost_override_usd && (
+            {(program.living_cost_override_usd || program.university?.living_cost_usd) && (
               <div className="program-details-page__info-item">
-                <strong>Living Cost:</strong> ${program.living_cost_override_usd.toLocaleString()} USD/year
+                <strong>Living Cost:</strong> ${(program.living_cost_override_usd || program.university?.living_cost_usd).toLocaleString()} USD/year
               </div>
             )}
           </div>

@@ -6,8 +6,8 @@
   display: flex;
   flex-direction: column;
   background-color: white;
-  padding-left: $space-30;
-  padding-right: $space-30;
+  // padding-left: $space-30;
+  // padding-right: $space-30;
   box-sizing: border-box;
 
   @include respond-to(xs) {

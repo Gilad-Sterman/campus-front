@@ -13,7 +13,7 @@ const DOMAINS = [
     'Human Insight & Impact',
     'Power, Policy & Influence',
     'Culture & Creativity',
-    'Explorative Paths'
+    // 'Explorative Paths'
 ];
 
 const DISCIPLINES = [
@@ -232,7 +232,7 @@ function ProgramsTab() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         // Validate all required fields
         const requiredFields = {
             university_id: 'University',
@@ -244,7 +244,6 @@ function ProgramsTab() {
             domain: 'Domain',
             career_horizon: 'Career Horizon',
             tuition_usd: 'Tuition',
-            living_cost_override_usd: 'Living Cost',
             application_url: 'Application URL'
         };
 
@@ -254,13 +253,13 @@ function ProgramsTab() {
                 return;
             }
         }
-        
+
         // Validate required documents
         if (formData.doc_requirements.length === 0) {
             alert('Please select at least one required document');
             return;
         }
-        
+
         try {
             const { application_deadline, ...rest } = formData;
             const data = {
@@ -346,8 +345,8 @@ function ProgramsTab() {
             <div className="admin-pagination">
                 <div className="admin-pagination__info">
                     <span>Show </span>
-                    <select 
-                        value={pageSize} 
+                    <select
+                        value={pageSize}
                         onChange={(e) => handlePageSizeChange(parseInt(e.target.value))}
                         className="admin-pagination__page-size"
                     >
@@ -358,23 +357,23 @@ function ProgramsTab() {
                     </select>
                     <span> per page</span>
                 </div>
-                
+
                 <div className="admin-pagination__controls">
-                    <button 
+                    <button
                         onClick={() => handlePageChange(1)}
                         disabled={currentPage === 1}
                         className="admin-pagination__btn"
                     >
                         First
                     </button>
-                    <button 
+                    <button
                         onClick={() => handlePageChange(currentPage - 1)}
                         disabled={currentPage === 1}
                         className="admin-pagination__btn"
                     >
                         Previous
                     </button>
-                    
+
                     <div className="admin-pagination__pages">
                         {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
                             let pageNum;
@@ -387,7 +386,7 @@ function ProgramsTab() {
                             } else {
                                 pageNum = currentPage - 2 + i;
                             }
-                            
+
                             return (
                                 <button
                                     key={pageNum}
@@ -399,15 +398,15 @@ function ProgramsTab() {
                             );
                         })}
                     </div>
-                    
-                    <button 
+
+                    <button
                         onClick={() => handlePageChange(currentPage + 1)}
                         disabled={currentPage === totalPages}
                         className="admin-pagination__btn"
                     >
                         Next
                     </button>
-                    <button 
+                    <button
                         onClick={() => handlePageChange(totalPages)}
                         disabled={currentPage === totalPages}
                         className="admin-pagination__btn"
@@ -464,8 +463,8 @@ function ProgramsTab() {
                     ))}
                 </select>
                 <div className="admin-tab__cache-info">
-                    <button 
-                        onClick={refreshPrograms} 
+                    <button
+                        onClick={refreshPrograms}
                         className="btn-admin btn-admin--small btn-admin--secondary"
                         title="Refresh data"
                     >
@@ -485,7 +484,7 @@ function ProgramsTab() {
                 <div className="admin-table">
                     {/* Top Pagination Controls */}
                     {renderPaginationControls()}
-                    
+
                     <div className="admin-table__wrapper">
                         <table>
                             <thead>
@@ -537,7 +536,7 @@ function ProgramsTab() {
                             </tbody>
                         </table>
                     </div>
-                    
+
                     {/* Bottom Pagination Controls */}
                     {renderPaginationControls()}
                 </div>
@@ -580,8 +579,8 @@ function ProgramsTab() {
                                     <select
                                         required
                                         value={formData.degree_level}
-                                        onChange={(e) => setFormData({ 
-                                            ...formData, 
+                                        onChange={(e) => setFormData({
+                                            ...formData,
                                             degree_level: e.target.value,
                                             degree_qualification: '' // Reset qualification when level changes
                                         })}
@@ -685,15 +684,7 @@ function ProgramsTab() {
                                         onChange={(e) => setFormData({ ...formData, tuition_usd: e.target.value })}
                                     />
                                 </div>
-                                <div className="admin-form__group">
-                                    <label>Est. Living Cost (USD/year) *</label>
-                                    <input
-                                        type="number"
-                                        required
-                                        value={formData.living_cost_override_usd}
-                                        onChange={(e) => setFormData({ ...formData, living_cost_override_usd: e.target.value })}
-                                    />
-                                </div>
+
                                 <div className="admin-form__group">
                                     <label>Application URL *</label>
                                     <input

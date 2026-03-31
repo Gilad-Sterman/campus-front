@@ -19,7 +19,7 @@ const HeroSection = ({ isLoggedIn, hasTakenQuiz, hasChurnedQuiz }) => {
     // },
     {
       title: "LAUNCH YOUR LIFE ",
-      img: "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/hero_img.jpg"
+      img: "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/hero_imgv4.jpg"
     },
     // {
     //   title: "Daring to try",
@@ -27,11 +27,11 @@ const HeroSection = ({ isLoggedIn, hasTakenQuiz, hasChurnedQuiz }) => {
     // },
     {
       title: "College. Reclaimed.",
-      img: "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/hero_img_2.jpg"
+      img: "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/hero_img_2v4.jpg"
     },
     {
       title: "Work hard play hard",
-      img: "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/hero_img_3.png"
+      img: "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/hero_img_3v4.png"
     },
   ]
 
