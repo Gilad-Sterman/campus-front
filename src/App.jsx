@@ -9,7 +9,7 @@ import Layout from './components/layout/Layout'
 import ProtectedRoute from './components/auth/ProtectedRoute'
 
 // Password Protection (Pre-launch)
-const ENABLE_SITE_LOCK = true; // Set to false to easily remove the password wall for launch
+const ENABLE_SITE_LOCK = false; // Set to false to easily remove the password wall for launch
 import SiteLockScreen from './components/auth/SiteLockScreen'
 
 // Pages

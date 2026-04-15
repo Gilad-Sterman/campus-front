@@ -101,9 +101,9 @@ const HomePage = () => {
       />
 
       {/* Why Study in Israel */}
-      <IsraelCarousel
+      {/* <IsraelCarousel
         autoplayInterval={8000} // 8 seconds
-      />
+      /> */}
 
       {/* Why Campus Israel */}
       <WhyCampusIsrael

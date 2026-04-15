@@ -93,7 +93,7 @@
     .carousel-nav {
       display: flex;
       justify-content: center;
-      margin-top: $spacing-md;
+      margin-block: $spacing-md;
 
       .carousel-dot {
         // border-radius: 50%;
@@ -125,8 +125,9 @@
 
 .hero-content {
   max-width: 1180px;
-  display: flex;
-  gap: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $spacing-md;
   // align-items: center;
   justify-content: center;
   margin-block: .5rem;
@@ -155,6 +156,12 @@
     @include respond-to(xs) {
       margin-block: $spacing-sm;
     }
+  }
+
+  h4 {
+    background-color: $color-seafoam;
+    width: fit-content;
+    padding: 5px;
   }
 
   // .second-title {
@@ -256,7 +263,19 @@
 // CTA container for individual buttons
 .hero-cta-container {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: start;
+  text-align: start;
+  border: 2px solid $color-primary;
+  border-radius: $border-radius-lg;
+  padding: $spacing-md;
+
+  img {
+    width: 60px;
+    height: 60px;
+    margin-bottom: $spacing-md;
+  }
+
   // padding-block: $spacing-md;
 
   .btn {
@@ -271,6 +290,17 @@
 
     span {
       font-size: $font-size-lg;
+    }
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: $color-primary;
+    border: 2px solid $color-primary;
+
+    &:hover {
+      background: $color-primary;
+      color: white;
     }
   }
 }
