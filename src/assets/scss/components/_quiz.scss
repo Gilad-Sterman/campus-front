@@ -10,6 +10,8 @@
     flex-direction: column;
     align-items: center;
     gap: 2rem;
+    background-color: $color-seafoam;
+    padding-block: 2rem;
 
     @include respond-to(xs) {
       gap: 1.5rem;
@@ -47,36 +49,107 @@
       }
     }
 
-    .quiz-hero-description {
-      max-width: 700px;
+  }
 
-      h1 {
-        font-family: $font-family-display;
-        // letter-spacing: -4px;
+  .quiz-hero-description {
+    max-width: 700px;
 
-        @include respond-to(xs) {
-          font-size: $font-size-2xl;
-          line-height: $line-height-tight;
-          // letter-spacing: -2px;
-        }
+
+    h1 {
+      font-family: $font-family-display;
+      text-align: center;
+      // line-height: 1.2;
+
+      // letter-spacing: -4px;
+
+      @include respond-to(xs) {
+        font-size: $font-size-2xl;
+        line-height: $line-height-tight;
+        // letter-spacing: -2px;
+      }
+    }
+
+    .quiz-start-card {
+      @include card;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2rem 0;
+    }
+
+    p {
+      @include body-text;
+      color: $color-text-primary;
+      margin-bottom: $spacing-lg;
+      font-size: $font-size-md;
+      line-height: 1.6;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  .quiz-card-container {
+    margin-top: 2rem;
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+
+
+    h1 {
+      font-family: $font-family-display;
+      // line-height: 1.2;
+
+      // letter-spacing: -4px;
+
+      @include respond-to(xs) {
+        font-size: $font-size-2xl;
+        line-height: $line-height-tight;
+        // letter-spacing: -2px;
+      }
+    }
+
+    .quiz-start-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      background-color: #F3F5FA;
+      padding: 2rem;
+      border-radius: $border-radius-pill;
+      max-width: 250px;
+      text-align: center;
+
+      @include respond-to(xs) {
+        max-width: 100%;
+        width: 100%;
       }
 
-      p {
-        @include body-text;
-        color: $color-text-primary;
-        margin-bottom: $spacing-lg;
-        font-size: $font-size-md;
-        line-height: 1.6;
+    }
 
-        &:last-child {
-          margin-bottom: 0;
-        }
+    p {
+      @include body-text;
+      color: $color-text-primary;
+      margin-bottom: $spacing-lg;
+      font-size: $font-size-md;
+      line-height: 1.6;
+
+      &:last-child {
+        margin-bottom: 0;
       }
+    }
+
+    @include respond-to(xs) {
+      flex-direction: column;
+      align-items: center;
     }
   }
 
   .quiz-start-content {
     @include card;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     max-width: 700px;
     width: 100%;
     margin: 0 auto;

@@ -48,9 +48,9 @@ const HeroSection = ({ isLoggedIn, hasTakenQuiz, hasChurnedQuiz }) => {
       const resultsLink = isLoggedIn ? '/quiz/results' : '/quiz';
       return <Link to={resultsLink} className="btn btn-primary">See My Results</Link>;
     } else if (hasChurnedQuiz) {
-      return <Link to="/quiz" className="btn btn-primary">Continue Quiz</Link>;
+      return <Link to="/quiz" className="btn btn-outline">Continue Quiz</Link>;
     } else {
-      return <Link to="/quiz" className="btn btn-primary"><span>Discover </span>your best options with our PathFinder quiz</Link>;
+      return <Link to="/quiz" className="btn btn-outline"><span>Take the quiz</span></Link>;
     }
   };
 
@@ -67,18 +67,24 @@ const HeroSection = ({ isLoggedIn, hasTakenQuiz, hasChurnedQuiz }) => {
               <p className="hero-subheadline">With a world class degree in Israel</p>
             </div>
           </div>
-          <div className="hero-content">
-            <div className="hero-cta-container second-title">
-              {renderPrimaryCta()}
-            </div>
-            <div className="hero-cta-container">
-              <Link to={"/apply/intro"} className="btn btn-primary btn-lg"><span>Apply!</span>search, manage with our Cancierge service</Link>
-            </div>
-          </div>
           <div className='carousel-nav'>
             {heroImgs.map((img, index) => (
               <button key={index} className={`carousel-dot ${index === currentIndex ? 'active' : ''}`} onClick={() => setCurrentIndex(index)}></button>
             ))}
+          </div>
+          <div className="hero-content">
+            <div className="hero-cta-container second-title">
+              <img src="https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/Group%2030.png" alt="" />
+              <h4>Find your degree match</h4>
+              <p>We’ll help you figure it out</p>
+              {renderPrimaryCta()}
+            </div>
+            <div className="hero-cta-container">
+              <img src="https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/Icons.png" alt="" />
+              <h4>Apply to your degree</h4>
+              <p>You’re good to go</p>
+              <Link to={"/apply/intro"} className="btn btn-primary btn-lg"><span>Apply now!</span></Link>
+            </div>
           </div>
         </div>
 
