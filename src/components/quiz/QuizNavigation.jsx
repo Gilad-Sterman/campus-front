@@ -1,11 +1,11 @@
-const QuizNavigation = ({ 
-  currentQuestion, 
-  totalQuestions, 
-  canGoBack, 
-  canGoNext, 
-  onPrevious, 
-  onNext, 
-  isLoading 
+const QuizNavigation = ({
+  currentQuestion,
+  totalQuestions,
+  canGoBack,
+  canGoNext,
+  onPrevious,
+  onNext,
+  isLoading
 }) => {
   return (
     <div className="quiz-navigation">
@@ -17,16 +17,16 @@ const QuizNavigation = ({
         ← Back
       </button> */}
 
-      <div className="question-indicator">
-        {/* {currentQuestion} / {totalQuestions} */}
-      </div>
+      {/* <div className="question-indicator">
+        {currentQuestion} / {totalQuestions}
+      </div> */}
 
       <button
         className="nav-btn nav-btn-primary"
         onClick={onNext}
         disabled={!canGoNext || isLoading}
       >
-        {currentQuestion === totalQuestions ? 'Finish' : 'Next'}
+        {currentQuestion === totalQuestions ? 'To my results' : 'Continue'}
       </button>
 
     </div>

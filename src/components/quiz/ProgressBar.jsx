@@ -1,3 +1,5 @@
+import { FiChevronLeft } from "react-icons/fi";
+
 const ProgressBar = ({ current, total, percentage, onprev, canGoBack, isLoading }) => {
   return (
     <div className="progress-container">
@@ -6,13 +8,13 @@ const ProgressBar = ({ current, total, percentage, onprev, canGoBack, isLoading 
         <span className="progress-percentage">{percentage}%</span>
       </div> */}
       <button
-            className="nav-btn btn-secondary"
-            onClick={onprev}
-            disabled={!canGoBack || isLoading}
-          >
-            Back
-          </button>
-      
+        className="nav-btn btn-secondary"
+        onClick={onprev}
+        disabled={!canGoBack || isLoading}
+      >
+        <FiChevronLeft />
+      </button>
+
       <div className="progress-bar">
         <div className="progress-fill" style={{ width: `${percentage}%` }} />
       </div>
