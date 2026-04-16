@@ -27,12 +27,25 @@ const QuizSummary = () => {
     return acc;
   }, {}) : {};
 
-  // Get section weights from enhanced scoring data (calculated weights, not raw Q5 values)
+  const isV3 = quizState?.data?.version === 'v3';
+
+  // Get section weights from enhanced scoring data
   const getSectionWeights = () => {
-    if (quizState?.data?.section_weights) {
-      const sectionData = typeof quizState.data.section_weights === 'string'
-        ? JSON.parse(quizState.data.section_weights)
-        : quizState.data.section_weights;
+    // V3 Weights - check top level or nested results
+    const v3Data = quizState?.data?.v3 || quizState?.data?.results?.scoring?.v3;
+    if (isV3 && v3Data?.weights) {
+      return {
+        academic: v3Data.weights.academic * 100,
+        environment: v3Data.weights.environment * 100
+      };
+    }
+
+    const sectionWeights = quizState?.data?.section_weights || quizState?.data?.results?.scoring?.sections;
+    if (sectionWeights) {
+      const sectionData = typeof sectionWeights === 'string'
+        ? JSON.parse(sectionWeights)
+        : sectionWeights;
+
 
       return {
         degree: sectionData?.degree?.weight || 0,
@@ -47,11 +60,27 @@ const QuizSummary = () => {
 
   const priorities = getSectionWeights();
 
+
   // Helper to format priority label
   const formatPriority = (key) => {
-    const labels = { degree: 'Academic Degree', campus: 'Campus Life', city: 'City Vibes' };
+    const labels = { 
+      degree: 'Academic Degree', 
+      campus: 'Campus Life', 
+      city: 'City Vibes',
+      academic: 'Academic Fit',
+      environment: 'Environment Fit'
+    };
     return labels[key] || key;
   };
+
+  const priorityColors = {
+    degree: '#028ec1ff',
+    campus: '#016a90ff',
+    city: '#094358ff',
+    academic: '#028ec1ff',
+    environment: '#016a90ff'
+  };
+
 
   // Fetch program matches when component mounts and quiz is completed
   useEffect(() => {
@@ -126,8 +155,20 @@ const QuizSummary = () => {
           </div>
 
           <div className="results-analysis">
+            {/* Display validity warning if applicable */}
+            {isV3 && quizState?.data?.v3?.validity_check && !quizState.data.v3.validity_check.is_valid && (
+              <div className="validity-warning">
+                <FiCheckCircle className="warning-icon" />
+                <div className="warning-content">
+                  <h4>Profile Reliability</h4>
+                  <p>Your responses show a high level of consistency, which may affect the specificity of your matches. Consider retaking the quiz if these results don't feel quite right.</p>
+                </div>
+              </div>
+            )}
+
             {/* Display enhanced personality data from database */}
             {quizState?.data?.brilliance_summary && (
+
               <div className='analysis-grid'>
                 <div className="analysis-card">
                   <h4>
@@ -142,28 +183,21 @@ const QuizSummary = () => {
             <div className="priorities-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <div style={{ width: '250px', height: '250px' }}>
                 <SimplePieChart
-                  data={[
-                    { label: 'degree', value: Number(priorities.degree || 0) },
-                    { label: 'campus', value: Number(priorities.campus || 0) },
-                    { label: 'city', value: Number(priorities.city || 0) }
-                  ]}
-                  colors={{
-                    degree: '#028ec1ff',
-                    campus: '#016a90ff',
-                    city: '#094358ff'
-                  }}
+                  data={Object.entries(priorities).map(([key, value]) => ({ label: key, value }))}
+                  colors={priorityColors}
                 />
               </div>
-              <div className="priorities-grid" style={{ width: '100%', gridTemplateColumns: 'repeat(3, 1fr)' }}>
+              <div className="priorities-grid" style={{ width: '100%', gridTemplateColumns: isV3 ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)' }}>
                 {Object.entries(priorities).map(([key, value]) => (
                   <div key={key} className="priority-card">
-                    <div style={{ width: '12px', height: '12px', backgroundColor: key === 'degree' ? '#028ec1ff' : key === 'campus' ? '#016a90ff' : '#094358ff', borderRadius: '50%', margin: '0 auto 0.5rem' }}></div>
-                    <div className="priority-value">{value}%</div>
+                    <div style={{ width: '12px', height: '12px', backgroundColor: priorityColors[key], borderRadius: '50%', margin: '0 auto 0.5rem' }}></div>
+                    <div className="priority-value">{Math.round(value)}%</div>
                     <div className="priority-label">{formatPriority(key)}</div>
                   </div>
                 ))}
               </div>
             </div>
+
           </div>
 
           <div className="results-analysis">
@@ -247,10 +281,11 @@ const QuizSummary = () => {
                               tick={{ fontSize: 12, fill: '#1c1e22' }}
                             />
                             <PolarRadiusAxis
-                              domain={[0, 5]}
+                              domain={[0, 4]}
                               tick={{ fontSize: 10, fill: '#1c1e22' }}
-                              tickCount={6}
+                              tickCount={5}
                             />
+
                             <Radar
                               dataKey="score"
                               stroke="#016a90"

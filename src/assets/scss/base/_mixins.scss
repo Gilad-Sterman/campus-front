@@ -255,20 +255,22 @@
 // Quiz-specific mixins
 @mixin quiz-option {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
   padding: $spacing-md;
-  border: $quiz-option-border;
+  // border: $quiz-option-border;
   border-radius: $border-radius-md;
   margin-bottom: $spacing-sm;
   cursor: pointer;
   transition: all $transition-base;
+  background-color: #F3F5FA;
 
   &:hover {
-    background-color: rgba($color-primary, 0.03);
+    box-shadow: 0 0 0 2px #272A2C33;
   }
 
   &.selected {
-    background-color: $quiz-option-selected-bg;
     border: $quiz-option-selected-border;
   }
 }
@@ -276,7 +278,7 @@
 @mixin quiz-progress-bar {
   width: 100%;
   height: $quiz-progress-height;
-  background-color: $color-gray;
+  background-color: #F3F5FA;
   border-radius: $border-radius-pill;
   overflow: hidden;
 

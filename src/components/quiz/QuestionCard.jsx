@@ -18,9 +18,11 @@ const QuestionCard = ({
     onAnswerSelect(questionId, answerValue);
   };
 
-  const answerOptions = question?.config?.labels
+  const answerOptions = question?.config?.options
+    ? question.config.options
+    : question?.config?.labels
     ? question.config.labels.map((label, index) => ({
-      value: (question.config.min || 1) + index,
+      value: (question.config.min !== undefined ? question.config.min : 1) + index,
       label
     }))
     : [
@@ -30,6 +32,7 @@ const QuestionCard = ({
       { value: 4, label: 'Agree' },
       { value: 5, label: 'Strongly Agree' }
     ];
+
 
   const renderInput = () => {
     if (!question) return null;
@@ -82,7 +85,11 @@ const QuestionCard = ({
               const isMaxed = !isChecked && selectedValues.length >= maxSelections;
 
               return (
-                <label key={option.value} className="multi-select-option">
+                <label 
+                  key={option.value} 
+                  className={`multi-select-option ${isChecked ? 'selected' : ''} ${(isLoading || isMaxed) ? 'disabled' : ''}`}
+                >
+
                   <input
                     type="checkbox"
                     checked={isChecked}
@@ -96,6 +103,7 @@ const QuestionCard = ({
                   />
                   <span>{option.label}</span>
                 </label>
+
               );
             })}
           </div>
@@ -197,7 +205,8 @@ const QuestionCard = ({
                       onClick={() => handleAnswerClick({ ...ratings, [item.id]: value })}
                       disabled={isLoading}
                     >
-                      {value}
+                      {renderValue(value)}
+
                     </button>
                   ))}
                 </div>
@@ -240,6 +249,7 @@ const QuestionCard = ({
         );
       }
 
+      case 'single_select':
       case 'likert':
       default:
         return (
@@ -252,19 +262,92 @@ const QuestionCard = ({
                 onClick={() => handleAnswerClick(option.value)}
                 disabled={isLoading}
               >
-                <span className="answer-value">{option.value}</span>
+                {!question?.config?.options && renderValue(option.value)}
+
                 <span className="answer-label">{option.label}</span>
               </button>
             ))}
           </div>
         );
+
     }
   };
+
+  const getEmoji = (value, scaleType) => {
+    if (scaleType === '0-4') {
+      const emojiMap = {
+        0: '😖',
+        1: '☹️',
+        2: '😑',
+        3: '😊',
+        4: '🤩'
+      };
+      return emojiMap[value] || value;
+    }
+    
+    if (scaleType === '0-2') {
+      const emojiMap = {
+        0: '🫥',
+        1: '🤔',
+        2: '😍'
+      };
+      return emojiMap[value] || value;
+    }
+    
+    return value;
+  };
+
+  const renderValue = (value) => {
+    const min = question?.config?.min;
+    const max = question?.config?.max;
+
+    if (min === 0 && max === 4) {
+      return <span className="answer-value emoji-value">{getEmoji(value, '0-4')}</span>;
+    }
+    
+    if (min === 0 && max === 2) {
+      return <span className="answer-value emoji-value">{getEmoji(value, '0-2')}</span>;
+    }
+
+    return <span className="answer-value">{value}</span>;
+  };
+
+
+
+  const renderTitle = () => {
+
+    const title = question?.title || 'Question';
+    
+    // Pattern 1: Splitting recurring part in quotes (V3 RIASEC/Openness)
+    const quoteMatch = title.match(/^("(.*?)")\s*(.*)$/);
+    if (quoteMatch) {
+      return (
+        <h2 className="question-title split-title">
+          <span className="question-recurring">{quoteMatch[1]}</span>
+          <span className="question-dynamic">{quoteMatch[3]}</span>
+        </h2>
+      );
+    }
+
+    // Pattern 2: Splitting question and instruction by '?' (e.g. V3 Values)
+    if (title.includes('?')) {
+      const parts = title.split('?');
+      return (
+        <h2 className="question-title instruction-split">
+          <span className="question-main">{parts[0]}?</span>
+          <span className="question-instruction">{parts[1].trim()}</span>
+        </h2>
+      );
+    }
+
+    return <h2 className="question-title">{title}</h2>;
+  };
+
 
   return (
     <div className={`question-card question-type-${question?.type || 'default'}`}>
       <div className="question-header">
-        <h2 className="question-title">{question?.title || 'Question'}</h2>
+        {renderTitle()}
         {question?.description && (
           <p className="question-description">{question.description}</p>
         )}

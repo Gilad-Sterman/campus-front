@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { 
-  loadSession, 
-  goToQuestion, 
+import {
+  loadSession,
+  goToQuestion,
   saveAnswer,
   saveProgressToServer,
   generateResults,
-  completeQuizFromProgress 
+  completeQuizFromProgress
 } from '../../store/slices/quizSlice';
 import { getCurrentUser } from '../../store/actions/authActions';
 import quizStorage from '../../services/quizStorage';
@@ -231,7 +231,7 @@ const QuizPage = ({ onComplete }) => {
     <div className="quiz-page">
       <div className="quiz-container">
         <div className="quiz-header">
-          <span className="progress-text">Question {visibleProgress.current} of {visibleProgress.total}</span>
+          {/* <span className="progress-text">Question {visibleProgress.current} of {visibleProgress.total}</span> */}
           <ProgressBar
             current={visibleProgress.current}
             total={visibleProgress.total}

@@ -19,8 +19,17 @@ const QuizResults = ({ onGetFullReport }) => {
     return acc;
   }, {}) : {};
 
-  // Get section weights from enhanced scoring data (calculated weights, not raw Q5 values)
+  // Get section weights from enhanced scoring data
   const getSectionWeights = () => {
+    // V3 Weights
+    if (results?.version === 'v3' && results?.scoring?.v3?.weights) {
+      return {
+        academic: results.scoring.v3.weights.academic * 100,
+        environment: results.scoring.v3.weights.environment * 100
+      };
+    }
+
+    // Legacy Weights
     if (results?.scoring?.sections) {
       return {
         degree: results.scoring.sections.degree?.weight || 0,
@@ -29,28 +38,44 @@ const QuizResults = ({ onGetFullReport }) => {
       };
     }
 
-    // Fallback to raw Q5 values if enhanced data not available
+    // Fallback
     return answerMap[5] || { degree: 0, campus: 0, city: 0 };
   };
 
   const priorities = getSectionWeights();
+  const isV3 = results?.version === 'v3';
 
-  const priorityData = [
-    { label: 'degree', value: Number(priorities.degree || 0) },
-    { label: 'campus', value: Number(priorities.campus || 0) },
-    { label: 'city', value: Number(priorities.city || 0) }
-  ];
+  // Prepare chart data based on version
+  const priorityData = isV3
+    ? [
+      { label: 'academic', value: Math.round(priorities.academic || 0) },
+      { label: 'environment', value: Math.round(priorities.environment || 0) }
+    ]
+    : [
+      { label: 'degree', value: Math.round(priorities.degree || 0) },
+      { label: 'campus', value: Math.round(priorities.campus || 0) },
+      { label: 'city', value: Math.round(priorities.city || 0) }
+    ];
 
   const priorityColors = {
     degree: '#028ec1ff',
     campus: '#016a90ff',
-    city: '#094358ff'
+    city: '#094358ff',
+    academic: '#028ec1ff',
+    environment: '#016a90ff'
   };
 
   const formatPriority = (key) => {
-    const labels = { degree: 'Academic Degree', campus: 'Campus Life', city: 'City Vibes' };
+    const labels = {
+      degree: 'Academic Degree',
+      campus: 'Campus Life',
+      city: 'City Vibes',
+      academic: 'Academic Fit',
+      environment: 'Environment Fit'
+    };
     return labels[key] || key;
   };
+
 
   if (isLoading) {
     return (
@@ -80,32 +105,42 @@ const QuizResults = ({ onGetFullReport }) => {
                 <h4>Your Brilliance Summary</h4>
                 <p>{results.insights.summary}</p>
 
-                {/* Display personality traits */}
-                {/* {results.insights.traits && results.insights.traits.length > 0 && (
-                  <div className="traits-container">
-                    <h5>Your Key Traits:</h5>
+                {/* Display personality traits / RIASEC top interests */}
+                {results.insights.traits && results.insights.traits.length > 0 && (
+                  <div className="traits-card">
+                    <h5>Your Key Strengths:</h5>
                     <div className="traits-list">
                       {results.insights.traits.map((trait, index) => (
                         <span key={index} className="trait-badge">
                           {trait}
                         </span>
-                      ))}
+                      ))}{' '}
+
                     </div>
                   </div>
-                )} */}
+                )}
               </div>
 
-              {/* Display recommendation */}
-              {/* {results.insights.recommendation && (
+              {/* V3 RIASEC Teaser */}
+              {isV3 && results?.scoring?.riasec && (
                 <div className="analysis-card">
-                  <h4>
-                    Personalized Recommendation
-                  </h4>
-                  <p>{results.insights.recommendation}</p>
+                  <h4>Top Interests</h4>
+                  <div className="riasec-teaser">
+                    {Object.entries(results.scoring.riasec)
+                      .sort(([, a], [, b]) => b - a)
+                      .slice(0, 2)
+                      .map(([key, score]) => (
+                        <div key={key} className="riasec-badge">
+                          <span className="riasec-label">{key.charAt(0).toUpperCase() + key.slice(1)}</span>
+                          <span className="riasec-value">{Number(score).toFixed(1)}</span>
+                        </div>
+                      ))}
+                  </div>
                 </div>
-              )} */}
+              )}
             </div>
           )}
+
           <div className="insights-section">
             <h2>Your Priority Weights</h2>
             <div className="chart-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
@@ -143,7 +178,7 @@ const QuizResults = ({ onGetFullReport }) => {
               </div>
             )}
           </div> */}
-           <CostComparisonChart programs={results?.programMatches} />
+          <CostComparisonChart programs={results?.programMatches} />
 
           {/* Program Matches Section */}
           {/* {results?.programMatches && results.programMatches.length > 0 && (
