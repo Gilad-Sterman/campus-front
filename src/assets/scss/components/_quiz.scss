@@ -214,9 +214,11 @@
 
 // Progress Bar
 .progress-container {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
   align-items: center;
-  gap: 2rem;
+  justify-content: start;
+  gap: 3rem;
   margin-bottom: $spacing-lg;
 
   .progress-info {
@@ -257,11 +259,9 @@
 .question-card {
   @include card;
   box-shadow: none;
-  max-width: 700px;
   width: 100%;
   margin: 0 auto $spacing-xl auto;
   // background-color: $color-seafoam;
-  max-width: 900px;
   border-radius: 0;
 
   $input-border: rgba($color-primary, 0.2);
@@ -269,13 +269,109 @@
   $input-focus: rgba($color-success, 0.2);
 
   &.question-type-statement {
-    background-color: $color-surface;
+    background-color: transparent; // Container is transparent
+    padding: 0;
+
+    .question-header {
+      background-color: $color-seafoam;
+      padding: 3rem 2rem;
+      margin-bottom: 2rem;
+      width: 100%;
+      // border-radius: $border-radius-lg;
+      text-align: center;
+
+      h2 {
+        font-family: $font-family-display;
+        font-size: 3rem;
+        font-weight: 700;
+        color: $color-primary;
+        margin-bottom: 0.5rem;
+
+        @include respond-to(xs) {
+          font-size: 2rem;
+        }
+      }
+
+      .question-description {
+        font-size: $font-size-lg;
+        color: $color-text-primary;
+        max-width: 700px;
+        margin: 0 auto;
+        line-height: 1.6;
+        background: none; // No background for description
+        padding: 0;
+
+        @include respond-to(xs) {
+          font-size: $font-size-base;
+        }
+      }
+    }
+
+    .statement-content {
+      padding-inline: 2rem;
+
+      .statement-steps {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        margin-top: 1rem;
+        justify-content: center;
+        max-width: 1000px;
+        margin-inline: auto;
+
+        .statement-step {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 0.75rem;
+          padding: 1.5rem;
+          background-color: #F3F5FA; // Light grey/blue background like intro cards
+          border-radius: $border-radius-pill;
+          flex: 1;
+          min-width: 200px;
+          max-width: 280px;
+          text-align: center;
+          border: none;
+
+          @include respond-to(xs) {
+            min-width: 100%;
+          }
+
+          .step-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background-color: white;
+            color: $color-primary;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: $font-size-sm;
+          }
+
+          .step-text {
+            font-size: $font-size-base;
+            font-weight: 500;
+            color: $color-text-primary;
+            line-height: 1.4;
+          }
+        }
+      }
+    }
   }
 
   .question-header,
   .question-text {
     margin-bottom: $spacing-xl;
     text-align: center;
+
+    .question-description {
+      @include body-text;
+      margin-top: $spacing-md;
+      color: $color-text-secondary;
+    }
 
     h2 {
       font-family: $font-family-headers;
@@ -672,7 +768,7 @@
 
   .quiz-container {
     @include container;
-    max-width: $container-max-md;
+    max-width: $container-max-lg;
   }
 
   .quiz-header {

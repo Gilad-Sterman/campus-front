@@ -3,7 +3,7 @@
  * Handles quiz state persistence in browser
  */
 
-import { getTotalQuestions } from '../config/quizQuestions.js';
+import { getTotalQuestions, QUIZ_QUESTIONS } from '../config/quizQuestions.js';
 import { getVisibleQuestionIds, isQuizCompleteForAnswers } from '../config/quizQuestions.js';
 
 const QUIZ_STORAGE_KEY = 'campusIsraelQuiz';
@@ -75,8 +75,10 @@ class QuizStorageService {
     const answers = [...session.answers];
     const existingIndex = answers.findIndex(a => a.questionId === questionId);
     
+    const question = QUIZ_QUESTIONS[questionId - 1];
     const answerData = {
       questionId,
+      key: question?.key || null, // Ensure key is always sent
       questionType: this._detectAnswerType(answer),
       answer,
       timestamp: new Date().toISOString()

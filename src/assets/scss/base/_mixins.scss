@@ -277,6 +277,7 @@
 
 @mixin quiz-progress-bar {
   width: 100%;
+  max-width: 600px;
   height: $quiz-progress-height;
   background-color: #F3F5FA;
   border-radius: $border-radius-pill;

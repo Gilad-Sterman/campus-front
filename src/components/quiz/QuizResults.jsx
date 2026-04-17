@@ -22,28 +22,40 @@ const QuizResults = ({ onGetFullReport }) => {
   // Get section weights from enhanced scoring data
   const getSectionWeights = () => {
     // V3 Weights
-    if (results?.version === 'v3' && results?.scoring?.v3?.weights) {
+    if (results?.scoring?.v3?.weights) {
       return {
         academic: results.scoring.v3.weights.academic * 100,
         environment: results.scoring.v3.weights.environment * 100
       };
     }
 
-    // Legacy Weights
-    if (results?.scoring?.sections) {
+    // V3 specific weights (Preferred)
+    const v3Data = results?.scoring?.v3?.weights || results?.v3_data?.weights || results?.section_weights;
+    if (v3Data && (v3Data.academic || v3Data.environment || (v3Data.weights && (v3Data.weights.academic || v3Data.weights.environment)))) {
+      const weights = v3Data.weights || v3Data;
       return {
-        degree: results.scoring.sections.degree?.weight || 0,
-        campus: results.scoring.sections.campus?.weight || 0,
-        city: results.scoring.sections.city?.weight || 0
+        academic: Math.round((weights.academic?.weight || weights.academic || 0) * (weights.academic < 1 ? 100 : 1)),
+        environment: Math.round((weights.environment?.weight || weights.environment || 0) * (weights.environment < 1 ? 100 : 1))
       };
     }
 
-    // Fallback
-    return answerMap[5] || { degree: 0, campus: 0, city: 0 };
+    // Legacy Weights (V1)
+    const sects = results?.scoring?.sections || results?.section_weights;
+    if (sects) {
+      const sectionData = typeof sects === 'string' ? JSON.parse(sects) : sects;
+      return {
+        degree: sectionData.degree?.weight || sectionData.degree || 40,
+        campus: sectionData.campus?.weight || sectionData.campus || 30,
+        city: sectionData.city?.weight || sectionData.city || 30
+      };
+    }
+
+    // Fallback logic
+    return { degree: 40, campus: 30, city: 30 };
   };
 
   const priorities = getSectionWeights();
-  const isV3 = results?.version === 'v3';
+  const isV3 = results?.version === 'v3' || (priorities.academic !== undefined);
 
   // Prepare chart data based on version
   const priorityData = isV3
@@ -132,7 +144,7 @@ const QuizResults = ({ onGetFullReport }) => {
                       .map(([key, score]) => (
                         <div key={key} className="riasec-badge">
                           <span className="riasec-label">{key.charAt(0).toUpperCase() + key.slice(1)}</span>
-                          <span className="riasec-value">{Number(score).toFixed(1)}</span>
+                          <span className="riasec-value">{(Number(score) || 0).toFixed(1)}</span>
                         </div>
                       ))}
                   </div>
@@ -178,7 +190,7 @@ const QuizResults = ({ onGetFullReport }) => {
               </div>
             )}
           </div> */}
-          <CostComparisonChart programs={results?.programMatches} />
+          <CostComparisonChart programs={(results?.programMatches || []).slice(0, 3)} />
 
           {/* Program Matches Section */}
           {/* {results?.programMatches && results.programMatches.length > 0 && (
@@ -187,7 +199,7 @@ const QuizResults = ({ onGetFullReport }) => {
               <p>Based on your quiz responses, here are your best program matches:</p>
 
               <div className="program-matches-mini">
-                {results.programMatches.map((program, index) => (
+                {(results.programMatches || []).slice(0, 3).map((program, index) => (
                   <div key={program.program_id} className="program-match-card">
                     <div className="match-rank">#{index + 1}</div>
                     <div className="program-details">

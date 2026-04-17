@@ -31,29 +31,47 @@ const QuizResultsPage = () => {
         return acc;
     }, {}) : {};
 
-    // Get section weights from enhanced scoring data (calculated weights, not raw Q5 values)
+    // Get section weights from enhanced scoring data
     const getSectionWeights = () => {
+        // V3 specific weights
+        const v3Data = quizState?.data?.scoring?.v3?.weights || quizState?.data?.v3_data?.weights || quizState?.data?.v3?.weights || quizState?.data?.section_weights;
+        if (v3Data && (v3Data.academic || v3Data.environment || (v3Data.weights && (v3Data.weights.academic || v3Data.weights.environment)))) {
+            const weights = v3Data.weights || v3Data;
+            return {
+                academic: Math.round((weights.academic?.weight || weights.academic || 0) * (weights.academic < 1 ? 100 : 1)),
+                environment: Math.round((weights.environment?.weight || weights.environment || 0) * (weights.environment < 1 ? 100 : 1))
+            };
+        }
+
+        // Legacy/V1 calculations
         if (quizState?.data?.section_weights) {
             const sectionData = typeof quizState.data.section_weights === 'string'
                 ? JSON.parse(quizState.data.section_weights)
                 : quizState.data.section_weights;
 
             return {
-                degree: sectionData?.degree?.weight || 0,
-                campus: sectionData?.campus?.weight || 0,
-                city: sectionData?.city?.weight || 0
+                degree: sectionData?.degree?.weight || sectionData?.degree || 40,
+                campus: sectionData?.campus?.weight || sectionData?.campus || 30,
+                city: sectionData?.city?.weight || sectionData?.city || 30
             };
         }
 
-        // Fallback to raw Q5 values if enhanced data not available
-        return answerMap[5] || { degree: 0, campus: 0, city: 0 };
+        // Fallback for V1
+        return { degree: 40, campus: 30, city: 30 };
     };
 
     const priorities = getSectionWeights();
+    const isV3 = quizState?.data?.version === 'v3' || (priorities.academic !== undefined);
 
     // Helper to format priority label
     const formatPriority = (key) => {
-        const labels = { degree: 'Academic Degree', campus: 'Campus Life', city: 'City Vibes' };
+        const labels = {
+            degree: 'Academic Degree',
+            campus: 'Campus Life',
+            city: 'City Vibes',
+            academic: 'Academic Fit',
+            environment: 'Environment Fit'
+        };
         return labels[key] || key;
     };
 
@@ -260,15 +278,16 @@ const QuizResultsPage = () => {
                         <div className="priorities-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             <div style={{ width: '250px', height: '250px' }}>
                                 <SimplePieChart
-                                    data={[
-                                        { label: 'degree', value: Number(priorities.degree || 0) },
-                                        { label: 'campus', value: Number(priorities.campus || 0) },
-                                        { label: 'city', value: Number(priorities.city || 0) }
-                                    ]}
+                                    data={Object.entries(priorities).map(([key, value]) => ({
+                                        label: key,
+                                        value: Number(value || 0)
+                                    }))}
                                     colors={{
                                         degree: '#028ec1ff',
                                         campus: '#016a90ff',
-                                        city: '#094358ff'
+                                        city: '#094358ff',
+                                        academic: '#028ec1ff',
+                                        environment: '#016a90ff'
                                     }}
                                 />
                             </div>
@@ -341,17 +360,18 @@ const QuizResultsPage = () => {
 
                                     // Prepare data for radar chart - all 6 dimensions
                                     const radarData = [
-                                        { dimension: 'Realistic', score: riasecData.realistic || 0, fullName: 'Realistic - Hands-on, practical work' },
-                                        { dimension: 'Investigative', score: riasecData.investigative || 0, fullName: 'Investigative - Research and analysis' },
-                                        { dimension: 'Artistic', score: riasecData.artistic || 0, fullName: 'Artistic - Creative and expressive' },
-                                        { dimension: 'Social', score: riasecData.social || 0, fullName: 'Social - Helping and teaching others' },
-                                        { dimension: 'Enterprising', score: riasecData.enterprising || 0, fullName: 'Enterprising - Leadership and business' },
-                                        { dimension: 'Conventional', score: riasecData.conventional || 0, fullName: 'Conventional - Organization and detail' }
+                                        { dimension: 'Realistic', score: Number(riasecData.realistic || 0), fullName: 'Realistic - Hands-on, practical work' },
+                                        { dimension: 'Investigative', score: Number(riasecData.investigative || 0), fullName: 'Investigative - Research and analysis' },
+                                        { dimension: 'Artistic', score: Number(riasecData.artistic || 0), fullName: 'Artistic - Creative and expressive' },
+                                        { dimension: 'Social', score: Number(riasecData.social || 0), fullName: 'Social - Helping and teaching others' },
+                                        { dimension: 'Enterprising', score: Number(riasecData.enterprising || 0), fullName: 'Enterprising - Leadership and business' },
+                                        { dimension: 'Conventional', score: Number(riasecData.conventional || 0), fullName: 'Conventional - Organization and detail' }
                                     ];
 
                                     // Get top 3 for text summary
-                                    const sortedRiasec = Object.entries(riasecData)
-                                        .sort(([, a], [, b]) => b - a)
+                                    const sortedRiasec = Object.entries(riasecData || {})
+                                        .filter(([key, score]) => typeof score === 'number' || !isNaN(Number(score)))
+                                        .sort(([, a], [, b]) => Number(b) - Number(a))
                                         .slice(0, 3);
 
                                     return (
@@ -387,7 +407,7 @@ const QuizResultsPage = () => {
                                                         <div key={key} className="riasec-summary-item">
                                                             <span className="riasec-rank">#{index + 1}</span>
                                                             <span className="riasec-name">{key.charAt(0).toUpperCase() + key.slice(1)}</span>
-                                                            <span className="riasec-score">{score.toFixed(1)}</span>
+                                                            <span className="riasec-score">{(Number(score) || 0).toFixed(1)}</span>
                                                         </div>
                                                     ))}
                                                 </div>
@@ -424,7 +444,7 @@ const QuizResultsPage = () => {
                         {!matchingLoading && !matchingError && matchedPrograms.length > 0 && (
                             <>
                                 {/* Cost Comparison Chart */}
-                                <CostComparisonChart programs={matchedPrograms} />
+                                <CostComparisonChart programs={matchedPrograms.slice(0, 3)} />
 
 
                             </>
@@ -443,9 +463,9 @@ const QuizResultsPage = () => {
                     {!matchingLoading && !matchingError && matchedPrograms.length > 0 && (
                         <>
                             {/* Minimal Program Cards */}
-                            <h2>HOW YOU FIT ACROSS DIFFERENT UNIVERSITIES & MAJORS</h2>
+                            <h2>YOUR TOP 3 MATCHES</h2>
                             <div className="program-matches">
-                                {matchedPrograms.map((program, index) => (
+                                {matchedPrograms.slice(0, 3).map((program, index) => (
                                     <div key={program.program_id} className="program-match-minimal">
                                         <div className="match-info">
                                             {/* <div className="match-rank">#{index + 1}</div> */}

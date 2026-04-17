@@ -27,16 +27,15 @@ const QuizSummary = () => {
     return acc;
   }, {}) : {};
 
-  const isV3 = quizState?.data?.version === 'v3';
-
   // Get section weights from enhanced scoring data
   const getSectionWeights = () => {
     // V3 Weights - check top level or nested results
-    const v3Data = quizState?.data?.v3 || quizState?.data?.results?.scoring?.v3;
-    if (isV3 && v3Data?.weights) {
+    const v3Data = quizState?.data?.scoring?.v3?.weights || quizState?.data?.v3_data?.weights || quizState?.data?.v3?.weights || quizState?.data?.section_weights;
+    if (v3Data && (v3Data.academic || v3Data.environment || (v3Data.weights && (v3Data.weights.academic || v3Data.weights.environment)))) {
+      const weights = v3Data.weights || v3Data;
       return {
-        academic: v3Data.weights.academic * 100,
-        environment: v3Data.weights.environment * 100
+        academic: Math.round((weights.academic?.weight || weights.academic || 0) * (weights.academic < 1 ? 100 : 1)),
+        environment: Math.round((weights.environment?.weight || weights.environment || 0) * (weights.environment < 1 ? 100 : 1))
       };
     }
 
@@ -46,26 +45,26 @@ const QuizSummary = () => {
         ? JSON.parse(sectionWeights)
         : sectionWeights;
 
-
       return {
-        degree: sectionData?.degree?.weight || 0,
-        campus: sectionData?.campus?.weight || 0,
-        city: sectionData?.city?.weight || 0
+        degree: sectionData?.degree?.weight || sectionData?.degree || 40,
+        campus: sectionData?.campus?.weight || sectionData?.campus || 30,
+        city: sectionData?.city?.weight || sectionData?.city || 30
       };
     }
 
-    // Fallback to raw Q5 values if enhanced data not available
-    return answerMap[5] || { degree: 0, campus: 0, city: 0 };
+    // Fallback logic
+    return { degree: 40, campus: 30, city: 30 };
   };
 
   const priorities = getSectionWeights();
+  const isV3 = quizState?.data?.version === 'v3' || (priorities.academic !== undefined);
 
 
   // Helper to format priority label
   const formatPriority = (key) => {
-    const labels = { 
-      degree: 'Academic Degree', 
-      campus: 'Campus Life', 
+    const labels = {
+      degree: 'Academic Degree',
+      campus: 'Campus Life',
       city: 'City Vibes',
       academic: 'Academic Fit',
       environment: 'Environment Fit'
@@ -257,17 +256,18 @@ const QuizSummary = () => {
 
                   // Prepare data for radar chart - all 6 dimensions
                   const radarData = [
-                    { dimension: 'Realistic', score: riasecData.realistic || 0, fullName: 'Realistic - Hands-on, practical work' },
-                    { dimension: 'Investigative', score: riasecData.investigative || 0, fullName: 'Investigative - Research and analysis' },
-                    { dimension: 'Artistic', score: riasecData.artistic || 0, fullName: 'Artistic - Creative and expressive' },
-                    { dimension: 'Social', score: riasecData.social || 0, fullName: 'Social - Helping and teaching others' },
-                    { dimension: 'Enterprising', score: riasecData.enterprising || 0, fullName: 'Enterprising - Leadership and business' },
-                    { dimension: 'Conventional', score: riasecData.conventional || 0, fullName: 'Conventional - Organization and detail' }
+                    { dimension: 'Realistic', score: Number(riasecData.realistic || 0), fullName: 'Realistic - Hands-on, practical work' },
+                    { dimension: 'Investigative', score: Number(riasecData.investigative || 0), fullName: 'Investigative - Research and analysis' },
+                    { dimension: 'Artistic', score: Number(riasecData.artistic || 0), fullName: 'Artistic - Creative and expressive' },
+                    { dimension: 'Social', score: Number(riasecData.social || 0), fullName: 'Social - Helping and teaching others' },
+                    { dimension: 'Enterprising', score: Number(riasecData.enterprising || 0), fullName: 'Enterprising - Leadership and business' },
+                    { dimension: 'Conventional', score: Number(riasecData.conventional || 0), fullName: 'Conventional - Organization and detail' }
                   ];
 
                   // Get top 3 for text summary
-                  const sortedRiasec = Object.entries(riasecData)
-                    .sort(([, a], [, b]) => b - a)
+                  const sortedRiasec = Object.entries(riasecData || {})
+                    .filter(([key, score]) => typeof score === 'number' || !isNaN(Number(score)))
+                    .sort(([, a], [, b]) => Number(b) - Number(a))
                     .slice(0, 3);
 
                   return (
@@ -304,7 +304,7 @@ const QuizSummary = () => {
                             <div key={key} className="riasec-summary-item">
                               <span className="riasec-rank">#{index + 1}</span>
                               <span className="riasec-name">{key.charAt(0).toUpperCase() + key.slice(1)}</span>
-                              <span className="riasec-score">{score.toFixed(1)}</span>
+                              <span className="riasec-score">{(Number(score) || 0).toFixed(1)}</span>
                             </div>
                           ))}
                         </div>
@@ -364,12 +364,12 @@ const QuizSummary = () => {
             {!matchingLoading && !matchingError && matchedPrograms.length > 0 && (
               <>
                 {/* Cost Comparison Chart */}
-                <CostComparisonChart programs={matchedPrograms} />
+                <CostComparisonChart programs={matchedPrograms.slice(0, 3)} />
 
                 {/* Minimal Program Cards */}
-                <h2 className="program-matches-title">HOW YOU FIT ACROSS DIFFERENT UNIVERSITIES & MAJORS</h2>
+                <h2 className="program-matches-title">YOUR TOP 3 MATCHES</h2>
                 <div className="program-matches">
-                  {matchedPrograms.map((program, index) => (
+                  {matchedPrograms.slice(0, 3).map((program, index) => (
                     <div key={program.program_id} className="program-match-minimal">
                       <div className="match-info">
                         {/* <div className="match-rank">#{index + 1}</div> */}

@@ -42,7 +42,16 @@ const QuestionCard = ({
         // No input for statement type, just informational
         return (
           <div className="statement-content">
-            {/* Optional: Add specific styling or illustration for statements if needed */}
+            {question.config?.steps && (
+              <div className="statement-steps">
+                {question.config.steps.map((step, index) => (
+                  <div key={index} className="statement-step">
+                    <span className="step-number">{index + 1}.</span>
+                    <span className="step-text">{step}</span>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         );
 
