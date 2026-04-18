@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { login, register } from '../store/actions/authActions.js';
-import GoogleOAuthButton from '../components/auth/GoogleOAuthButton.jsx';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -23,7 +22,9 @@ const LoginPage = () => {
     firstName: '',
     lastName: '',
     confirmPassword: '',
-    country: ''
+    country: '',
+    dateOfBirth: '',
+    zipCode: ''
   });
 
   // US States list
@@ -130,6 +131,10 @@ const LoginPage = () => {
           alert('Please select your state or location');
           return;
         }
+        if (!formData.dateOfBirth) {
+          alert('Please enter your date of birth');
+          return;
+        }
         if (formData.password !== formData.confirmPassword) {
           alert('Passwords do not match');
           return;
@@ -145,7 +150,9 @@ const LoginPage = () => {
             password: formData.password,
             firstName: formData.firstName,
             lastName: formData.lastName,
-            country: formData.country
+            country: formData.country,
+            dateOfBirth: formData.dateOfBirth,
+            zipCode: formData.zipCode?.trim() || undefined
           }));
           // Registration success - user will be redirected by useEffect
         } catch (err) {
@@ -175,7 +182,10 @@ const LoginPage = () => {
       password: '',
       firstName: '',
       lastName: '',
-      confirmPassword: ''
+      confirmPassword: '',
+      country: '',
+      dateOfBirth: '',
+      zipCode: ''
     });
   };
 
@@ -259,6 +269,35 @@ const LoginPage = () => {
               </div>
             )}
 
+            {isSignUp && (
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="dateOfBirth">Date of birth</label>
+                  <input
+                    type="date"
+                    id="dateOfBirth"
+                    name="dateOfBirth"
+                    value={formData.dateOfBirth}
+                    onChange={handleInputChange}
+                    required={isSignUp}
+                    max={new Date().toISOString().slice(0, 10)}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="zipCode">ZIP / postal code (optional)</label>
+                  <input
+                    type="text"
+                    id="zipCode"
+                    name="zipCode"
+                    value={formData.zipCode}
+                    onChange={handleInputChange}
+                    placeholder="e.g. 90210"
+                    autoComplete="postal-code"
+                  />
+                </div>
+              </div>
+            )}
+
             <div className="form-group">
               <label htmlFor="email">Email Address</label>
               <input
@@ -334,13 +373,6 @@ const LoginPage = () => {
               {loading ? 'Processing...' : (isSignUp ? 'Create Account' : 'Submit')}
             </button>
           </form>
-
-          {/* Temporarily commented out OAuth functionality */}
-          {/* <div className="oauth-divider">
-              <span>or</span>
-            </div>
-
-            <GoogleOAuthButton disabled={loading} /> */}
 
           <div className="login-footer">
             <p>

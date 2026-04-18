@@ -84,12 +84,6 @@ const authApi = {
     } catch (error) {
       throw error;
     }
-  },
-
-  // Initiate Google OAuth login
-  googleOAuth: () => {
-    // Redirect to backend OAuth endpoint
-    window.location.href = '/api/auth/google';
   }
 };
 
