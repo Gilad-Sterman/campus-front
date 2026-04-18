@@ -111,6 +111,14 @@ const LoginPage = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    if (name === 'zipCode') {
+      const digitsOnly = value.replace(/\D/g, '').slice(0, 9);
+      setFormData(prev => ({
+        ...prev,
+        [name]: digitsOnly
+      }));
+      return;
+    }
     setFormData(prev => ({
       ...prev,
       [name]: value
@@ -291,7 +299,10 @@ const LoginPage = () => {
                     name="zipCode"
                     value={formData.zipCode}
                     onChange={handleInputChange}
-                    placeholder="e.g. 90210"
+                    placeholder="e.g. 90210 or 902101234"
+                    inputMode="numeric"
+                    maxLength={9}
+                    pattern="\d{0,9}"
                     autoComplete="postal-code"
                   />
                 </div>
