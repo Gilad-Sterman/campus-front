@@ -210,8 +210,7 @@ const MyApplications = () => {
 
 
   const handleApplyToMore = () => {
-    // Navigate to apply page to start new application
-    navigate('/profile?tab=applications');
+    navigate('/apply/intro');
   };
 
   const handleDocumentUpload = async (documentId) => {
@@ -594,20 +593,22 @@ const MyApplications = () => {
               <h3> No Applications Yet</h3>
               <p>You haven't started any applications yet. Begin your journey to studying in Israel!</p>
               <button
+                type="button"
                 className="btn-primary"
                 onClick={handleApplyToMore}
               >
-                Apply Now
+                Application Hub
               </button>
             </div>
           </div>
         ) : (
           <div className="add-application">
             <button
+              type="button"
               className="btn-primary btn-lg"
               onClick={handleApplyToMore}
             >
-              Apply to More
+              Add more programs
             </button>
           </div>
         )}

@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { FaSearch, FaArrowRight, FaChevronDown } from 'react-icons/fa';
 import searchApiService from '../../services/searchApi';
+import { useAddToMyApplications } from '../../hooks/useAddToMyApplications';
 
 function ApplicationHub() {
-    const navigate = useNavigate();
+    const { addProgram } = useAddToMyApplications();
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState(null);
     const [selectedProgram, setSelectedProgram] = useState(null);
@@ -59,12 +59,9 @@ function ApplicationHub() {
         setSearchResults(null); // Clear results to prevent re-searching
     };
 
-    // Handle Apply Now
-    const handleApplyNow = () => {
+    const handleAddToMyApplications = () => {
         if (!selectedProgram) return;
-
-        // Navigate to apply page with pre-filled program data
-        navigate(`/apply?program=${selectedProgram.id}&source=intro`);
+        addProgram(selectedProgram);
     };
 
     // Handle More Information - Open program details page in new tab
@@ -196,16 +193,21 @@ function ApplicationHub() {
                     </div>
 
                 </div>
-                {/* A ction Buttons */}
                 <div className="apply-intro__actions">
-                    <button className={`btn-primary ${!selectedProgram ? 'disabled' : ''}`}
+                    <p className="apply-intro__cta-hint" role="status">
+                        {!selectedProgram ? 'Please select a Program.' : '\u00a0'}
+                    </p>
+                    <button
+                        type="button"
+                        className={`btn-primary ${!selectedProgram ? 'disabled' : ''}`}
                         disabled={!selectedProgram}
-                        onClick={handleApplyNow}
+                        onClick={handleAddToMyApplications}
                     >
-                        Let's Apply!
+                        Add to My Applications
                     </button>
 
                     <button
+                        type="button"
                         className={`btn-secondary ${!selectedProgram ? 'disabled' : ''}`}
                         onClick={handleMoreInfo}
                         disabled={!selectedProgram}

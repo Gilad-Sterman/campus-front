@@ -81,9 +81,9 @@ const HeroSection = ({ isLoggedIn, hasTakenQuiz, hasChurnedQuiz }) => {
             </div>
             <div className="hero-cta-container">
               <img src="https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/Icons.png" alt="" />
-              <h4>Apply to your degree</h4>
-              <p>You’re good to go</p>
-              <Link to={"/apply/intro"} className="btn btn-primary btn-lg"><span>Apply now!</span></Link>
+              <h4>Add programs you like</h4>
+              <p>Save them to track in one place</p>
+              <Link to={"/apply/intro"} className="btn btn-primary btn-lg"><span>Add to My Applications</span></Link>
             </div>
           </div>
         </div>

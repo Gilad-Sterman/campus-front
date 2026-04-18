@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { FaSearch, FaArrowRight, FaChevronDown } from 'react-icons/fa';
 import searchApi from '../services/searchApi';
+import { useAddToMyApplications } from '../hooks/useAddToMyApplications';
 
 const DomainPage = () => {
   const { domainName } = useParams();
   const navigate = useNavigate();
-  const { isAuthenticated } = useSelector(state => state.auth);
+  const { addProgram } = useAddToMyApplications();
 
   const [domainInfo, setDomainInfo] = useState(null);
   const [allPrograms, setAllPrograms] = useState(null);
@@ -153,10 +153,9 @@ const DomainPage = () => {
     setShowDropdown(false);
   };
 
-  // Handle Apply Now
-  const handleApplyNow = () => {
+  const handleAddToMyApplications = () => {
     if (!selectedProgram) return;
-    navigate(`/apply?program=${selectedProgram.id}&source=domain`);
+    addProgram(selectedProgram);
   };
 
   // Handle More Information - Open program details page in new tab
@@ -363,16 +362,20 @@ const DomainPage = () => {
           </div>
         )} */}
 
-        {/* Apply Button */}
         <div className="domain-page__actions">
-          {/* <button
-            className='btn-primary'
-            disabled={!selectedProgram}
-            onClick={handleApplyNow}
-          >
-            Let's Apply!
-          </button> */}
+          <p className="domain-page__cta-hint" role="status">
+            {!selectedProgram ? 'Please select a Program.' : '\u00a0'}
+          </p>
           <button
+            type="button"
+            className="btn-primary"
+            disabled={!selectedProgram}
+            onClick={handleAddToMyApplications}
+          >
+            Add to My Applications
+          </button>
+          <button
+            type="button"
             className="program-more-info-btn"
             onClick={handleMoreInfo}
             disabled={!selectedProgram}

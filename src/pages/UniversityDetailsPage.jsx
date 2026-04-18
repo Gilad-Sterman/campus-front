@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getPublicUniversityDetails } from '../store/actions/appActions';
 import searchApi from '../services/searchApi';
+import { useAddToMyApplications } from '../hooks/useAddToMyApplications';
 
 const UniversityDetailsPage = () => {
   const { id } = useParams();
@@ -15,6 +16,7 @@ const UniversityDetailsPage = () => {
   const [selectedProgram, setSelectedProgram] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
   const [programsLoading, setProgramsLoading] = useState(false);
+  const { addProgram } = useAddToMyApplications();
 
   useEffect(() => {
     const loadUniversityDetails = async () => {
@@ -115,11 +117,18 @@ const UniversityDetailsPage = () => {
     setShowDropdown(false);
   };
 
-  // Handle More Information - Open program details page in new tab
   const handleMoreInfo = () => {
     if (!selectedProgram) return;
     const programDetailsUrl = `/program/${selectedProgram.id}`;
     window.open(programDetailsUrl, '_blank');
+  };
+
+  const handleAddToMyApplications = () => {
+    if (!selectedProgram || !university?.id) return;
+    addProgram({
+      ...selectedProgram,
+      university_id: selectedProgram.university_id ?? university.id
+    });
   };
 
   return (
@@ -284,17 +293,27 @@ const UniversityDetailsPage = () => {
                 </div>
               </div>
 
-              {selectedProgram && (
-                <div className="program-actions">
-                  <button
-                    className="btn btn-outline"
-                    onClick={handleMoreInfo}
-                  >
-                    More Information
-                  </button>
-                  {/* Add to Applications CTA will be added here after client clarification */}
-                </div>
-              )}
+              <p className="university-program-cta-hint" role="status">
+                {!selectedProgram ? 'Please select a Program.' : '\u00a0'}
+              </p>
+              <div className="program-actions">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  disabled={!selectedProgram}
+                  onClick={handleAddToMyApplications}
+                >
+                  Add to My Applications
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-outline"
+                  onClick={handleMoreInfo}
+                  disabled={!selectedProgram}
+                >
+                  More Information
+                </button>
+              </div>
             </div>
           )}
         </div>
