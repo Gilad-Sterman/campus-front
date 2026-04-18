@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { FiFileText, FiUpload, FiDownload, FiEye, FiEdit, FiTrash2, FiPlus, FiCalendar, FiMapPin, FiBook, FiCheck, FiClock, FiAlertCircle, FiExternalLink, FiCheckCircle } from 'react-icons/fi';
 import { applicationApiService, clearApplicationCache } from '../../services/applicationApi';
-import { universityApiService } from '../../services/universityApi';
 import { documentApiService } from '../../services/documentApi';
 
 const MyApplications = () => {
@@ -11,7 +10,6 @@ const MyApplications = () => {
   const [activeTab, setActiveTab] = useState('applications');
   const [applications, setApplications] = useState([]);
   const [documents, setDocuments] = useState([]);
-  const [uploadedDocumentTypes, setUploadedDocumentTypes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const { user } = useSelector(state => state.auth);
@@ -128,24 +126,10 @@ const MyApplications = () => {
     return degreeLevel ? degreeLevel.toUpperCase() : '';
   };
 
-  const getApplicationDocumentProgress = (application) => {
-    const requiredDocs = Array.isArray(application?.program?.doc_requirements) && application.program.doc_requirements.length > 0
-      ? application.program.doc_requirements
-      : standardDocuments.filter((doc) => doc.required).map((doc) => doc.id);
-
-    const requiredTypes = [...new Set(requiredDocs.map((docType) => normalizeDocumentType(docType)))];
-    const uploadedTypesSet = new Set(uploadedDocumentTypes.map((docType) => normalizeDocumentType(docType)));
-    const uploadedCount = requiredTypes.filter((docType) => uploadedTypesSet.has(docType)).length;
-    const totalRequired = requiredTypes.length;
-    const progressPercent = totalRequired > 0 ? Math.round((uploadedCount / totalRequired) * 100) : 0;
-
-    return { uploadedCount, totalRequired, progressPercent };
-  };
-
   const loadApplicationsData = async () => {
     try {
       setLoading(true);
-      const applicationsResponse = await applicationApiService.getUserApplications();
+      const applicationsResponse = await applicationApiService.getSavedUserApplications();
       const userApplications = applicationsResponse.data || [];
 
       setApplications(userApplications);
@@ -169,7 +153,6 @@ const MyApplications = () => {
       try {
         const documentsResponse = await documentApiService.getUserDocuments();
         const userDocuments = documentsResponse.data || [];
-        setUploadedDocumentTypes(userDocuments.map((doc) => doc.document_type));
 
         // Create a map of user documents by type
         const userDocsMap = {};
@@ -206,18 +189,11 @@ const MyApplications = () => {
     }
   }, [user]);
 
-  const handleStatusUpdate = async (applicationId, newStatus) => {
+  const handleMarkApplied = async (applicationId) => {
     try {
-      const updateData = {
-        status: newStatus,
-        ...(newStatus === 'confirmed_applied' && { confirmed_at: new Date().toISOString() }),
-        ...(newStatus === 'redirected' && { redirected_at: new Date().toISOString() })
-      };
-
-      await applicationApiService.updateApplication(applicationId, updateData);
-
-      // Refresh applications list
-      const applicationsResponse = await applicationApiService.getUserApplications();
+      setError(null);
+      await applicationApiService.patchUserApplication(applicationId, { status: 'applied' });
+      const applicationsResponse = await applicationApiService.getSavedUserApplications();
       setApplications(applicationsResponse.data || []);
     } catch (err) {
       console.error('Error updating application status:', err);
@@ -225,34 +201,20 @@ const MyApplications = () => {
     }
   };
 
-
-  const handleOpenUploadInterface = (applicationId) => {
-    // Navigate to apply page step 3 (documents) for this application
-    navigate(`/apply?continue=${applicationId}&step=3`);
+  const openExternalApplicationUrl = (app) => {
+    const url = app.external_link || app.program?.application_url || app.university?.application_url;
+    if (url) {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
   };
+
 
   const handleApplyToMore = () => {
     // Navigate to apply page to start new application
     navigate('/profile?tab=applications');
   };
 
-  const handleDeleteApplication = async (applicationId) => {
-    if (window.confirm('Are you sure you want to delete this application?')) {
-      try {
-        await applicationApiService.deleteApplication(applicationId);
-
-        // Refresh applications list to ensure it's gone
-        await loadApplicationsData();
-      } catch (err) {
-        console.error('Error deleting application:', err);
-        setError('Failed to delete application. Please try again.');
-      }
-    }
-  };
-
   const handleDocumentUpload = async (documentId) => {
-    const documentItem = documents.find(doc => doc.id === documentId);
-
     // Create file input
     const fileInput = window.document.createElement('input');
     fileInput.type = 'file';
@@ -276,7 +238,6 @@ const MyApplications = () => {
       // Refresh documents list to show new upload
       const documentsResponse = await documentApiService.getUserDocuments();
       const userDocuments = documentsResponse.data || [];
-      setUploadedDocumentTypes(userDocuments.map((doc) => doc.document_type));
 
       // Create a map of user documents by type
       const userDocsMap = {};
@@ -362,12 +323,11 @@ const MyApplications = () => {
           setLoading(true);
 
           // Upload the replacement file
-          const response = await documentApiService.uploadDocument(file, document.uploadedData.document_type);
+          await documentApiService.uploadDocument(file, document.uploadedData.document_type);
 
           // Refresh documents list to show the replacement
           const documentsResponse = await documentApiService.getUserDocuments();
           const userDocuments = documentsResponse.data || [];
-          setUploadedDocumentTypes(userDocuments.map((doc) => doc.document_type));
 
           // Update documents state
           const userDocsMap = {};
@@ -564,65 +524,57 @@ const MyApplications = () => {
           {applications.map(app => (
             <div key={app.id} className={`application-item ${app.status}`}>
               {(() => {
-                const { uploadedCount, totalRequired, progressPercent } = getApplicationDocumentProgress(app);
-                const programImageUrl = app.program?.image_url || app.program?.university?.logo_url;
+                const programImageUrl =
+                  app.program?.image_url || app.university?.logo_url || app.program?.university?.logo_url;
+                const universityName = app.university?.name || app.program?.university?.name;
+                const programTitle = app.program?.name;
 
                 return (
                   <>
-                    <div className='application-header'>
-                      <h3 className="application-university">{app.program?.university?.name}</h3>
-                      <p className="application-title">{app.program?.name}, {formatDegreeLevel(app.program?.degree_level)}</p>
+                    <div className="application-header">
+                      <h3 className="application-university">{universityName || 'University'}</h3>
+                      <p className="application-title">
+                        {programTitle ? `${programTitle}, ${formatDegreeLevel(app.program?.degree_level)}` : 'Program'}
+                      </p>
+                      {app.program_unavailable && (
+                        <p className="application-unavailable-notice" role="alert">
+                          Program no longer available
+                        </p>
+                      )}
                     </div>
-                    <div className='application-content'>
-                      <div className='application-details'>
-                        {app.status !== 'confirmed_applied' && (
-                          <div className='document-progress'>
-                            <p>Required documents you uploaded</p>
-                            <div className='document-progress-track'>
-                              <div className='document-progress-fill' style={{ width: `${progressPercent}%` }} />
-                            </div>
-                          </div>
-                        )}
-                        {/* <span className={`status-badge ${app.status}`}>
-                    {app.status.replace('_', ' ')}
-                  </span> */}
+                    <div className="application-content">
+                      <div className="application-details">
                         <div className="application-actions">
-                          {app.status !== 'confirmed_applied' && (
+                          {app.status !== 'applied' && (
                             <>
                               <button
+                                type="button"
                                 className="btn-outline"
-                                onClick={() => handleStatusUpdate(app.id, 'confirmed_applied')}
+                                onClick={() => handleMarkApplied(app.id)}
                               >
                                 Mark as Applied
                               </button>
                               <button
+                                type="button"
                                 className="btn-outline"
-                                onClick={() => {
-                                  if (app.status !== 'redirected') {
-                                    handleStatusUpdate(app.id, 'redirected');
-                                  }
-                                  window.open(app.external_redirect_url || app.program?.application_url, '_blank');
-                                }}
+                                onClick={() => openExternalApplicationUrl(app)}
                               >
-                                University Application
+                                Go to University Site
                               </button>
                             </>
                           )}
 
-                          {app.status === 'confirmed_applied' && (
+                          {app.status === 'applied' && (
                             <div className="applied-status">
-                              <img className="applied-icon" src="https://mzyjtmyoxpsnnxsvucup.supabase.co/storage/v1/object/public/university-logos/09651966a64b6879d4f4c2fcccbf849ac6c8d95a.png" alt="" />
-                              <h4>Successfully Applied!</h4>
-                              {/* {app.confirmed_at && (
-                                <small>on {new Date(app.confirmed_at).toLocaleDateString()}</small>
-                              )} */}
+                              <FiCheckCircle className="applied-icon" size={40} aria-hidden />
+                              <h4>Applied</h4>
                             </div>
                           )}
                         </div>
                       </div>
                       <div className="application-image">
                         {programImageUrl ? (
-                          <img src={programImageUrl} alt={`${app.program?.name || 'Program'} image`} />
+                          <img src={programImageUrl} alt={`${programTitle || 'Program'} image`} />
                         ) : (
                           <div className="application-image-placeholder">
                             <FiBook size={28} />

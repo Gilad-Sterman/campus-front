@@ -5,6 +5,8 @@ const cache = {
   programs: null,
   universities: null,
   userApplications: null,
+  /** GET /user-applications — MVP saved/applied list */
+  savedUserApplications: null,
   applicationDocuments: null,
   applicationStatus: null,
   cacheTime: 5 * 60 * 1000 // 5 minutes
@@ -15,6 +17,7 @@ export const clearApplicationCache = () => {
   cache.programs = null;
   cache.universities = null;
   cache.userApplications = null;
+  cache.savedUserApplications = null;
   cache.applicationDocuments = null;
   cache.applicationStatus = null;
 };
@@ -181,6 +184,60 @@ export const applicationApiService = {
       return response.data;
     } catch (error) {
       console.error('Error fetching program required documents:', error);
+      throw error;
+    }
+  },
+
+  /**
+   * MVP "My Applications" — GET /user-applications (joined program + university).
+   * @returns {Promise<{ success: boolean, data: array, count: number }>}
+   */
+  async getSavedUserApplications() {
+    if (
+      cache.savedUserApplications &&
+      cache.savedUserApplications.timestamp > Date.now() - cache.cacheTime
+    ) {
+      return cache.savedUserApplications.data;
+    }
+    try {
+      const response = await api.get('/user-applications');
+      const body = response.data;
+      cache.savedUserApplications = {
+        data: body,
+        timestamp: Date.now()
+      };
+      return body;
+    } catch (error) {
+      console.error('Error fetching saved user applications:', error);
+      throw error;
+    }
+  },
+
+  /**
+   * MVP — POST /user-applications
+   * @param {{ program_id: string, university_id: string }} payload
+   */
+  async addUserApplication(payload) {
+    try {
+      const response = await api.post('/user-applications', payload);
+      cache.savedUserApplications = null;
+      return response.data;
+    } catch (error) {
+      console.error('Error adding user application:', error);
+      throw error;
+    }
+  },
+
+  /**
+   * MVP — PATCH /user-applications/:id (status saved|applied, optional external_link)
+   */
+  async patchUserApplication(id, updateData) {
+    try {
+      const response = await api.patch(`/user-applications/${id}`, updateData);
+      cache.savedUserApplications = null;
+      return response.data;
+    } catch (error) {
+      console.error('Error updating user application:', error);
       throw error;
     }
   }
