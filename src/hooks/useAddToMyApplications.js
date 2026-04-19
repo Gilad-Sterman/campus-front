@@ -21,6 +21,7 @@ function resolveIds(programLike) {
 
 /**
  * MVP: add current program to `user_applications` or send user to signup with pending add.
+ * @returns {Promise<{ kind: 'success' | 'duplicate' | 'redirect_signup' | 'invalid_ids' | 'error' }>}
  */
 export function useAddToMyApplications() {
   const dispatch = useDispatch();
@@ -38,14 +39,14 @@ export function useAddToMyApplications() {
             message: 'Could not determine program or university. Please try again.'
           })
         );
-        return;
+        return { kind: 'invalid_ids' };
       }
 
       if (!isAuthenticated) {
         setPendingUserApplication(ids.program_id, ids.university_id);
         const returnTo = `${location.pathname}${location.search || ''}`;
         navigate(`/login?mode=signup&redirect=${encodeURIComponent(returnTo)}`);
-        return;
+        return { kind: 'redirect_signup' };
       }
 
       try {
@@ -59,6 +60,7 @@ export function useAddToMyApplications() {
             message: 'Added to My Applications'
           })
         );
+        return { kind: 'success' };
       } catch (e) {
         if (e.status === 409) {
           dispatch(
@@ -67,7 +69,7 @@ export function useAddToMyApplications() {
               message: 'Already in your applications.'
             })
           );
-          return;
+          return { kind: 'duplicate' };
         }
         dispatch(
           addNotification({
@@ -75,10 +77,16 @@ export function useAddToMyApplications() {
             message: e.message || 'Could not add to My Applications.'
           })
         );
+        return { kind: 'error' };
       }
     },
     [dispatch, isAuthenticated, navigate, location.pathname, location.search]
   );
 
   return { addProgram, isAuthenticated };
+}
+
+/** True after a successful add or when the server reports duplicate (for "Added ✓" UI). */
+export function shouldShowAddedState(result) {
+  return result?.kind === 'success' || result?.kind === 'duplicate';
 }

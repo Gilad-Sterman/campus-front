@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useAddToMyApplications } from '../hooks/useAddToMyApplications';
+import { useAddToMyApplications, shouldShowAddedState } from '../hooks/useAddToMyApplications';
 import { FiTarget, FiSearch, FiArrowRight } from 'react-icons/fi';
 import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer } from 'recharts';
 import programMatchingApi from '../services/programMatchingApi';
@@ -16,6 +16,7 @@ const QuizResultsPage = () => {
     const [matchedPrograms, setMatchedPrograms] = useState([]);
     const [matchingLoading, setMatchingLoading] = useState(false);
     const [matchingError, setMatchingError] = useState(null);
+    const [addedProgramIds, setAddedProgramIds] = useState(() => new Set());
     const [universities, setUniversities] = useState([]);
     const [travelCosts, setTravelCosts] = useState({});
     const [loading, setLoading] = useState(true);
@@ -489,15 +490,19 @@ const QuizResultsPage = () => {
                                             <button
                                                 type="button"
                                                 className="btn-primary btn-apply"
-                                                onClick={() =>
-                                                    addProgram({
+                                                disabled={addedProgramIds.has(program.program_id)}
+                                                onClick={async () => {
+                                                    const result = await addProgram({
                                                         program_id: program.program_id,
                                                         id: program.program_id,
                                                         university_id: program.university_id
-                                                    })
-                                                }
+                                                    });
+                                                    if (shouldShowAddedState(result)) {
+                                                        setAddedProgramIds((prev) => new Set(prev).add(program.program_id));
+                                                    }
+                                                }}
                                             >
-                                                Add to My Applications
+                                                {addedProgramIds.has(program.program_id) ? 'Added ✓' : 'Add to My Applications'}
                                             </button>
                                         </div>
                                     </div>

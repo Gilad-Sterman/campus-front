@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { getPublicUniversityDetails } from '../store/actions/appActions';
 import searchApi from '../services/searchApi';
-import { useAddToMyApplications } from '../hooks/useAddToMyApplications';
+import { useAddToMyApplications, shouldShowAddedState } from '../hooks/useAddToMyApplications';
 
 const UniversityDetailsPage = () => {
   const { id } = useParams();
@@ -16,6 +16,7 @@ const UniversityDetailsPage = () => {
   const [selectedProgram, setSelectedProgram] = useState(null);
   const [showDropdown, setShowDropdown] = useState(false);
   const [programsLoading, setProgramsLoading] = useState(false);
+  const [showAddedForSelection, setShowAddedForSelection] = useState(false);
   const { addProgram } = useAddToMyApplications();
 
   useEffect(() => {
@@ -115,6 +116,7 @@ const UniversityDetailsPage = () => {
   const handleProgramSelect = (program) => {
     setSelectedProgram(program);
     setShowDropdown(false);
+    setShowAddedForSelection(false);
   };
 
   const handleMoreInfo = () => {
@@ -123,12 +125,15 @@ const UniversityDetailsPage = () => {
     window.open(programDetailsUrl, '_blank');
   };
 
-  const handleAddToMyApplications = () => {
+  const handleAddToMyApplications = async () => {
     if (!selectedProgram || !university?.id) return;
-    addProgram({
+    const result = await addProgram({
       ...selectedProgram,
       university_id: selectedProgram.university_id ?? university.id
     });
+    if (shouldShowAddedState(result)) {
+      setShowAddedForSelection(true);
+    }
   };
 
   return (
@@ -300,10 +305,10 @@ const UniversityDetailsPage = () => {
                 <button
                   type="button"
                   className="btn btn-primary"
-                  disabled={!selectedProgram}
+                  disabled={!selectedProgram || showAddedForSelection}
                   onClick={handleAddToMyApplications}
                 >
-                  Add to My Applications
+                  {showAddedForSelection ? 'Added ✓' : 'Add to My Applications'}
                 </button>
                 <button
                   type="button"

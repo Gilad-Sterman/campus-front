@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { FaSearch, FaArrowRight, FaChevronDown } from 'react-icons/fa';
 import searchApiService from '../../services/searchApi';
-import { useAddToMyApplications } from '../../hooks/useAddToMyApplications';
+import { useAddToMyApplications, shouldShowAddedState } from '../../hooks/useAddToMyApplications';
 
 function ApplicationHub() {
     const { addProgram } = useAddToMyApplications();
@@ -11,6 +11,7 @@ function ApplicationHub() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [showDropdown, setShowDropdown] = useState(false);
+    const [showAdded, setShowAdded] = useState(false);
     const dropdownRef = useRef(null);
 
     // Handle search
@@ -57,11 +58,19 @@ function ApplicationHub() {
         setSearchQuery(`${program.name} - ${program.university.name}`);
         setShowDropdown(false);
         setSearchResults(null); // Clear results to prevent re-searching
+        setShowAdded(false);
     };
 
-    const handleAddToMyApplications = () => {
+    useEffect(() => {
+        setShowAdded(false);
+    }, [selectedProgram?.id]);
+
+    const handleAddToMyApplications = async () => {
         if (!selectedProgram) return;
-        addProgram(selectedProgram);
+        const result = await addProgram(selectedProgram);
+        if (shouldShowAddedState(result)) {
+            setShowAdded(true);
+        }
     };
 
     // Handle More Information - Open program details page in new tab
@@ -200,10 +209,10 @@ function ApplicationHub() {
                     <button
                         type="button"
                         className={`btn-primary ${!selectedProgram ? 'disabled' : ''}`}
-                        disabled={!selectedProgram}
+                        disabled={!selectedProgram || showAdded}
                         onClick={handleAddToMyApplications}
                     >
-                        Add to My Applications
+                        {showAdded ? 'Added ✓' : 'Add to My Applications'}
                     </button>
 
                     <button

@@ -5,11 +5,10 @@ import {
   FiTarget,
   FiDollarSign,
   FiUsers,
-  FiHelpCircle,
-  FiLogOut
+  FiHelpCircle
 } from 'react-icons/fi';
 
-const ProfileSidebar = ({ activeSection, setActiveSection, user }) => {
+const ProfileSidebar = ({ activeSection, setActiveSection }) => {
   const dispatch = useDispatch();
 
   const handleLogout = () => {

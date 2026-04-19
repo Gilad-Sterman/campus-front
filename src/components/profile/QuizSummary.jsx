@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useAddToMyApplications } from '../../hooks/useAddToMyApplications';
+import { useAddToMyApplications, shouldShowAddedState } from '../../hooks/useAddToMyApplications';
 import { FiTarget, FiCalendar, FiBookOpen, FiUsers, FiMonitor, FiSearch, FiCheckCircle, FiArrowRight } from 'react-icons/fi';
 import { QUIZ_QUESTIONS } from '../../config/quizQuestions.js';
 import SimplePieChart from '../common/SimplePieChart';
@@ -15,6 +15,7 @@ const QuizSummary = () => {
   const [matchedPrograms, setMatchedPrograms] = useState([]);
   const [matchingLoading, setMatchingLoading] = useState(false);
   const [matchingError, setMatchingError] = useState(null);
+  const [addedProgramIds, setAddedProgramIds] = useState(() => new Set());
 
   // Check quiz status for authenticated users only
   const hasCompletedQuiz = quizState?.data?.status === 'completed';
@@ -393,15 +394,19 @@ const QuizSummary = () => {
                         <button
                           type="button"
                           className="btn-primary btn-apply"
-                          onClick={() =>
-                            addProgram({
+                          disabled={addedProgramIds.has(program.program_id)}
+                          onClick={async () => {
+                            const result = await addProgram({
                               program_id: program.program_id,
                               id: program.program_id,
                               university_id: program.university_id
-                            })
-                          }
+                            });
+                            if (shouldShowAddedState(result)) {
+                              setAddedProgramIds((prev) => new Set(prev).add(program.program_id));
+                            }
+                          }}
                         >
-                          Add to My Applications
+                          {addedProgramIds.has(program.program_id) ? 'Added ✓' : 'Add to My Applications'}
                         </button>
                       </div>
                     </div>

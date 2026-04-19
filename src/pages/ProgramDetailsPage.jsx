@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { FaArrowLeft, FaArrowRight, FaMapMarkerAlt, FaClock, FaDollarSign, FaGraduationCap, FaBuilding } from 'react-icons/fa';
 import searchApi from '../services/searchApi';
-import { useAddToMyApplications } from '../hooks/useAddToMyApplications';
+import { useAddToMyApplications, shouldShowAddedState } from '../hooks/useAddToMyApplications';
 
 const ProgramDetailsPage = () => {
   const { id } = useParams();
@@ -10,6 +10,7 @@ const ProgramDetailsPage = () => {
   const [program, setProgram] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [showAdded, setShowAdded] = useState(false);
 
   useEffect(() => {
     const fetchProgramDetails = async () => {
@@ -34,9 +35,16 @@ const ProgramDetailsPage = () => {
     fetchProgramDetails();
   }, [id]);
 
-  const handleAddToMyApplications = () => {
+  useEffect(() => {
+    setShowAdded(false);
+  }, [program?.id]);
+
+  const handleAddToMyApplications = async () => {
     if (!program) return;
-    addProgram(program);
+    const result = await addProgram(program);
+    if (shouldShowAddedState(result)) {
+      setShowAdded(true);
+    }
   };
 
   const handleGoBack = () => {
@@ -201,9 +209,10 @@ const ProgramDetailsPage = () => {
             type="button"
             className="program-details-page__apply-btn"
             onClick={handleAddToMyApplications}
+            disabled={showAdded}
           >
-            Add to My Applications
-            <FaArrowRight className="program-details-page__apply-icon" />
+            {showAdded ? 'Added ✓' : 'Add to My Applications'}
+            {!showAdded && <FaArrowRight className="program-details-page__apply-icon" />}
           </button>
         </div>
       </div>

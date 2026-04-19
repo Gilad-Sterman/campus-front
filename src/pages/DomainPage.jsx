@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { FaSearch, FaArrowRight, FaChevronDown } from 'react-icons/fa';
 import searchApi from '../services/searchApi';
-import { useAddToMyApplications } from '../hooks/useAddToMyApplications';
+import { useAddToMyApplications, shouldShowAddedState } from '../hooks/useAddToMyApplications';
 
 const DomainPage = () => {
   const { domainName } = useParams();
@@ -17,6 +17,7 @@ const DomainPage = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [expandedPrograms, setExpandedPrograms] = useState(new Set());
   const [programDescriptions, setProgramDescriptions] = useState({});
+  const [showAdded, setShowAdded] = useState(false);
   const dropdownRef = useRef(null);
 
   // Domain configurations
@@ -145,6 +146,7 @@ const DomainPage = () => {
   const handleProgramSelect = (program) => {
     setSelectedProgram(program);
     setShowDropdown(false);
+    setShowAdded(false);
   };
 
   // Handle clearing program selection
@@ -153,9 +155,16 @@ const DomainPage = () => {
     setShowDropdown(false);
   };
 
-  const handleAddToMyApplications = () => {
+  useEffect(() => {
+    setShowAdded(false);
+  }, [selectedProgram?.id]);
+
+  const handleAddToMyApplications = async () => {
     if (!selectedProgram) return;
-    addProgram(selectedProgram);
+    const result = await addProgram(selectedProgram);
+    if (shouldShowAddedState(result)) {
+      setShowAdded(true);
+    }
   };
 
   // Handle More Information - Open program details page in new tab
@@ -369,10 +378,10 @@ const DomainPage = () => {
           <button
             type="button"
             className="btn-primary"
-            disabled={!selectedProgram}
+            disabled={!selectedProgram || showAdded}
             onClick={handleAddToMyApplications}
           >
-            Add to My Applications
+            {showAdded ? 'Added ✓' : 'Add to My Applications'}
           </button>
           <button
             type="button"

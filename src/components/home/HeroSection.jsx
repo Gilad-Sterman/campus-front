@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 const HeroSection = ({ isLoggedIn, hasTakenQuiz, hasChurnedQuiz }) => {
   // Determine which CTA to show based on user state according to the table:
   // User State | Login/Signup | Primary CTA | Secondary CTA
-  // Not Logged In | Show | Start Free Quiz | Apply Now
-  // Logged In, No Quiz | Hide | Start Free Quiz | Apply Now
-  // Logged In, Quiz Started | Hide | Continue Quiz | Apply Now
-  // Logged In, Quiz Completed | Hide | See My Results | Apply Now
+  // Not Logged In | Show | Start Free Quiz | Add to My Applications
+  // Logged In, No Quiz | Hide | Start Free Quiz | Add to My Applications
+  // Logged In, Quiz Started | Hide | Continue Quiz | Add to My Applications
+  // Logged In, Quiz Completed | Hide | See My Results | Add to My Applications
   // Logged In, Has Applications | Hide | See My Results | My Applications
 
   const [currentIndex, setCurrentIndex] = useState(0);
