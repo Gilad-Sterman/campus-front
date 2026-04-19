@@ -12,6 +12,7 @@ const MyApplications = () => {
   const [applications, setApplications] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [markingAppliedId, setMarkingAppliedId] = useState(null);
   const { user } = useSelector(state => state.auth);
 
   const formatDegreeLevel = (degreeLevel = '') => {
@@ -46,12 +47,15 @@ const MyApplications = () => {
   const handleMarkApplied = async (applicationId) => {
     try {
       setError(null);
+      setMarkingAppliedId(applicationId);
       await applicationApiService.patchUserApplication(applicationId, { status: 'applied' });
       const applicationsResponse = await applicationApiService.getSavedUserApplications();
       setApplications(applicationsResponse.data || []);
     } catch (err) {
       console.error('Error updating application status:', err);
       setError('Failed to update application. Please try again.');
+    } finally {
+      setMarkingAppliedId(null);
     }
   };
 
@@ -127,13 +131,23 @@ const MyApplications = () => {
                                     <button
                                       type="button"
                                       className="btn-outline"
+                                      disabled={markingAppliedId === app.id}
+                                      aria-busy={markingAppliedId === app.id}
                                       onClick={() => handleMarkApplied(app.id)}
                                     >
-                                      Mark as Applied
+                                      {markingAppliedId === app.id ? (
+                                        <>
+                                          <span className="mark-as-applied-spinner" aria-hidden />
+                                          Saving...
+                                        </>
+                                      ) : (
+                                        'Mark as Applied'
+                                      )}
                                     </button>
                                     <button
                                       type="button"
                                       className="btn-outline"
+                                      disabled={markingAppliedId === app.id}
                                       onClick={() => openExternalApplicationUrl(app)}
                                     >
                                       Go to University Site
