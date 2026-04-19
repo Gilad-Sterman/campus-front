@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { FiBook, FiCheckCircle } from 'react-icons/fi';
+import { FiBook } from 'react-icons/fi';
 import { applicationApiService } from '../../services/applicationApi';
+
+const appliedSuccessImageUrl =
+  'https://mzyjtmyoxpsnnxsvucup.supabase.co/storage/v1/object/public/university-logos/09651966a64b6879d4f4c2fcccbf849ac6c8d95a.png';
 
 const MyApplications = () => {
   const navigate = useNavigate();
@@ -140,8 +143,12 @@ const MyApplications = () => {
 
                                 {app.status === 'applied' && (
                                   <div className="applied-status">
-                                    <FiCheckCircle className="applied-icon" size={40} aria-hidden />
-                                    <h4>Applied</h4>
+                                    <img
+                                      className="applied-icon"
+                                      src={appliedSuccessImageUrl}
+                                      alt=""
+                                    />
+                                    <h4>Successfully Applied!</h4>
                                   </div>
                                 )}
                               </div>

@@ -605,21 +605,13 @@
       }
     }
 
-    img {
+    .application-image img {
       width: 150px;
       height: 150px;
       object-fit: cover;
       border-radius: 50%;
       background-color: white;
       display: block;
-    }
-
-    .applied-icon {
-      background-color: transparent;
-      max-width: 100px;
-      max-height: 100px;
-      border-radius: 0;
-      object-fit: contain;
     }
 
     @include respond-to(xs) {
@@ -724,8 +716,19 @@
   color: $color-white;
   font-weight: 500;
 
+  .applied-icon {
+    width: 100px;
+    height: 100px;
+    max-width: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
   h4 {
     color: $color-white;
+    font-weight: 700;
+    margin: 0;
+    text-align: center;
   }
 }
 
