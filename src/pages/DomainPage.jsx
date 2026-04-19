@@ -372,9 +372,6 @@ const DomainPage = () => {
         )} */}
 
         <div className="domain-page__actions">
-          <p className="domain-page__cta-hint" role="status">
-            {!selectedProgram ? 'Please select a Program.' : '\u00a0'}
-          </p>
           <button
             type="button"
             className="btn-primary"

@@ -203,9 +203,6 @@ function ApplicationHub() {
 
                 </div>
                 <div className="apply-intro__actions">
-                    <p className="apply-intro__cta-hint" role="status">
-                        {!selectedProgram ? 'Please select a Program.' : '\u00a0'}
-                    </p>
                     <button
                         type="button"
                         className={`btn-primary ${!selectedProgram ? 'disabled' : ''}`}

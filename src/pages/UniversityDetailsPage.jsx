@@ -298,9 +298,6 @@ const UniversityDetailsPage = () => {
                 </div>
               </div>
 
-              <p className="university-program-cta-hint" role="status">
-                {!selectedProgram ? 'Please select a Program.' : '\u00a0'}
-              </p>
               <div className="program-actions">
                 <button
                   type="button"

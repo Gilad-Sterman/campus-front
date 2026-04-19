@@ -81,7 +81,7 @@ const MyApplications = () => {
   return (
     <div className="profile-section">
       <div className="profile-section-content">
-        <div className="tab-content">
+        <div className="tab-content tab-content--my-applications">
           {error ? (
             <div className="applications-tab">
               <div className="applications-header">
