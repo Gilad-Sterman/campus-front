@@ -532,7 +532,8 @@
   transition: all 0.2s ease;
   // min-height: 280px;
 
-  &.confirmed_applied {
+  &.confirmed_applied,
+  &.applied {
     background-color: $color-seafoam;
   }
 
