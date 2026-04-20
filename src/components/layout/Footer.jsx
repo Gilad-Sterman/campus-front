@@ -39,9 +39,9 @@ const Footer = () => {
     <footer className="app-footer" id="contact-section">
       <div className="container">
         {/* Contact Section */}
-        <div className="contact-section">
+        {/* <div className="contact-section">
           <div className="contact-left">
-            <h2>WE ARE HERE FOR YOU</h2>
+            <h2>WE ARE HERE FOR YOU111</h2>
           </div>
           <div className="contact-right">
             <p className="p-large">Welcome. Sign up for a quiz, create a profile, or book a call.</p>
@@ -62,10 +62,10 @@ const Footer = () => {
                   <img src="https://res.cloudinary.com/dollaguij/image/upload/v1771106263/d47a7d0fb405a07cc7b6cd0e1d342a7c5d81fa5d_fqfozs.png" alt="" />
                 </div>
               </a>
-              {/* {renderProfileButton()} */}
+              
             </div>
           </div>
-        </div>
+        </div> */}
 
         {/* Footer Navigation */}
         <div className="footer-navigation">

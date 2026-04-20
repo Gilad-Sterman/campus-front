@@ -1,61 +1,548 @@
-// Campus Israel - Home Page Styles
+// Home page redesign based on Figma composition while retaining shared header/footer.
 
-.home {
-  &-hero {
-    padding: $spacing-2xl 0;
-    text-align: center;
-    
+.home-redesign {
+  background-color: #f3f3f3;
+
+  &__hero {
+    @include full-width-breakout;
+    min-height: 420px;
+    position: relative;
+    overflow: hidden;
+    background-color: #111;
+  }
+
+  &__hero-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.72);
+  }
+
+  &__hero-overlay {
+    position: relative;
+    z-index: 2;
+    max-width: 1380px;
+    margin: 0 auto;
+    min-height: 420px;
+    padding: 56px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    color: #fff;
+
     h1 {
-      margin-bottom: $spacing-lg;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
+      font-family: 'Druk Wide Super', 'Arial Black', Impact, sans-serif;
+      font-size: 64px;
+      line-height: 64px;
+      letter-spacing: 0;
+      margin-bottom: 20px;
+      color: #fff;
+      text-transform: uppercase;
+      max-width: 640px;
     }
-    
+
     p {
-      font-size: $font-size-lg;
-      color: $color-text-secondary;
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-      margin-bottom: $spacing-xl;
+      font-family: 'NB International Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 28px;
+      line-height: 38px;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: #fff;
+      margin-bottom: 28px;
+      max-width: 700px;
     }
   }
-  
-  &-features {
-    padding: $spacing-2xl 0;
-    background-color: $color-surface;
-    
-    .feature-card {
-      @include card;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      
-      h3 {
-        margin-bottom: $spacing-md;
-      }
-      
-      p {
-        color: $color-text-secondary;
-        flex-grow: 1;
-      }
-    }
+
+  &__hero-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
   }
-  
-  &-cta {
-    padding: $spacing-2xl 0;
+
+  &__action {
+    min-width: 238px;
+    border-radius: 8px;
+    padding: 14px 28px;
+    color: #fff;
     text-align: center;
-    
-    h2 {
-      margin-bottom: $spacing-lg;
+    text-decoration: none;
+    font-family: 'NB International Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+
+    &--mint {
+      background-color: #00d1a0;
     }
-    
+
+    &--blue {
+      background-color: #00baff;
+    }
+  }
+
+  &__toolkit {
+    padding: 56px 0 64px;
+    background-color: #f3f3f3;
+
+    h2 {
+      text-align: center;
+      margin-bottom: 28px;
+      font-size: 56px;
+      line-height: 55px;
+      letter-spacing: -0.03em;
+      font-family: 'NB International Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-weight: 700;
+    }
+  }
+
+  &__toolkit-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  &__toolkit-card {
+    background: #fff;
+    border: 2px solid #d9d9d9;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    min-height: 570px;
+    text-align: center;
+
+    h3 {
+      font-family: 'NB International Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 39px;
+      line-height: 43px;
+      letter-spacing: -0.03em;
+      margin: 28px 24px 16px;
+    }
+
     p {
-      max-width: 600px;
-      margin-left: auto;
-      margin-right: auto;
-      margin-bottom: $spacing-xl;
+      margin: 0 24px;
+      font-family: 'NB International Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 30px;
+      line-height: 40px;
+      letter-spacing: -0.02em;
+      color: #000;
+      flex: 1;
+    }
+  }
+
+  &__toolkit-icon {
+    height: 140px;
+    background-color: #000;
+    border-radius: 6px 6px 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 56px;
+  }
+
+  &__toolkit-link {
+    margin: 20px 20px 24px;
+    background-color: #00baff;
+    border-radius: 8px;
+    color: #fff;
+    text-decoration: none;
+    font-family: 'NB International Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    padding: 16px 18px;
+  }
+
+  &__degrees {
+    @include full-width-breakout;
+    background: #00baff;
+    padding: 56px 0 72px;
+
+    h2 {
+      color: #fff;
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 64px;
+      line-height: 55px;
+      letter-spacing: -0.03em;
+      font-family: 'NB International Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-weight: 700;
+    }
+  }
+
+  &__degrees-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 60px;
+  }
+
+  &__degree-item {
+    color: #fff;
+    text-decoration: none;
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 20px;
+    align-items: center;
+
+    img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+    }
+
+    h3 {
+      color: #fff;
+      margin: 0 0 8px;
+      font-family: 'NB International Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 36px;
+      line-height: 40px;
+      letter-spacing: -0.03em;
+      font-weight: 700;
+    }
+
+    p {
+      color: #fff;
+      margin: 0;
+      font-family: 'NB International Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 30px;
+      line-height: 40px;
+      letter-spacing: -0.02em;
+      font-weight: 400;
+    }
+  }
+
+  &__universities {
+    padding: 64px 0;
+    background-color: #f3f3f3;
+
+    h2 {
+      text-align: center;
+      margin-bottom: 28px;
+      font-family: 'NB International Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 64px;
+      line-height: 55px;
+      letter-spacing: -0.03em;
+      font-weight: 700;
+    }
+  }
+
+  &__universities-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  &__university-card {
+    color: #000;
+    text-decoration: none;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+
+    h3 {
+      margin: 0;
+      font-family: 'NB International Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 36px;
+      line-height: 40px;
+      letter-spacing: -0.03em;
+      font-weight: 700;
+    }
+  }
+
+  &__university-logo-box {
+    width: 100%;
+    height: 270px;
+    border: 2px solid #d9d9d9;
+    border-radius: 8px;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 28px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  &__dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 28px;
+
+    span {
+      width: 12px;
+      height: 12px;
+      background: #d9d9d9;
+      transform: rotate(45deg);
+      display: block;
+    }
+
+    .is-active {
+      background: #52b4f9;
+    }
+  }
+
+  &__fit-cta {
+    @include full-width-breakout;
+    background: #00d1a0;
+    text-align: center;
+    padding: 48px 0;
+
+    h2 {
+      color: #fff;
+      font-family: 'NB International Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 64px;
+      line-height: 55px;
+      letter-spacing: -0.03em;
+      font-weight: 700;
+      margin-bottom: 22px;
+    }
+  }
+
+  &__fit-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+    color: #000;
+    border-radius: 8px;
+    text-decoration: none;
+    font-family: 'NB International Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 45px;
+    line-height: 1;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    padding: 20px 34px;
+  }
+
+  &__support {
+    padding: 60px 0 36px;
+    text-align: center;
+    background-color: #f3f3f3;
+
+    h2 {
+      margin-bottom: 14px;
+      font-family: 'NB International Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 64px;
+      line-height: 55px;
+      letter-spacing: -0.03em;
+      font-weight: 700;
+    }
+
+    p {
+      margin-bottom: 24px;
+      color: #6d6d6d;
+      font-family: 'NB International Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 30px;
+      line-height: 40px;
+      letter-spacing: -0.02em;
+      font-weight: 700;
+    }
+  }
+
+  &__support-actions {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+
+    a {
+      min-height: 88px;
+      background: #00baff;
+      border-radius: 8px;
+      color: #fff;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      font-family: 'NB International Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: 45px;
+      line-height: 1;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+
+      svg {
+        font-size: 34px;
+        flex-shrink: 0;
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .home-redesign {
+    &__hero-overlay h1 {
+      font-size: 48px;
+      line-height: 50px;
+    }
+
+    &__hero-overlay p {
+      font-size: 22px;
+      line-height: 32px;
+    }
+
+    &__toolkit h2,
+    &__degrees h2,
+    &__universities h2,
+    &__fit-cta h2,
+    &__support h2 {
+      font-size: 48px;
+      line-height: 46px;
+    }
+
+    &__toolkit-grid,
+    &__universities-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    &__toolkit-card {
+      min-height: 500px;
+
+      h3 {
+        font-size: 32px;
+        line-height: 36px;
+      }
+
+      p {
+        font-size: 24px;
+        line-height: 34px;
+      }
+    }
+
+    &__degrees-grid {
+      grid-template-columns: 1fr;
+    }
+
+    &__fit-button,
+    &__support-actions a {
+      font-size: 32px;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .home-redesign {
+    &__hero {
+      min-height: 340px;
+    }
+
+    &__hero-overlay {
+      min-height: 340px;
+      padding: 28px 16px;
+
+      h1 {
+        font-size: 34px;
+        line-height: 36px;
+        margin-bottom: 12px;
+      }
+
+      p {
+        font-size: 18px;
+        line-height: 24px;
+        margin-bottom: 16px;
+      }
+    }
+
+    &__action {
+      min-width: 190px;
+      font-size: 24px;
+      padding: 12px 18px;
+    }
+
+    &__toolkit,
+    &__universities,
+    &__support {
+      padding: 36px 0;
+    }
+
+    &__toolkit h2,
+    &__degrees h2,
+    &__universities h2,
+    &__fit-cta h2,
+    &__support h2 {
+      font-size: 36px;
+      line-height: 34px;
+      margin-bottom: 20px;
+    }
+
+    &__toolkit-grid,
+    &__universities-grid,
+    &__support-actions {
+      grid-template-columns: 1fr;
+    }
+
+    &__toolkit-card {
+      min-height: auto;
+      padding-bottom: 16px;
+
+      h3 {
+        font-size: 30px;
+        line-height: 32px;
+      }
+
+      p {
+        font-size: 22px;
+        line-height: 30px;
+      }
+    }
+
+    &__toolkit-link {
+      font-size: 26px;
+    }
+
+    &__degree-item {
+      grid-template-columns: 1fr;
+      text-align: center;
+
+      img {
+        width: 140px;
+        height: 140px;
+        margin: 0 auto;
+      }
+
+      h3 {
+        font-size: 30px;
+        line-height: 32px;
+      }
+
+      p {
+        font-size: 22px;
+        line-height: 30px;
+      }
+    }
+
+    &__university-logo-box {
+      height: 180px;
+    }
+
+    &__university-card h3 {
+      font-size: 30px;
+      line-height: 32px;
+    }
+
+    &__fit-button,
+    &__support-actions a {
+      font-size: 26px;
+      padding: 14px 18px;
+      min-height: 64px;
+    }
+
+    &__support p {
+      font-size: 20px;
+      line-height: 28px;
     }
   }
 }
