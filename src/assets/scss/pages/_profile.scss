@@ -281,6 +281,11 @@
   }
 }
 
+// My Applications: white canvas so gaps between cards are not $color-surface (blue)
+.tab-content--my-applications {
+  background-color: $color-white;
+}
+
 .empty-state-content {
   padding: 1rem;
 }
@@ -511,10 +516,12 @@
   }
 }
 
-// Application Items
+// Application Items (My Applications tab only — see .applications-tab)
 .applications-list {
   display: flex;
   flex-direction: column;
+  gap: $spacing-md;
+  background-color: $color-white;
 
   .empty-state {
     padding: $spacing-md;
@@ -530,10 +537,16 @@
 .application-item {
   padding: 1.5rem 1.5rem 0;
   transition: all 0.2s ease;
+  background-color: $color-surface;
+  border: 1px solid darken($color-surface, 10%);
+  border-radius: $border-radius-lg;
+  box-sizing: border-box;
   // min-height: 280px;
 
-  &.confirmed_applied {
+  &.confirmed_applied,
+  &.applied {
     background-color: $color-seafoam;
+    border-color: darken($color-seafoam, 12%);
   }
 
   .application-header {
@@ -605,21 +618,13 @@
       }
     }
 
-    img {
+    .application-image img {
       width: 150px;
       height: 150px;
       object-fit: cover;
       border-radius: 50%;
       background-color: white;
       display: block;
-    }
-
-    .applied-icon {
-      background-color: transparent;
-      max-width: 100px;
-      max-height: 100px;
-      border-radius: 0;
-      object-fit: contain;
     }
 
     @include respond-to(xs) {
@@ -713,6 +718,28 @@
       color: white;
     }
   }
+
+  .btn-outline:disabled {
+    opacity: 0.85;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .mark-as-applied-spinner {
+    width: 1.25em;
+    height: 1.25em;
+    border: 2px solid rgba($color-primary, 0.35);
+    border-top-color: $color-primary;
+    border-radius: 50%;
+    animation: mark-as-applied-spin 0.65s linear infinite;
+    flex-shrink: 0;
+  }
+}
+
+@keyframes mark-as-applied-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .applied-status {
@@ -724,8 +751,19 @@
   color: $color-white;
   font-weight: 500;
 
+  .applied-icon {
+    width: 100px;
+    height: 100px;
+    max-width: 100%;
+    object-fit: contain;
+    display: block;
+  }
+
   h4 {
     color: $color-white;
+    font-weight: 700;
+    margin: 0;
+    text-align: center;
   }
 }
 

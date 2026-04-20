@@ -125,7 +125,11 @@ function App() {
             <DomainPage />
           </Layout>
         } />
-        <Route path="/program/:id" element={<ProgramDetailsPage />} />
+        <Route path="/program/:id" element={
+          <Layout>
+            <ProgramDetailsPage />
+          </Layout>
+        } />
         <Route path="/apply/thank-you" element={
           <Layout>
             <ThankYouPage />

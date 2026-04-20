@@ -1,7 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { useSearchParams } from 'react-router-dom';
-import { Navigate } from 'react-router-dom';
 
 // Components
 import ProfileSidebar from '../components/profile/ProfileSidebar';
@@ -15,13 +13,14 @@ import ApplicationHub from '../components/profile/ApplicationHub';
 const ProfilePage = () => {
   const [searchParams] = useSearchParams();
   const [activeSection, setActiveSection] = useState('applications-hub');
-  const { user, isAuthenticated } = useSelector(state => state.auth);
 
   // Handle tab query parameter from URL
   useEffect(() => {
     const tabParam = searchParams.get('tab');
     if (tabParam) {
-      setActiveSection(tabParam);
+      // Legacy ?tab=account (removed from MVP) maps to Applications Hub
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- sync ?tab= to active section
+      setActiveSection(tabParam === 'account' ? 'applications-hub' : tabParam);
     }
   }, [searchParams]);
 
@@ -91,7 +90,6 @@ const ProfilePage = () => {
         <ProfileSidebar
           activeSection={activeSection}
           setActiveSection={setActiveSection}
-          user={user}
         />
         <div className="profile-content">
           <div className="profile-content-inner">

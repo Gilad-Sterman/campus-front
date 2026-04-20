@@ -91,7 +91,7 @@ const WhyCampusIsrael = ({ isLoggedIn, hasTakenQuiz, hasChurnedQuiz, onGatedFeat
       description: "Real human guidance. We are waiting to hear from you. And yes, we answer the phone!",
       iconComponent: <FaComments size={48} className="icon-svg" />,
       iconImg: "/noun-magical.svg",
-      buttonText: "Let's Apply",
+      buttonText: 'Talk to us',
       linkTo: isLoggedIn ? "/profile?tab=concierge" : "/login?redirect=/profile?tab=concierge",
       isGated: false
     }

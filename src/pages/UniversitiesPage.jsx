@@ -144,7 +144,7 @@ const UniversitiesPage = () => {
                       rel="noopener noreferrer"
                       className="btn btn-primary"
                     >
-                      Apply Now
+                      Go to University Site
                     </a>
                   )}
                 </div>

@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { FaArrowLeft, FaArrowRight, FaMapMarkerAlt, FaClock, FaDollarSign, FaGraduationCap, FaBuilding } from 'react-icons/fa';
 import searchApi from '../services/searchApi';
+import { useAddToMyApplications, shouldShowAddedState } from '../hooks/useAddToMyApplications';
 
 const ProgramDetailsPage = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
+  const { addProgram } = useAddToMyApplications();
   const [program, setProgram] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [showAdded, setShowAdded] = useState(false);
 
   useEffect(() => {
     const fetchProgramDetails = async () => {
@@ -33,10 +35,16 @@ const ProgramDetailsPage = () => {
     fetchProgramDetails();
   }, [id]);
 
-  const handleApplyNow = () => {
+  useEffect(() => {
+    setShowAdded(false);
+  }, [program?.id]);
+
+  const handleAddToMyApplications = async () => {
     if (!program) return;
-    // Open apply page in same tab (user initiated action)
-    navigate(`/apply?program=${program.id}&source=details`);
+    const result = await addProgram(program);
+    if (shouldShowAddedState(result)) {
+      setShowAdded(true);
+    }
   };
 
   const handleGoBack = () => {
@@ -148,11 +156,15 @@ const ProgramDetailsPage = () => {
                 <strong>Region:</strong> {program.university?.region}
               </div>
             )}
-            {(program.living_cost_override_usd || program.university?.living_cost_usd) && (
-              <div className="program-details-page__info-item">
-                <strong>Living Cost:</strong> ${(program.living_cost_override_usd || program.university?.living_cost_usd).toLocaleString()} USD/year
-              </div>
-            )}
+            {(() => {
+              const livingUsd =
+                program.living_cost_override_usd ?? program.university?.living_cost_usd;
+              return livingUsd != null ? (
+                <div className="program-details-page__info-item">
+                  <strong>Living Cost:</strong> ${Number(livingUsd).toLocaleString()} USD/year
+                </div>
+              ) : null;
+            })()}
           </div>
         </div>
 
@@ -194,11 +206,13 @@ const ProgramDetailsPage = () => {
         {/* Action Buttons */}
         <div className="program-details-page__actions">
           <button
+            type="button"
             className="program-details-page__apply-btn"
-            onClick={handleApplyNow}
+            onClick={handleAddToMyApplications}
+            disabled={showAdded}
           >
-            Apply Now
-            <FaArrowRight className="program-details-page__apply-icon" />
+            {showAdded ? 'Added ✓' : 'Add to My Applications'}
+            {!showAdded && <FaArrowRight className="program-details-page__apply-icon" />}
           </button>
         </div>
       </div>

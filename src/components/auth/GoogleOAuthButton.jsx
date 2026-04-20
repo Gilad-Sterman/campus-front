@@ -1,20 +1,14 @@
 import React from 'react';
 import { FaGoogle } from 'react-icons/fa';
-import authApi from '../../services/authApi.js';
 
-const GoogleOAuthButton = ({ disabled = false }) => {
-  const handleGoogleLogin = () => {
-    if (!disabled) {
-      authApi.googleOAuth();
-    }
-  };
-
+/** Retired for MVP — kept so imports do not break if re-enabled later. */
+const GoogleOAuthButton = ({ disabled = true }) => {
   return (
     <button
       type="button"
       className="btn btn-google-oauth"
-      onClick={handleGoogleLogin}
       disabled={disabled}
+      title="Google sign-in is not available"
     >
       <FaGoogle className="google-icon" />
       Continue with Google

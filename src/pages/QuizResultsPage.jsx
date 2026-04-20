@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useAddToMyApplications, shouldShowAddedState } from '../hooks/useAddToMyApplications';
 import { FiTarget, FiSearch, FiArrowRight } from 'react-icons/fi';
 import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer } from 'recharts';
 import programMatchingApi from '../services/programMatchingApi';
@@ -10,10 +11,12 @@ import universityApiService from '../services/universityApi';
 import { calculateTuition, getStateCodeFromName } from '../utils/tuitionCalculator';
 
 const QuizResultsPage = () => {
+    const { addProgram } = useAddToMyApplications();
     const { quizState, user } = useSelector(state => state.auth);
     const [matchedPrograms, setMatchedPrograms] = useState([]);
     const [matchingLoading, setMatchingLoading] = useState(false);
     const [matchingError, setMatchingError] = useState(null);
+    const [addedProgramIds, setAddedProgramIds] = useState(() => new Set());
     const [universities, setUniversities] = useState([]);
     const [travelCosts, setTravelCosts] = useState({});
     const [loading, setLoading] = useState(true);
@@ -484,12 +487,23 @@ const QuizResultsPage = () => {
                                         </div>
 
                                         <div className="program-actions">
-                                            <Link
-                                                to={`/apply?program=${program.program_id}&source=quiz-results`}
+                                            <button
+                                                type="button"
                                                 className="btn-primary btn-apply"
+                                                disabled={addedProgramIds.has(program.program_id)}
+                                                onClick={async () => {
+                                                    const result = await addProgram({
+                                                        program_id: program.program_id,
+                                                        id: program.program_id,
+                                                        university_id: program.university_id
+                                                    });
+                                                    if (shouldShowAddedState(result)) {
+                                                        setAddedProgramIds((prev) => new Set(prev).add(program.program_id));
+                                                    }
+                                                }}
                                             >
-                                                Apply Now
-                                            </Link>
+                                                {addedProgramIds.has(program.program_id) ? 'Added ✓' : 'Add to My Applications'}
+                                            </button>
                                         </div>
                                     </div>
                                 ))}
@@ -498,7 +512,7 @@ const QuizResultsPage = () => {
                     )}
                     <div className="results-actions">
                         <Link to="/apply/intro" className="btn-primary">
-                            Learn More & Apply
+                            Application Hub
                         </Link>
                     </div>
                     {/* Cost Comparison Table */}
@@ -612,7 +626,7 @@ const QuizResultsPage = () => {
                                 </div>
                                 <div className="progress-step pending">
                                     <div className="step-icon"></div>
-                                    <Link className="step-label" to={'/apply/intro'}>Apply</Link>
+                                    <Link className="step-label" to={'/apply/intro'}>My Applications</Link>
                                 </div>
                             </div>
                         </div>

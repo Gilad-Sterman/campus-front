@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { login, register } from '../store/actions/authActions.js';
-import GoogleOAuthButton from '../components/auth/GoogleOAuthButton.jsx';
+import { usStateOptions } from '../constants/usStateOptions.js';
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -23,64 +23,10 @@ const LoginPage = () => {
     firstName: '',
     lastName: '',
     confirmPassword: '',
-    country: ''
+    country: '',
+    dateOfBirth: '',
+    zipCode: ''
   });
-
-  // US States list
-  const usStates = [
-    { value: 'AL', label: 'Alabama' },
-    { value: 'AK', label: 'Alaska' },
-    { value: 'AZ', label: 'Arizona' },
-    { value: 'AR', label: 'Arkansas' },
-    { value: 'CA', label: 'California' },
-    { value: 'CO', label: 'Colorado' },
-    { value: 'CT', label: 'Connecticut' },
-    { value: 'DE', label: 'Delaware' },
-    { value: 'FL', label: 'Florida' },
-    { value: 'GA', label: 'Georgia' },
-    { value: 'HI', label: 'Hawaii' },
-    { value: 'ID', label: 'Idaho' },
-    { value: 'IL', label: 'Illinois' },
-    { value: 'IN', label: 'Indiana' },
-    { value: 'IA', label: 'Iowa' },
-    { value: 'KS', label: 'Kansas' },
-    { value: 'KY', label: 'Kentucky' },
-    { value: 'LA', label: 'Louisiana' },
-    { value: 'ME', label: 'Maine' },
-    { value: 'MD', label: 'Maryland' },
-    { value: 'MA', label: 'Massachusetts' },
-    { value: 'MI', label: 'Michigan' },
-    { value: 'MN', label: 'Minnesota' },
-    { value: 'MS', label: 'Mississippi' },
-    { value: 'MO', label: 'Missouri' },
-    { value: 'MT', label: 'Montana' },
-    { value: 'NE', label: 'Nebraska' },
-    { value: 'NV', label: 'Nevada' },
-    { value: 'NH', label: 'New Hampshire' },
-    { value: 'NJ', label: 'New Jersey' },
-    { value: 'NM', label: 'New Mexico' },
-    { value: 'NY', label: 'New York' },
-    { value: 'NC', label: 'North Carolina' },
-    { value: 'ND', label: 'North Dakota' },
-    { value: 'OH', label: 'Ohio' },
-    { value: 'OK', label: 'Oklahoma' },
-    { value: 'OR', label: 'Oregon' },
-    { value: 'PA', label: 'Pennsylvania' },
-    { value: 'RI', label: 'Rhode Island' },
-    { value: 'SC', label: 'South Carolina' },
-    { value: 'SD', label: 'South Dakota' },
-    { value: 'TN', label: 'Tennessee' },
-    { value: 'TX', label: 'Texas' },
-    { value: 'UT', label: 'Utah' },
-    { value: 'VT', label: 'Vermont' },
-    { value: 'VA', label: 'Virginia' },
-    { value: 'WA', label: 'Washington' },
-    { value: 'WV', label: 'West Virginia' },
-    { value: 'WI', label: 'Wisconsin' },
-    { value: 'WY', label: 'Wyoming' },
-    { value: 'DC', label: 'Washington D.C.' },
-    { value: 'NOT_US', label: 'Not from the US' }
-  ];
 
   // Get redirect URL from query params
   const redirectUrl = searchParams.get('redirect') || '/profile';
@@ -110,6 +56,14 @@ const LoginPage = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    if (name === 'zipCode') {
+      const digitsOnly = value.replace(/\D/g, '').slice(0, 9);
+      setFormData(prev => ({
+        ...prev,
+        [name]: digitsOnly
+      }));
+      return;
+    }
     setFormData(prev => ({
       ...prev,
       [name]: value
@@ -130,6 +84,10 @@ const LoginPage = () => {
           alert('Please select your state or location');
           return;
         }
+        if (!formData.dateOfBirth) {
+          alert('Please enter your date of birth');
+          return;
+        }
         if (formData.password !== formData.confirmPassword) {
           alert('Passwords do not match');
           return;
@@ -145,7 +103,9 @@ const LoginPage = () => {
             password: formData.password,
             firstName: formData.firstName,
             lastName: formData.lastName,
-            country: formData.country
+            country: formData.country,
+            dateOfBirth: formData.dateOfBirth,
+            zipCode: formData.zipCode?.trim() || undefined
           }));
           // Registration success - user will be redirected by useEffect
         } catch (err) {
@@ -175,7 +135,10 @@ const LoginPage = () => {
       password: '',
       firstName: '',
       lastName: '',
-      confirmPassword: ''
+      confirmPassword: '',
+      country: '',
+      dateOfBirth: '',
+      zipCode: ''
     });
   };
 
@@ -250,12 +213,44 @@ const LoginPage = () => {
                   required={isSignUp}
                 >
                   <option value="">Select your state or location</option>
-                  {usStates.map((state) => (
+                  {usStateOptions.map((state) => (
                     <option key={state.value} value={state.value}>
                       {state.label}
                     </option>
                   ))}
                 </select>
+              </div>
+            )}
+
+            {isSignUp && (
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="dateOfBirth">Date of birth</label>
+                  <input
+                    type="date"
+                    id="dateOfBirth"
+                    name="dateOfBirth"
+                    value={formData.dateOfBirth}
+                    onChange={handleInputChange}
+                    required={isSignUp}
+                    max={new Date().toISOString().slice(0, 10)}
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="zipCode">ZIP / postal code (optional)</label>
+                  <input
+                    type="text"
+                    id="zipCode"
+                    name="zipCode"
+                    value={formData.zipCode}
+                    onChange={handleInputChange}
+                    placeholder="e.g. 90210 or 902101234"
+                    inputMode="numeric"
+                    maxLength={9}
+                    pattern="\d{0,9}"
+                    autoComplete="postal-code"
+                  />
+                </div>
               </div>
             )}
 
@@ -334,13 +329,6 @@ const LoginPage = () => {
               {loading ? 'Processing...' : (isSignUp ? 'Create Account' : 'Submit')}
             </button>
           </form>
-
-          {/* Temporarily commented out OAuth functionality */}
-          {/* <div className="oauth-divider">
-              <span>or</span>
-            </div>
-
-            <GoogleOAuthButton disabled={loading} /> */}
 
           <div className="login-footer">
             <p>

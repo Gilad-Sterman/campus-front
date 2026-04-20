@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import { FaSearch, FaArrowRight, FaChevronDown } from 'react-icons/fa';
 import searchApi from '../services/searchApi';
+import { useAddToMyApplications, shouldShowAddedState } from '../hooks/useAddToMyApplications';
 
 const DomainPage = () => {
   const { domainName } = useParams();
   const navigate = useNavigate();
-  const { isAuthenticated } = useSelector(state => state.auth);
+  const { addProgram } = useAddToMyApplications();
 
   const [domainInfo, setDomainInfo] = useState(null);
   const [allPrograms, setAllPrograms] = useState(null);
@@ -17,6 +17,7 @@ const DomainPage = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const [expandedPrograms, setExpandedPrograms] = useState(new Set());
   const [programDescriptions, setProgramDescriptions] = useState({});
+  const [showAdded, setShowAdded] = useState(false);
   const dropdownRef = useRef(null);
 
   // Domain configurations
@@ -145,6 +146,7 @@ const DomainPage = () => {
   const handleProgramSelect = (program) => {
     setSelectedProgram(program);
     setShowDropdown(false);
+    setShowAdded(false);
   };
 
   // Handle clearing program selection
@@ -153,10 +155,16 @@ const DomainPage = () => {
     setShowDropdown(false);
   };
 
-  // Handle Apply Now
-  const handleApplyNow = () => {
+  useEffect(() => {
+    setShowAdded(false);
+  }, [selectedProgram?.id]);
+
+  const handleAddToMyApplications = async () => {
     if (!selectedProgram) return;
-    navigate(`/apply?program=${selectedProgram.id}&source=domain`);
+    const result = await addProgram(selectedProgram);
+    if (shouldShowAddedState(result)) {
+      setShowAdded(true);
+    }
   };
 
   // Handle More Information - Open program details page in new tab
@@ -363,16 +371,17 @@ const DomainPage = () => {
           </div>
         )} */}
 
-        {/* Apply Button */}
         <div className="domain-page__actions">
-          {/* <button
-            className='btn-primary'
-            disabled={!selectedProgram}
-            onClick={handleApplyNow}
-          >
-            Let's Apply!
-          </button> */}
           <button
+            type="button"
+            className="btn-primary"
+            disabled={!selectedProgram || showAdded}
+            onClick={handleAddToMyApplications}
+          >
+            {showAdded ? 'Added ✓' : 'Add to My Applications'}
+          </button>
+          <button
+            type="button"
             className="program-more-info-btn"
             onClick={handleMoreInfo}
             disabled={!selectedProgram}

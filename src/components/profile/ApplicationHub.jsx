@@ -1,16 +1,17 @@
 import { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { FaSearch, FaArrowRight, FaChevronDown } from 'react-icons/fa';
 import searchApiService from '../../services/searchApi';
+import { useAddToMyApplications, shouldShowAddedState } from '../../hooks/useAddToMyApplications';
 
 function ApplicationHub() {
-    const navigate = useNavigate();
+    const { addProgram } = useAddToMyApplications();
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState(null);
     const [selectedProgram, setSelectedProgram] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const [showDropdown, setShowDropdown] = useState(false);
+    const [showAdded, setShowAdded] = useState(false);
     const dropdownRef = useRef(null);
 
     // Handle search
@@ -57,14 +58,19 @@ function ApplicationHub() {
         setSearchQuery(`${program.name} - ${program.university.name}`);
         setShowDropdown(false);
         setSearchResults(null); // Clear results to prevent re-searching
+        setShowAdded(false);
     };
 
-    // Handle Apply Now
-    const handleApplyNow = () => {
-        if (!selectedProgram) return;
+    useEffect(() => {
+        setShowAdded(false);
+    }, [selectedProgram?.id]);
 
-        // Navigate to apply page with pre-filled program data
-        navigate(`/apply?program=${selectedProgram.id}&source=intro`);
+    const handleAddToMyApplications = async () => {
+        if (!selectedProgram) return;
+        const result = await addProgram(selectedProgram);
+        if (shouldShowAddedState(result)) {
+            setShowAdded(true);
+        }
     };
 
     // Handle More Information - Open program details page in new tab
@@ -196,16 +202,18 @@ function ApplicationHub() {
                     </div>
 
                 </div>
-                {/* A ction Buttons */}
                 <div className="apply-intro__actions">
-                    <button className={`btn-primary ${!selectedProgram ? 'disabled' : ''}`}
-                        disabled={!selectedProgram}
-                        onClick={handleApplyNow}
+                    <button
+                        type="button"
+                        className={`btn-primary ${!selectedProgram ? 'disabled' : ''}`}
+                        disabled={!selectedProgram || showAdded}
+                        onClick={handleAddToMyApplications}
                     >
-                        Let's Apply!
+                        {showAdded ? 'Added ✓' : 'Add to My Applications'}
                     </button>
 
                     <button
+                        type="button"
                         className={`btn-secondary ${!selectedProgram ? 'disabled' : ''}`}
                         onClick={handleMoreInfo}
                         disabled={!selectedProgram}

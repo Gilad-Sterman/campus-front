@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 const HeroSection = ({ isLoggedIn, hasTakenQuiz, hasChurnedQuiz }) => {
   // Determine which CTA to show based on user state according to the table:
   // User State | Login/Signup | Primary CTA | Secondary CTA
-  // Not Logged In | Show | Start Free Quiz | Apply Now
-  // Logged In, No Quiz | Hide | Start Free Quiz | Apply Now
-  // Logged In, Quiz Started | Hide | Continue Quiz | Apply Now
-  // Logged In, Quiz Completed | Hide | See My Results | Apply Now
+  // Not Logged In | Show | Start Free Quiz | Add to My Applications
+  // Logged In, No Quiz | Hide | Start Free Quiz | Add to My Applications
+  // Logged In, Quiz Started | Hide | Continue Quiz | Add to My Applications
+  // Logged In, Quiz Completed | Hide | See My Results | Add to My Applications
   // Logged In, Has Applications | Hide | See My Results | My Applications
 
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -81,9 +81,9 @@ const HeroSection = ({ isLoggedIn, hasTakenQuiz, hasChurnedQuiz }) => {
             </div>
             <div className="hero-cta-container">
               <img src="https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/Icons.png" alt="" />
-              <h4>Apply to your degree</h4>
-              <p>You’re good to go</p>
-              <Link to={"/apply/intro"} className="btn btn-primary btn-lg"><span>Apply now!</span></Link>
+              <h4>Add programs you like</h4>
+              <p>Save them to track in one place</p>
+              <Link to={"/apply/intro"} className="btn btn-primary btn-lg"><span>Add to My Applications</span></Link>
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useAddToMyApplications, shouldShowAddedState } from '../../hooks/useAddToMyApplications';
 import { FiTarget, FiCalendar, FiBookOpen, FiUsers, FiMonitor, FiSearch, FiCheckCircle, FiArrowRight } from 'react-icons/fi';
 import { QUIZ_QUESTIONS } from '../../config/quizQuestions.js';
 import SimplePieChart from '../common/SimplePieChart';
@@ -9,10 +10,12 @@ import programMatchingApi from '../../services/programMatchingApi.js';
 import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer } from 'recharts';
 
 const QuizSummary = () => {
+  const { addProgram } = useAddToMyApplications();
   const { quizState } = useSelector(state => state.auth);
   const [matchedPrograms, setMatchedPrograms] = useState([]);
   const [matchingLoading, setMatchingLoading] = useState(false);
   const [matchingError, setMatchingError] = useState(null);
+  const [addedProgramIds, setAddedProgramIds] = useState(() => new Set());
 
   // Check quiz status for authenticated users only
   const hasCompletedQuiz = quizState?.data?.status === 'completed';
@@ -388,12 +391,23 @@ const QuizSummary = () => {
                       </div>
 
                       <div className="program-actions">
-                        <Link
-                          to={`/apply?program=${program.program_id}&source=quiz-results`}
+                        <button
+                          type="button"
                           className="btn-primary btn-apply"
+                          disabled={addedProgramIds.has(program.program_id)}
+                          onClick={async () => {
+                            const result = await addProgram({
+                              program_id: program.program_id,
+                              id: program.program_id,
+                              university_id: program.university_id
+                            });
+                            if (shouldShowAddedState(result)) {
+                              setAddedProgramIds((prev) => new Set(prev).add(program.program_id));
+                            }
+                          }}
                         >
-                          Apply Now
-                        </Link>
+                          {addedProgramIds.has(program.program_id) ? 'Added ✓' : 'Add to My Applications'}
+                        </button>
                       </div>
                     </div>
                   ))}
@@ -410,7 +424,7 @@ const QuizSummary = () => {
 
           <div className="results-actions">
             <Link to="/apply/intro" className="btn-primary">
-              Learn More & Apply
+              Application Hub
             </Link>
           </div>
         </div>

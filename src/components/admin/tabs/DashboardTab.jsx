@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { FaChartLine, FaSearch, FaSync } from 'react-icons/fa';
-import adminApi from '../../../services/adminApi';
 import AdminLoader from '../AdminLoader';
 import { useDashboardStats } from '../../../hooks/useAdminCache';
 import { formatCacheAge } from '../../../utils/adminCacheUtils';
@@ -58,7 +57,7 @@ function DashboardTab() {
         loading,
         error,
         timestamp,
-        refresh
+        refresh,
     } = useDashboardStats(startDate, endDate);
 
     const handleDateRangeChange = (e) => {
@@ -81,8 +80,8 @@ function DashboardTab() {
 
     const handleApplyCustomDates = () => {
         if (customDates.start && customDates.end) {
-            // This will trigger a re-render with new date range, causing cache hook to fetch new data
             setHasUnsavedChanges(false);
+            refresh();
         }
     };
 
@@ -181,27 +180,15 @@ function DashboardTab() {
                             </div>
                             <div className="metric-card">
                                 <div className="metric-card__label">Total Applications</div>
-                                <div className="metric-card__value">{stats?.totalApplications || 0}</div>
+                                <div className="metric-card__value">{stats?.myApplicationsTotal ?? 0}</div>
                             </div>
                             <div className="metric-card">
-                                <div className="metric-card__label">Avg Docs/User</div>
-                                <div className="metric-card__value">{stats?.avgDocsPerUser || 0}</div>
+                                <div className="metric-card__label">Saved</div>
+                                <div className="metric-card__value">{stats?.myApplicationsSaved ?? 0}</div>
                             </div>
                             <div className="metric-card">
-                                <div className="metric-card__label">Avg Time: Quiz → App</div>
-                                <div className="metric-card__value">{stats?.avgQuizToApplication || 0}h</div>
-                            </div>
-                            <div className="metric-card">
-                                <div className="metric-card__label">Application Completion Rate</div>
-                                <div className="metric-card__value">{stats?.applicationCompletionRate || 0}%</div>
-                            </div>
-                            <div className="metric-card">
-                                <div className="metric-card__label">Email Confirmation Rate</div>
-                                <div className="metric-card__value">{stats?.emailConfirmationRate || 0}%</div>
-                            </div>
-                            <div className="metric-card">
-                                <div className="metric-card__label">Bounce Rate</div>
-                                <div className="metric-card__value">{stats?.bounceRate || 0}%</div>
+                                <div className="metric-card__label">Marked Applied</div>
+                                <div className="metric-card__value">{stats?.myApplicationsApplied ?? 0}</div>
                             </div>
                         </div>
 
@@ -210,7 +197,7 @@ function DashboardTab() {
                                 Top Universities by Program Count
                             </h3>
                             <div className="admin-table__wrapper">
-                                {stats?.top5Universities && stats.top5Universities.length > 0 ? (
+                                {stats?.top5MyApplicationUniversities && stats.top5MyApplicationUniversities.length > 0 ? (
                                     <table>
                                         <thead>
                                             <tr>
@@ -220,7 +207,7 @@ function DashboardTab() {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {stats.top5Universities.map((uni, index) => (
+                                            {stats.top5MyApplicationUniversities.map((uni, index) => (
                                                 <tr key={uni.name}>
                                                     <td>#{index + 1}</td>
                                                     <td>{uni.name}</td>
@@ -242,7 +229,7 @@ function DashboardTab() {
                                 Top 5 Programs by Applications
                             </h3>
                             <div className="admin-table__wrapper">
-                                {stats?.top5Programs && stats.top5Programs.length > 0 ? (
+                                {stats?.top5MyApplicationPrograms && stats.top5MyApplicationPrograms.length > 0 ? (
                                     <table>
                                         <thead>
                                             <tr>
@@ -252,7 +239,7 @@ function DashboardTab() {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {stats.top5Programs.map((program, index) => (
+                                            {stats.top5MyApplicationPrograms.map((program, index) => (
                                                 <tr key={program.name}>
                                                     <td>#{index + 1}</td>
                                                     <td>{program.name}</td>
