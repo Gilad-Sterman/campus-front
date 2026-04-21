@@ -85,16 +85,16 @@ const HomePage = () => {
 
   // Carousel Screens Logic
   const screens = useMemo(() => {
-    const unis = israeliUniversities.length > 0 
+    const unis = israeliUniversities.length > 0
       ? israeliUniversities.filter(uni => !uni.isUS && uni.status === 'active')
       : [
-          { id: 'fallback-1', name: 'University Name One', logo_url: universityLogoFallback },
-          { id: 'fallback-2', name: 'University Name Two', logo_url: universityLogoFallback },
-          { id: 'fallback-3', name: 'University Name Three', logo_url: universityLogoFallback },
-          { id: 'fallback-4', name: 'University Name Four', logo_url: universityLogoFallback },
-          { id: 'fallback-5', name: 'University Name Five', logo_url: universityLogoFallback },
-          { id: 'fallback-6', name: 'University Name Six', logo_url: universityLogoFallback }
-        ];
+        { id: 'fallback-1', name: 'University Name One', logo_url: universityLogoFallback },
+        { id: 'fallback-2', name: 'University Name Two', logo_url: universityLogoFallback },
+        { id: 'fallback-3', name: 'University Name Three', logo_url: universityLogoFallback },
+        { id: 'fallback-4', name: 'University Name Four', logo_url: universityLogoFallback },
+        { id: 'fallback-5', name: 'University Name Five', logo_url: universityLogoFallback },
+        { id: 'fallback-6', name: 'University Name Six', logo_url: universityLogoFallback }
+      ];
 
     const chunkSize = 3;
     if (unis.length <= chunkSize) {
@@ -103,7 +103,7 @@ const HomePage = () => {
 
     const numScreens = Math.ceil(unis.length / chunkSize);
     const result = [];
-    
+
     for (let i = 0; i < numScreens; i++) {
       const screen = [];
       for (let j = 0; j < chunkSize; j++) {
@@ -158,7 +158,8 @@ const HomePage = () => {
   const toolkitCards = [
     {
       title: 'Degree Quiz',
-      description: 'Get suggestions based on your strengths and interests. No sign up required.',
+      description: 'Get suggestions based on your strengths and interests.',
+      subDescription: 'No sign up required.',
       buttonLabel: 'PathFinder',
       link: quizPrimaryLink,
       icon: "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/Vector%20(3).svg"
@@ -210,11 +211,12 @@ const HomePage = () => {
           <div className="home-redesign__toolkit-grid">
             {toolkitCards.map((card) => (
               <article key={card.title} className="home-redesign__toolkit-card">
-                <div className="home-redesign__toolkit-icon">
+                {/* <div className="home-redesign__toolkit-icon">
                   <img src={card.icon} alt={card.title} />
-                </div>
+                </div> */}
                 <h3>{card.title}</h3>
                 <p>{card.description}</p>
+                {card.subDescription && <p style={{ marginTop: '2rem' }}>{card.subDescription}</p>}
                 <Link to={card.link} className="home-redesign__toolkit-link">
                   {card.buttonLabel}
                 </Link>
