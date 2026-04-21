@@ -74,21 +74,21 @@ const Header = () => {
           <div className="app-auth">
             {!isAuthenticated ? (
               <div className='auth-btns'>
-                <Link 
-                  to="/login" 
-                  className={`auth-btn auth-btn--login ${isLoginActive() ? 'active' : ''}`} 
+                <Link
+                  to="/login"
+                  className={`auth-btn auth-btn--login ${isLoginActive() ? 'active' : ''}`}
                   aria-label="Log in"
                 >
+                  <img src="https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/mingcute_user-3-line.svg" alt="Log in" />
                   <span>Log In</span>
-                  <img src="https://res.cloudinary.com/dollaguij/image/upload/v1771108332/Layer_1_hjhqff.png" alt="Log in" />
                 </Link>
-                <Link 
-                  to="/login?mode=signup" 
-                  className={`auth-btn auth-btn--signup ${isSignupActive() ? 'active' : ''}`} 
+                <Link
+                  to="/login?mode=signup"
+                  className={`auth-btn auth-btn--signup ${isSignupActive() ? 'active' : ''}`}
                   aria-label="Sign up"
                 >
+                  <img src="https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/mingcute_user-add-2-line.svg" alt="Sign up" />
                   <span>Sign Up</span>
-                  <img src="https://res.cloudinary.com/dollaguij/image/upload/v1771108332/Layer_1_1_yk6gsp.png" alt="Sign up" />
                 </Link>
               </div>
             ) : (

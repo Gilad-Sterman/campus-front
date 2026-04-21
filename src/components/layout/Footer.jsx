@@ -72,7 +72,8 @@ const Footer = () => {
           <div className="footer-nav-group">
             <h3>Campus Israel</h3>
             <ul>
-              <li><Link to="https://www.campusisrael.com/about">ABOUT US</Link></li>
+              <li><Link to="/about">ABOUT US</Link></li>
+              <li><Link to="/founders">FOUNDERS</Link></li>
               <li><Link to="https://www.campusisrael.com/contact">WHAT TO KNOW</Link></li>
               <li><Link to="/about">THE TEAM</Link></li>
             </ul>

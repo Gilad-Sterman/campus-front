@@ -30,6 +30,8 @@ import ThankYouPage from './pages/ThankYouPage'
 import StaffOnboarding from './pages/StaffOnboarding'
 import AdminLayout from './components/admin/AdminLayout'
 import ConciergePage from './pages/ConciergePage'
+import AboutPage from './pages/AboutPage'
+import FoundersPage from './pages/FoundersPage'
 
 // Utils
 import { scrollToElement } from './utils/scrollUtils'
@@ -177,10 +179,12 @@ function App() {
         } />
         <Route path="/about" element={
           <Layout>
-            <div className="container mt-xl">
-              <h1>About Campus Israel</h1>
-              <p>Information about our platform and mission.</p>
-            </div>
+            <AboutPage />
+          </Layout>
+        } />
+        <Route path="/founders" element={
+          <Layout>
+            <FoundersPage />
           </Layout>
         } />
         <Route path="/admin" element={

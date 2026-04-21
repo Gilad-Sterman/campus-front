@@ -67,6 +67,8 @@ const HomePage = () => {
     [isAuthenticated, quizState?.data?.status, anonymousStatus, anonymousAnswerCount, applications.length]
   );
 
+  const [currentScreen, setCurrentScreen] = useState(0);
+
   useEffect(() => {
     const loadIsraeliUniversities = async () => {
       try {
@@ -81,7 +83,51 @@ const HomePage = () => {
     loadIsraeliUniversities();
   }, [dispatch]);
 
+  // Carousel Screens Logic
+  const screens = useMemo(() => {
+    const unis = israeliUniversities.length > 0 
+      ? israeliUniversities.filter(uni => !uni.isUS && uni.status === 'active')
+      : [
+          { id: 'fallback-1', name: 'University Name One', logo_url: universityLogoFallback },
+          { id: 'fallback-2', name: 'University Name Two', logo_url: universityLogoFallback },
+          { id: 'fallback-3', name: 'University Name Three', logo_url: universityLogoFallback },
+          { id: 'fallback-4', name: 'University Name Four', logo_url: universityLogoFallback },
+          { id: 'fallback-5', name: 'University Name Five', logo_url: universityLogoFallback },
+          { id: 'fallback-6', name: 'University Name Six', logo_url: universityLogoFallback }
+        ];
+
+    const chunkSize = 3;
+    if (unis.length <= chunkSize) {
+      return [unis];
+    }
+
+    const numScreens = Math.ceil(unis.length / chunkSize);
+    const result = [];
+    
+    for (let i = 0; i < numScreens; i++) {
+      const screen = [];
+      for (let j = 0; j < chunkSize; j++) {
+        const index = (i * chunkSize + j) % unis.length;
+        screen.push(unis[index]);
+      }
+      result.push(screen);
+    }
+    return result;
+  }, [israeliUniversities]);
+
+  // Auto-rotation effect
+  useEffect(() => {
+    if (screens.length <= 1) return;
+
+    const timer = setInterval(() => {
+      setCurrentScreen((prev) => (prev + 1) % screens.length);
+    }, 5000);
+
+    return () => clearInterval(timer);
+  }, [screens.length]);
+
   const quizPrimaryLink = userState.hasTakenQuiz && userState.isLoggedIn ? '/quiz/results' : '/quiz';
+  const applicationPrimaryLink = userState.hasTakenQuiz && userState.isLoggedIn ? '/profile' : '/apply/intro';
   const conciergeLink = userState.isLoggedIn ? '/profile?tab=concierge' : '/login?redirect=/profile?tab=concierge';
   const backendOrigin = typeof window !== 'undefined' && window.location.hostname === 'localhost'
     ? 'http://localhost:3001'
@@ -96,6 +142,11 @@ const HomePage = () => {
       return logoUrl;
     }
 
+    // If it's a local public asset path, serve it from the frontend origin
+    if (logoUrl.startsWith('/noun-')) {
+      return logoUrl;
+    }
+
     if (!backendOrigin) {
       return universityLogoFallback;
     }
@@ -103,21 +154,6 @@ const HomePage = () => {
     return `${backendOrigin}${logoUrl.startsWith('/') ? '' : '/'}${logoUrl}`;
   };
 
-  const universityCards = useMemo(() => {
-    if (israeliUniversities.length === 0) {
-      return [
-        { id: 'fallback-1', name: 'University Name One', logo_url: universityLogoFallback },
-        { id: 'fallback-2', name: 'University Name Two', logo_url: universityLogoFallback },
-        { id: 'fallback-3', name: 'University Name Three', logo_url: universityLogoFallback }
-      ];
-    }
-
-    return israeliUniversities.slice(0, 3).map((uni) => ({
-      id: uni.id,
-      name: uni.name,
-      logo_url: uni.logo_url
-    }));
-  }, [israeliUniversities]);
 
   const toolkitCards = [
     {
@@ -125,28 +161,28 @@ const HomePage = () => {
       description: 'Get suggestions based on your strengths and interests. No sign up required.',
       buttonLabel: 'PathFinder',
       link: quizPrimaryLink,
-      icon: <FaSearch />
+      icon: "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/Vector%20(3).svg"
     },
     {
       title: 'Application Concierge',
       description: 'Real human guidance. We are waiting to hear from you.',
       buttonLabel: 'Concierge',
       link: conciergeLink,
-      icon: <FaUserTie />
+      icon: "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/Vector%20(2).svg"
     },
     {
       title: 'Student Intros',
       description: 'Meet peers and students from your hometown or in your Israel destination.',
       buttonLabel: 'PeerConnect',
       link: userState.isLoggedIn ? '/profile?tab=study-buddy' : '/login?redirect=/profile?tab=study-buddy',
-      icon: <FaUserFriends />
+      icon: "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/Vector%20(1).svg"
     },
     {
       title: 'Price Compare',
       description: 'Compare tuition costs at your top US and Israel options.',
       buttonLabel: 'CostCompare',
       link: userState.isLoggedIn ? '/profile?tab=cost-calculator' : '/login?redirect=/profile?tab=cost-calculator',
-      icon: <FaCalculator />
+      icon: "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/Vector.svg"
     }
   ];
 
@@ -158,7 +194,7 @@ const HomePage = () => {
           <h1>WE&apos;RE HERE FOR YOU.</h1>
           <p>Everything you need to access world-class study in Israel. In English.</p>
           <div className="home-redesign__hero-actions">
-            <Link to={quizPrimaryLink} className="home-redesign__action home-redesign__action--mint">
+            <Link to={applicationPrimaryLink} className="home-redesign__action home-redesign__action--mint">
               Degree Ideas
             </Link>
             <Link to={conciergeLink} className="home-redesign__action home-redesign__action--blue">
@@ -174,7 +210,9 @@ const HomePage = () => {
           <div className="home-redesign__toolkit-grid">
             {toolkitCards.map((card) => (
               <article key={card.title} className="home-redesign__toolkit-card">
-                <div className="home-redesign__toolkit-icon">{card.icon}</div>
+                <div className="home-redesign__toolkit-icon">
+                  <img src={card.icon} alt={card.title} />
+                </div>
                 <h3>{card.title}</h3>
                 <p>{card.description}</p>
                 <Link to={card.link} className="home-redesign__toolkit-link">
@@ -187,8 +225,8 @@ const HomePage = () => {
       </section>
 
       <section className="home-redesign__degrees">
+        <h2>Degrees and Career Horizons</h2>
         <div className="container">
-          <h2>Degrees and Career Horizons</h2>
           <div className="home-redesign__degrees-grid">
             {degreeHorizons.map((degree) => (
               <Link key={degree.title} to={degree.link} className="home-redesign__degree-item">
@@ -206,36 +244,43 @@ const HomePage = () => {
       <section className="home-redesign__universities">
         <div className="container">
           <h2>Explore Israeli Universities</h2>
-          <div className="home-redesign__universities-grid">
-            {universityCards.map((uni) => (
-              <Link
-                key={uni.id}
-                to={typeof uni.id === 'string' && uni.id.startsWith('fallback-') ? '/universities' : `/universities/${uni.id}`}
-                className="home-redesign__university-card"
-              >
-                <div className="home-redesign__university-logo-box">
-                  <img
-                    src={resolveUniversityLogoUrl(uni.logo_url)}
-                    alt={`${uni.name} logo`}
-                    onError={(event) => {
-                      if (event.currentTarget.src.endsWith(universityLogoFallback)) {
-                        return;
-                      }
-                      event.currentTarget.src = universityLogoFallback;
-                    }}
-                  />
-                </div>
-                <h3>{uni.name}</h3>
-              </Link>
-            ))}
+          <div className="home-redesign__universities-container">
+            <div className="home-redesign__universities-grid">
+              {screens[currentScreen]?.map((uni) => (
+                <Link
+                  key={uni.id}
+                  to={typeof uni.id === 'string' && uni.id.startsWith('fallback-') ? '/universities' : `/universities/${uni.id}`}
+                  className="home-redesign__university-card"
+                >
+                  <div className="home-redesign__university-logo-box">
+                    <img
+                      src={resolveUniversityLogoUrl(uni.logo_url)}
+                      alt={`${uni.name} logo`}
+                      onError={(event) => {
+                        if (event.currentTarget.src.endsWith(universityLogoFallback)) {
+                          return;
+                        }
+                        event.currentTarget.src = universityLogoFallback;
+                      }}
+                    />
+                  </div>
+                  <h3>{uni.name}</h3>
+                </Link>
+              ))}
+            </div>
           </div>
-          <div className="home-redesign__dots" aria-hidden="true">
-            <span />
-            <span />
-            <span className="is-active" />
-            <span />
-            <span />
-          </div>
+          {screens.length > 1 && (
+            <div className="home-redesign__dots">
+              {screens.map((_, idx) => (
+                <button
+                  key={idx}
+                  className={`home-redesign__dot ${currentScreen === idx ? 'is-active' : ''}`}
+                  onClick={() => setCurrentScreen(idx)}
+                  aria-label={`Go to screen ${idx + 1}`}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -255,15 +300,19 @@ const HomePage = () => {
           <div className="home-redesign__support-actions">
             <a href="mailto:contact@campusisrael.com">
               <span>Inquire</span>
-              <FaEnvelope />
+              <img src="https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/Vector%20(5).svg" alt="" />
             </a>
             <Link to={conciergeLink}>
               <span>Meet</span>
-              <FaComments />
+              <img src="https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/mingcute_user-star-line.svg" alt="" />
             </Link>
             <a href="https://wa.me/972544444444" target="_blank" rel="noreferrer">
               <span>Chat</span>
-              <FaWhatsapp />
+              <div className="chat-icons">
+                <img src="https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/Vector%20(7).svg" alt="" />
+                <img src="https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/Vector%20(8).svg" alt="" />
+                <img src="https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/Vector%20(6).svg" alt="" />
+              </div>
             </a>
           </div>
         </div>

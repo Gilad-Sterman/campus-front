@@ -1,7 +1,6 @@
 // Home page redesign based on Figma composition while retaining shared header/footer.
 
 .home-redesign {
-  background-color: #f3f3f3;
 
   &__hero {
     @include full-width-breakout;
@@ -38,7 +37,7 @@
       font-size: 64px;
       line-height: 64px;
       letter-spacing: 0;
-      margin-bottom: 20px;
+      margin-bottom: 0;
       color: #fff;
       text-transform: uppercase;
       max-width: 640px;
@@ -86,7 +85,6 @@
 
   &__toolkit {
     padding: 56px 0 64px;
-    background-color: #f3f3f3;
 
     h2 {
       text-align: center;
@@ -161,10 +159,12 @@
   &__degrees {
     @include full-width-breakout;
     background: #00baff;
-    padding: 56px 0 72px;
+    padding-bottom: 72px;
 
     h2 {
       color: #fff;
+      background-color: $color-primary;
+      padding-block: 53px;
       text-align: center;
       margin-bottom: 40px;
       font-size: 64px;
@@ -220,7 +220,6 @@
 
   &__universities {
     padding: 64px 0;
-    background-color: #f3f3f3;
 
     h2 {
       text-align: center;
@@ -233,10 +232,21 @@
     }
   }
 
+  &__universities-container {
+    padding-bottom: 20px;
+    min-height: 400px; // Maintain height during transition
+  }
+
   &__universities-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 20px;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 
   &__university-card {
@@ -281,16 +291,24 @@
     justify-content: center;
     gap: 12px;
     margin-top: 28px;
+  }
 
-    span {
-      width: 12px;
-      height: 12px;
-      background: #d9d9d9;
-      transform: rotate(45deg);
-      display: block;
+  &__dot {
+    width: 12px;
+    height: 12px;
+    background: #d9d9d9;
+    transform: rotate(45deg);
+    display: block;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: background 0.3s ease, border-color 0.3s ease;
+
+    &:hover {
+      background: #aaa;
     }
 
-    .is-active {
+    &.is-active {
       background: #52b4f9;
     }
   }
@@ -331,7 +349,6 @@
   &__support {
     padding: 60px 0 36px;
     text-align: center;
-    background-color: #f3f3f3;
 
     h2 {
       margin-bottom: 14px;
@@ -373,6 +390,11 @@
       line-height: 1;
       font-weight: 700;
       letter-spacing: -0.02em;
+
+      .chat-icons {
+        display: flex;
+        gap: 10px;
+      }
 
       svg {
         font-size: 34px;
