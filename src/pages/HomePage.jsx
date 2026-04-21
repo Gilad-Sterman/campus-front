@@ -216,7 +216,7 @@ const HomePage = () => {
                 </div> */}
                 <h3>{card.title}</h3>
                 <p>{card.description}</p>
-                {card.subDescription && <p style={{ marginTop: '2rem' }}>{card.subDescription}</p>}
+                {card.subDescription && <p style={{ marginTop: '2rem', marginRight: '0px' }}>{card.subDescription}</p>}
                 <Link to={card.link} className="home-redesign__toolkit-link">
                   {card.buttonLabel}
                 </Link>

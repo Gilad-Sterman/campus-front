@@ -2,6 +2,21 @@
 @import '../base/mixins';
 
 .about-page {
+  .about-page-title {
+    font-size: 24px;
+    line-height: 28px;
+    color: #919191;
+    font-weight: 350;
+    text-align: left;
+    max-width: 840px;
+    margin: 1rem auto;
+    text-transform: uppercase;
+
+    @include respond-to(xs) {
+      font-size: 28px;
+      line-height: 30px;
+    }
+  }
 
   .about-hero {
     @include full-width-breakout;
@@ -28,14 +43,14 @@
       left: 50%;
       transform: translate(-50%, -50%);
       width: 100%;
-      max-width: 1380px; // Standard site container
-      padding: 0 $spacing-2xl;
       z-index: 2;
       color: $color-white;
+      max-width: 840px;
+      margin: 0 auto;
 
       font-family: 'Druk Wide Super', 'Arial Black', Impact, sans-serif;
-      font-size: 64px;
-      line-height: 64px;
+      font-size: 56px;
+      line-height: 58px;
       text-transform: uppercase;
       letter-spacing: 0;
 
@@ -57,8 +72,8 @@
 
     .sub-headline {
       font-family: 'NB International Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 28px;
-      line-height: 38px;
+      font-size: 32px;
+      line-height: 36px;
       font-weight: 700;
       letter-spacing: -0.03em;
       padding-bottom: $spacing-2xl;
@@ -73,8 +88,8 @@
     }
 
     p {
-      font-size: 26px;
-      line-height: 38px;
+      font-size: 20px;
+      line-height: 26px;
     }
   }
 
@@ -143,8 +158,8 @@
 
     h2 {
       font-family: 'Druk Wide Super', 'Arial Black', Impact, sans-serif;
-      font-size: 48px;
-      line-height: 48px;
+      font-size: 56px;
+      line-height: 58px;
       margin-bottom: $spacing-2xl;
       color: $color-text-primary;
       text-transform: uppercase;
@@ -212,14 +227,11 @@
       }
 
       h3 {
-        font-family: 'Druk Wide Super', 'Arial Black', Impact, sans-serif;
         font-weight: 700;
-        font-size: 16px;
-        line-height: 1.2;
-        margin-bottom: $spacing-md;
-        color: $color-accent-blue;
-        text-transform: uppercase;
-        letter-spacing: 0;
+        font-size: 26px;
+        line-height: 26px;
+        margin-bottom: 0;
+        color: white;
       }
 
       p {
@@ -237,8 +249,8 @@
 
     h2 {
       font-family: 'Druk Wide Super', 'Arial Black', Impact, sans-serif;
-      font-size: 48px;
-      line-height: 48px;
+      font-size: 56px;
+      line-height: 58px;
       margin-bottom: $spacing-2xl;
       color: $color-text-primary;
       text-transform: uppercase;
@@ -278,8 +290,8 @@
 
     h2 {
       font-family: 'Druk Wide Super', 'Arial Black', Impact, sans-serif;
-      font-size: 48px;
-      line-height: 48px;
+      font-size: 56px;
+      line-height: 58px;
       margin-bottom: $spacing-lg;
       text-transform: uppercase;
       letter-spacing: 0;
@@ -315,19 +327,18 @@
   }
 
   .sources-section {
-    border-top: 1px solid $color-border;
+    border-top: 2px solid #D9D9D9;
 
     .container {
       max-width: 840px;
-      margin: $spacing-3xl auto;
+      margin: $spacing-2xl auto;
     }
 
     h4 {
-      font-size: $font-size-lg;
-      line-height: 1.2;
+      font-size: 32px;
+      line-height: 36px;
       margin-bottom: $spacing-md;
-      text-transform: uppercase;
-      letter-spacing: 0;
+      letter-spacing: -0.03em;
     }
 
     .sources-list {

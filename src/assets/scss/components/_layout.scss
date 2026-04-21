@@ -24,7 +24,7 @@
 .app-header {
   background-color: white;
   box-shadow: $shadow-sm;
-  padding: $spacing-md 0;
+  padding: $spacing-md $spacing-lg;
   position: sticky;
   top: 0;
   z-index: $z-index-sticky;
@@ -44,7 +44,7 @@
 }
 
 .app-logo {
-  max-width: 150px;
+  max-width: 380px;
   display: flex;
   align-items: center;
 

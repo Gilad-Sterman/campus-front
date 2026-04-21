@@ -22,7 +22,7 @@
   &__hero-overlay {
     position: relative;
     z-index: 2;
-    max-width: 1380px;
+    max-width: 840px;
     margin: 0 auto;
     min-height: 420px;
     padding: 56px 32px;
@@ -89,49 +89,60 @@
     h2 {
       text-align: center;
       margin-bottom: 28px;
-      font-size: 56px;
-      line-height: 55px;
-      letter-spacing: -0.03em;
-      font-family: 'NB International Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-weight: 700;
+      font-size: 40px;
+      line-height: 40px;
+      // letter-spacing: -0.03em;
+      font-family: $font-family-display;
+      font-weight: 1000;
+      max-width: 540px;
+      margin-inline: auto;
     }
   }
 
   &__toolkit-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 20px;
+    max-width: 840px;
+    margin: 0 auto;
   }
 
   &__toolkit-card {
     background: #fff;
-    border: 2px solid #d9d9d9;
-    border-radius: 8px;
+    border-left: 1px solid $color-primary;
+    // border-right: 1px solid $color-primary;
     display: flex;
     flex-direction: column;
-    min-height: 480px;
+    min-height: 310px;
     text-align: center;
+
+    &:last-child {
+      border-right: 1px solid $color-primary;
+    }
 
     h3 {
       font-family: 'NB International Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 39px;
-      line-height: 43px;
+      font-size: 28px;
+      line-height: 32px;
       letter-spacing: -0.03em;
-      margin: 28px 24px 16px;
-      min-height: 86px; // Space for 2 lines to ensure alignment
+      margin-inline: 16px;
+      margin-bottom: 20px;
+      // margin-block: 16px;
+      min-height: 64px; // Space for 2 lines to ensure alignment
       display: flex;
+      text-align: start;
       align-items: center;
       justify-content: center;
       width: min-content;
-      margin: 2rem auto;
     }
 
     p {
-      margin: 0 24px;
+      margin: 0 16px;
       font-family: 'NB International Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 30px;
-      line-height: 36px;
+      font-size: 20px;
+      line-height: 26px;
       letter-spacing: -0.02em;
+      font-weight: 350;
+      text-align: start;
       color: #000;
       flex: 1;
     }
@@ -149,17 +160,17 @@
   }
 
   &__toolkit-link {
-    margin: 20px 20px 24px;
+    margin: 16px;
     background-color: #00baff;
     border-radius: 8px;
     color: #fff;
     text-decoration: none;
     font-family: 'NB International Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 32px;
+    font-size: 24px;
     font-weight: 700;
     line-height: 1;
     letter-spacing: -0.02em;
-    padding: 16px 18px;
+    padding: 16px 9px;
   }
 
   &__degrees {
@@ -169,15 +180,16 @@
 
     h2 {
       color: #fff;
-      background-color: $color-primary;
-      padding-block: 53px;
+      padding-top: 53px;
+      padding-bottom: 37px;
       text-align: center;
-      margin-bottom: 40px;
-      font-size: 64px;
-      line-height: 55px;
-      letter-spacing: -0.03em;
-      font-family: 'NB International Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-weight: 700;
+      margin-bottom: 0;
+      font-size: 40px;
+      line-height: 40px;
+      font-family: $font-family-display;
+      font-weight: 1000;
+      max-width: 540px;
+      margin-inline: auto;
     }
   }
 
@@ -185,19 +197,21 @@
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 28px 60px;
+    max-width: 840px;
+    margin: 0 auto;
   }
 
   &__degree-item {
     color: #fff;
     text-decoration: none;
     display: grid;
-    grid-template-columns: 210px 1fr;
+    grid-template-columns: 130px 1fr;
     gap: 20px;
     align-items: start;
 
     img {
-      width: 210px;
-      height: 210px;
+      width: 130px;
+      height: 130px;
       border-radius: 50%;
       object-fit: cover;
       display: block;
@@ -207,41 +221,45 @@
       color: #fff;
       margin: 0 0 8px;
       font-family: 'NB International Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 36px;
-      line-height: 36px;
+      font-size: 26px;
+      line-height: 30px;
       letter-spacing: -0.03em;
       font-weight: 700;
+      width: min-content;
     }
 
     p {
       color: #fff;
       margin: 0;
       font-family: 'NB International Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 30px;
-      line-height: 36px;
+      font-size: 20px;
+      line-height: 26px;
       letter-spacing: -0.02em;
       font-weight: 350;
-      max-width: 265px;
+      max-width: 235px;
     }
   }
 
   &__universities {
-    padding: 64px 0;
+    padding: 57px 0;
 
     h2 {
       text-align: center;
       margin-bottom: 28px;
-      font-family: 'NB International Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 64px;
-      line-height: 55px;
-      letter-spacing: -0.03em;
-      font-weight: 700;
+      font-family: $font-family-display;
+      font-size: 40px;
+      line-height: 40px;
+      font-weight: 1000;
+      max-width: 540px;
+      margin-inline: auto;
     }
   }
 
   &__universities-container {
-    padding-bottom: 20px;
-    min-height: 400px; // Maintain height during transition
+    min-height: 300px; // Maintain height during transition
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   &__universities-grid {
@@ -249,6 +267,8 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 20px;
     animation: fadeIn 0.5s ease-in-out;
+    max-width: 840px;
+    margin-inline: auto;
   }
 
   @keyframes fadeIn {
@@ -270,28 +290,29 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
+    gap: 8px;
+    padding: 16px;
+    border: 2px solid #d9d9d9;
+    border-radius: 8px;
 
     h3 {
       margin: 0;
       font-family: 'NB International Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 36px;
-      line-height: 36px;
+      font-size: 26px;
+      line-height: 30px;
       letter-spacing: -0.03em;
       font-weight: 700;
     }
   }
 
   &__university-logo-box {
+    height: 150px;
     width: 100%;
-    height: 270px;
-    border: 2px solid #d9d9d9;
-    border-radius: 8px;
     background-color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 28px;
+    // padding: 28px;
 
     img {
       width: 100%;
@@ -304,7 +325,7 @@
     display: flex;
     justify-content: center;
     gap: 12px;
-    margin-top: 28px;
+    margin-top: 16px;
   }
 
   &__dot {
@@ -334,13 +355,13 @@
     padding: 48px 0;
 
     h2 {
-      color: #fff;
-      font-family: 'NB International Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 64px;
-      line-height: 55px;
-      letter-spacing: -0.03em;
-      font-weight: 700;
+      font-family: $font-family-display;
+      font-weight: 1000;
+      font-size: 40px;
+      line-height: 40px;
       margin-bottom: 22px;
+      max-width: 400px;
+      margin-inline: auto;
     }
   }
 
@@ -353,11 +374,12 @@
     border-radius: 8px;
     text-decoration: none;
     font-family: 'NB International Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    font-size: 45px;
+    font-size: 28px;
     line-height: 1;
     font-weight: 700;
     letter-spacing: -0.02em;
-    padding: 20px 34px;
+    padding: 15px 38px;
+    width: 320px;
   }
 
   &__support {
@@ -366,19 +388,19 @@
 
     h2 {
       margin-bottom: 14px;
-      font-family: 'NB International Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 64px;
-      line-height: 55px;
-      letter-spacing: -0.03em;
-      font-weight: 700;
+      font-family: $font-family-display;
+      font-size: 40px;
+      line-height: 40px;
+      // letter-spacing: -0.03em;
+      font-weight: 1000;
     }
 
     p {
       margin-bottom: 24px;
       color: #6d6d6d;
       font-family: 'NB International Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 30px;
-      line-height: 36px;
+      font-size: 28px;
+      line-height: 32px;
       letter-spacing: -0.02em;
       font-weight: 700;
     }
@@ -388,9 +410,11 @@
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 16px;
+    max-width: 840px;
+    margin-inline: auto;
 
     a {
-      min-height: 88px;
+      min-height: 58px;
       background: #00baff;
       border-radius: 8px;
       color: #fff;
@@ -400,7 +424,7 @@
       justify-content: space-between;
       padding: 0 24px;
       font-family: 'NB International Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-size: 45px;
+      font-size: 28px;
       line-height: 1;
       font-weight: 700;
       letter-spacing: -0.02em;
@@ -408,6 +432,12 @@
       .chat-icons {
         display: flex;
         gap: 10px;
+      }
+
+      img {
+        height: 34px;
+        width: 34px;
+        object-fit: cover;
       }
 
       svg {

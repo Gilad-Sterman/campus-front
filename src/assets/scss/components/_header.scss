@@ -8,10 +8,10 @@
   z-index: $z-index-header;
   transition: all $transition-base;
 
-  .container {
-    padding-top: $spacing-sm;
-    padding-bottom: $spacing-sm;
-  }
+  // .container {
+  //   padding-top: $spacing-sm;
+  //   padding-bottom: $spacing-sm;
+  // }
 
   &.scrolled {
     box-shadow: $shadow-md;
@@ -21,7 +21,9 @@
 // Simplified header layout
 .simplified-header {
   @include flex-between;
-  align-items: center;
+  align-items: baseline;
+  max-width: 1440px;
+  margin: auto;
 }
 
 // App navbar (desktop default) - kept for backward compatibility

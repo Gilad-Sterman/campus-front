@@ -50,6 +50,7 @@ const AboutPage = () => {
 
   return (
     <div className="about-page">
+      <p className='about-page-title'>About</p>
       <section className="about-hero">
         <div className="hero-image-wrapper">
           <img src="https://www.figma.com/api/mcp/asset/30702ffd-6f83-4363-81a8-958184d5d252" alt="About Hero" className="hero-full-img" />
@@ -99,7 +100,7 @@ const AboutPage = () => {
                     <div className="pillar-icon">
                       <img src={pillar.icon} alt={pillar.title} />
                     </div>
-                    <p>{pillar.title}</p>
+                    <h3>{pillar.title}</h3>
                   </div>
                   <div className="pillar-info">
                     <p>{pillar.description}</p>
@@ -149,7 +150,7 @@ const AboutPage = () => {
       </div>
       <section className="sources-section">
         <div className="container">
-          <h4>SOURCES</h4>
+          <h4>Sources</h4>
           <ol className="sources-list">
             {sources.map((source, index) => (
               <li key={index}>{source}</li>
