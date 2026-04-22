@@ -35,11 +35,11 @@ const QuizStartPage = ({ onStart }) => {
         </div> */}
         <div className="quiz-hero-description">
           <h1>Hey! Welcome to PathFinder</h1>
-          {/* <p>Understand what you’re great at and find where you’ll thrive. Academically, culturally, and socially.</p> */}
           {/* <p>Takes less than 5 minutes. No commitment – just insight.</p> */}
           {/* <p>Your future is waiting.</p> */}
         </div>
       </div>
+      <h2>10 minutes. Personalized degree ideas for you.</h2>
       <div className="quiz-card-container">
         <div className='quiz-start-card'>
           <img src="https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/Capa_1%20(2).png" alt="" />

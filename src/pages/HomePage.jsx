@@ -20,25 +20,25 @@ const degreeHorizons = [
   {
     title: 'Future Builders',
     description: 'Understand, engineer, invent, and pioneer what comes next. STEM.',
-    imageUrl: 'https://www.figma.com/api/mcp/asset/30702ffd-6f83-4363-81a8-958184d5d252',
+    imageUrl: '/future-builders.jpg',
     link: '/domains/future-builders'
   },
   {
     title: 'Human Insight',
     description: 'Discover people and their relationships; educate and drive social change.',
-    imageUrl: 'https://www.figma.com/api/mcp/asset/c9046f6e-25a3-42f8-9782-8cdd07354f5e',
+    imageUrl: '/human-insights.jpg',
     link: '/domains/human-insight-impact'
   },
   {
     title: 'Policy, Influence',
     description: 'Shape systems, decisions, and the rules of the game.',
-    imageUrl: 'https://www.figma.com/api/mcp/asset/afccd2e6-573b-42bc-b62e-a35315227c43',
+    imageUrl: '/power-influence.jpg',
     link: '/domains/power-policy-influence'
   },
   {
     title: 'Culture, Creativity',
     description: 'Uncover ideas, stories, and meanings shaping the world.',
-    imageUrl: 'https://www.figma.com/api/mcp/asset/e0f3709f-d410-48e0-b3be-99c10eddc4e5',
+    imageUrl: '/culture-creativity.jpg',
     link: '/domains/culture-creativity'
   }
 ];
@@ -195,7 +195,7 @@ const HomePage = () => {
           <h1>WE&apos;RE HERE FOR YOU.</h1>
           <p>Everything you need to access world-class study in Israel. In English.</p>
           <div className="home-redesign__hero-actions">
-            <Link to={applicationPrimaryLink} className="home-redesign__action home-redesign__action--mint">
+            <Link to={quizPrimaryLink} className="home-redesign__action home-redesign__action--mint">
               Degree Ideas
             </Link>
             <Link to={conciergeLink} className="home-redesign__action home-redesign__action--blue">

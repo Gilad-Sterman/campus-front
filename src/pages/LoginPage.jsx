@@ -154,7 +154,7 @@ const LoginPage = () => {
     <div className="login-page">
       {/* <div className="container"> */}
       <div className='image-container'>
-        <img src="https://mzyjtmyoxpsnnxsvucup.supabase.co/storage/v1/object/public/university-logos/f3b0f307540d6984cc0662e8dd321e902990de40.png" alt="" />
+        <img src="https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/GettyImages-2158556312.jpg" alt="" />
         <h2>{isSignUp ? 'Create Account' : 'Welcome Back'}</h2>
       </div>
       <div className="login-container">
@@ -163,12 +163,12 @@ const LoginPage = () => {
             ← Back to Home
           </Link> */}
           <h1>{isSignUp ? 'Signup' : 'Login'}</h1>
-          {/* <p className="login-subtitle">
-              {isSignUp
-                ? 'Join Campus Israel to start your application journey'
-                : 'Sign in to continue your application process'
-              }
-            </p> */}
+          <p className="login-subtitle">
+            {isSignUp
+              ? 'Create your free account to access your results, book a concierge appointment, and unlock your toolkit.'
+              : ''
+            }
+          </p>
         </div>
 
         <div className="login-form-container">
