@@ -82,6 +82,11 @@ const HomePage = () => {
   }, [dispatch]);
 
   const quizPrimaryLink = userState.hasTakenQuiz && userState.isLoggedIn ? '/quiz/results' : '/quiz';
+  const quizFitCtaLabel = userState.hasTakenQuiz
+    ? 'See My Results'
+    : userState.hasChurnedQuiz
+      ? 'Continue Quiz'
+      : 'Start Free Quiz';
   const conciergeLink = userState.isLoggedIn ? '/profile?tab=concierge' : '/login?redirect=/profile?tab=concierge';
   const backendOrigin = typeof window !== 'undefined' && window.location.hostname === 'localhost'
     ? 'http://localhost:3001'
@@ -243,7 +248,7 @@ const HomePage = () => {
         <div className="container">
           <h2>Want to see how you fit?</h2>
           <Link to={quizPrimaryLink} className="home-redesign__fit-button">
-            Start Free Quiz
+            {quizFitCtaLabel}
           </Link>
         </div>
       </section>
