@@ -88,6 +88,10 @@ const LoginPage = () => {
           alert('Please enter your date of birth');
           return;
         }
+        if (!formData.zipCode.trim()) {
+          alert('Please enter your ZIP / postal code');
+          return;
+        }
         if (formData.password !== formData.confirmPassword) {
           alert('Passwords do not match');
           return;
@@ -105,7 +109,7 @@ const LoginPage = () => {
             lastName: formData.lastName,
             country: formData.country,
             dateOfBirth: formData.dateOfBirth,
-            zipCode: formData.zipCode?.trim() || undefined
+            zipCode: formData.zipCode.trim()
           }));
           // Registration success - user will be redirected by useEffect
         } catch (err) {
@@ -237,17 +241,18 @@ const LoginPage = () => {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="zipCode">ZIP / postal code (optional)</label>
+                  <label htmlFor="zipCode">ZIP / postal code</label>
                   <input
                     type="text"
                     id="zipCode"
                     name="zipCode"
                     value={formData.zipCode}
                     onChange={handleInputChange}
+                    required={isSignUp}
                     placeholder="e.g. 90210 or 902101234"
                     inputMode="numeric"
                     maxLength={9}
-                    pattern="\d{0,9}"
+                    pattern="\d{1,9}"
                     autoComplete="postal-code"
                   />
                 </div>

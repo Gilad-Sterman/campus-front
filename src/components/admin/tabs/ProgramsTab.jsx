@@ -93,19 +93,6 @@ const DEGREE_QUALIFICATIONS = [
 
 const DEGREE_LEVELS = ['bachelor', 'master', 'phd'];
 
-const DOC_TYPES = [
-    { value: 'passport', label: 'Passport' },
-    { value: 'academic_transcript', label: 'Academic Transcript' },
-    { value: 'diploma_certificate', label: 'Diploma Certificate' },
-    { value: 'english_proficiency', label: 'English Proficiency' },
-    { value: 'personal_statement', label: 'Personal Statement' },
-    { value: 'cv_resume', label: 'CV/Resume' },
-    { value: 'recommendation_letters', label: 'Recommendation Letters' },
-    { value: 'financial_documents', label: 'Financial Documents' },
-    { value: 'portfolio', label: 'Portfolio' },
-    { value: 'motivation_letter', label: 'Motivation Letter' }
-];
-
 function ProgramsTab() {
     const { user: currentUser } = useSelector(state => state.auth);
     const [search, setSearch] = useState('');
@@ -131,7 +118,6 @@ function ProgramsTab() {
         description: '',
         application_url: '',
         application_deadline: '',
-        doc_requirements: [],
         image_url: '',
         status: 'active'
     });
@@ -189,7 +175,6 @@ function ProgramsTab() {
             description: '',
             application_url: '',
             application_deadline: '',
-            doc_requirements: [],
             image_url: '',
             status: 'active'
         });
@@ -214,20 +199,10 @@ function ProgramsTab() {
             description: program.description || '',
             application_url: program.application_url || '',
             application_deadline: program.requirements?.application_deadline || '',
-            doc_requirements: program.doc_requirements || [],
             image_url: program.image_url || '',
             status: program.status || 'active'
         });
         setShowForm(true);
-    };
-
-    const handleDocToggle = (docValue) => {
-        setFormData(prev => {
-            const docs = prev.doc_requirements.includes(docValue)
-                ? prev.doc_requirements.filter(d => d !== docValue)
-                : [...prev.doc_requirements, docValue];
-            return { ...prev, doc_requirements: docs };
-        });
     };
 
     const handleSubmit = async (e) => {
@@ -254,12 +229,6 @@ function ProgramsTab() {
             }
         }
 
-        // Validate required documents
-        if (formData.doc_requirements.length === 0) {
-            alert('Please select at least one required document');
-            return;
-        }
-
         try {
             const { application_deadline, ...rest } = formData;
             const data = {
@@ -267,7 +236,7 @@ function ProgramsTab() {
                 duration_years: formData.duration_years ? parseInt(formData.duration_years) : null,
                 tuition_usd: formData.tuition_usd ? parseInt(formData.tuition_usd) : null,
                 living_cost_override_usd: formData.living_cost_override_usd ? parseInt(formData.living_cost_override_usd) : null,
-                doc_requirements: formData.doc_requirements,
+                doc_requirements: [],
                 image_url: formData.image_url || null,
                 duration_text: formData.duration_text || null,
                 requirements: application_deadline
@@ -709,21 +678,6 @@ function ProgramsTab() {
                                         value={formData.description}
                                         onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                                     />
-                                </div>
-                                <div className="admin-form__group admin-form__group--full">
-                                    <label>Required Documents *</label>
-                                    <div className="doc-checkboxes">
-                                        {DOC_TYPES.map((doc) => (
-                                            <label key={doc.value} className="checkbox-label">
-                                                <input
-                                                    type="checkbox"
-                                                    checked={formData.doc_requirements.includes(doc.value)}
-                                                    onChange={() => handleDocToggle(doc.value)}
-                                                />
-                                                <span>{doc.label}</span>
-                                            </label>
-                                        ))}
-                                    </div>
                                 </div>
                                 <div className="admin-form__group admin-form__group--full">
                                     <label>Program Image</label>
