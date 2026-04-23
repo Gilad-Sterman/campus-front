@@ -3,7 +3,7 @@
 The frontend of Campus Israel is built with **React**, **Vite**, and **Redux Toolkit**. It provides a comprehensive platform for students to explore universities, career paths, and manage applications, along with a robust admin dashboard for staff.
 
 ## 🚀 Getting Started
-
+#test change
 ### Prerequisites
 - [Node.js](https://nodejs.org/) (v18.x or later recommended)
 - [npm](https://www.npmjs.com/)
