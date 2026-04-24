@@ -4,6 +4,7 @@
 .quiz-results {
   min-height: 60vh;
   padding: $spacing-xl $spacing-md;
+  padding-top: 0;
   background-color: $color-surface;
 
   &.loading {
@@ -42,6 +43,39 @@
     text-align: center;
   }
 
+  .results-top {
+    @include full-width-breakout;
+    background-color: white;
+
+    h2 {
+      text-align: center;
+      background-color: $color-seafoam;
+      padding-block: $spacing-2xl;
+      font-family: $font-family-display;
+      font-size: 55px;
+      margin: 0 0 $spacing-md 0;
+      font-weight: $font-weight-medium;
+
+      @include respond-to(xs) {
+        font-size: $font-size-2xl;
+      }
+    }
+
+    .results-description {
+      padding-block: $spacing-3xl;
+      display: flex;
+      justify-content: center;
+      gap: $spacing-md;
+      margin: 0 auto;
+      max-width: 1080px;
+
+      p {
+        font-size: 30px;
+        line-height: 40px;
+      }
+    }
+  }
+
   .results-container {
     @include container;
     max-width: $container-max-lg;
@@ -50,6 +84,7 @@
 
   .results-header {
     text-align: center;
+    padding-top: $spacing-xl;
 
     h1 {
       font-size: $font-size-3xl;

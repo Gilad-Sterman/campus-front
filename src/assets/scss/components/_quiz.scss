@@ -221,6 +221,52 @@
   }
 }
 
+.progress-outer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: $spacing-lg;
+  width: 100%;
+
+  .quiz-badge {
+    background-color: #F3F5FA;
+    color: $color-primary;
+    padding: 0.25rem .75rem;
+    border-radius: $border-radius-pill;
+    font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    animation: badgePop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 12px rgba($color-primary, 0.08);
+
+    .badge-title {
+      font-size: $font-size-base;
+      line-height: 1.2;
+    }
+
+    .badge-description {
+      font-size: $font-size-xs;
+      font-weight: 400;
+      opacity: 0.85;
+      margin-top: 2px;
+    }
+  }
+}
+
+@keyframes badgePop {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 // Progress Bar
 .progress-container {
   display: grid;
@@ -228,7 +274,7 @@
   align-items: center;
   justify-content: start;
   gap: 3rem;
-  margin-bottom: $spacing-lg;
+  width: 100%;
 
   .progress-info {
     @include flex-between;
@@ -334,7 +380,7 @@
           flex-direction: column;
           align-items: center;
           gap: 0.75rem;
-          padding: 1.5rem;
+          padding: 2.5rem .5rem;
           background-color: #F3F5FA; // Light grey/blue background like intro cards
           border-radius: $border-radius-pill;
           flex: 1;
@@ -347,17 +393,17 @@
             min-width: 100%;
           }
 
-          .step-number {
+          .step-icon {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 32px;
-            height: 32px;
-            background-color: white;
-            color: $color-primary;
-            border-radius: 50%;
-            font-weight: 700;
-            font-size: $font-size-sm;
+            // width: 32px;
+            // height: 32px;
+            // background-color: white;
+            // color: $color-primary;
+            // border-radius: 50%;
+            // font-weight: 700;
+            // font-size: $font-size-sm;
           }
 
           .step-text {
@@ -452,6 +498,30 @@
         }
       }
 
+      &.pre-title-split {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: $spacing-xs;
+
+        .question-pre-title {
+          font-size: $font-size-2xl;
+          color: $color-primary;
+          font-weight: $font-weight-bold;
+          background-color: $color-seafoam;
+          margin-bottom: 10px;
+          padding: 0 10px;
+          width: fit-content;
+        }
+
+        .question-main {
+          font-size: $font-size-2xl;
+          color: $color-primary;
+          font-weight: 350;
+          line-height: 1.2;
+        }
+      }
+
       @include respond-to(xs) {
         font-size: $font-size-lg;
       }
@@ -471,10 +541,11 @@
       font-size: $font-size-base;
       font-weight: $font-weight-medium;
       text-align: center;
-      min-height: 120px;
+      min-height: 170px;
       max-width: 300px;
       margin: 0 auto;
       width: 100%;
+      gap: 10px;
 
 
 
@@ -519,9 +590,9 @@
       }
 
 
-      // .answer-label {
-      //   flex: 1;
-      // }
+      .answer-icons {
+        font-size: 40px;
+      }
 
       // &.selected .answer-value {
       //   color: white;
@@ -529,7 +600,27 @@
     }
   }
 
+  .custom-answer-container {
+    margin-top: $spacing-xl;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-sm;
+    width: 100%;
+    margin-inline: auto;
+
+    .custom-answer-label {
+      font-size: $font-size-base;
+      color: $color-text-secondary;
+      font-weight: $font-weight-medium;
+    }
+
+    .custom-input {
+      padding: $spacing-md $spacing-lg;
+    }
+  }
+
   .question-text-input,
+  .question-text-area,
   .question-number-input,
   .question-date-input,
   .question-dropdown,
@@ -555,6 +646,12 @@
       cursor: not-allowed;
       background-color: rgba($color-text-secondary, 0.06);
     }
+  }
+
+  .question-text-area {
+    border-radius: $border-radius-lg;
+    resize: vertical;
+    min-height: 120px;
   }
 
   .question-number-input,
@@ -591,6 +688,10 @@
         color: $color-primary;
 
         span {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: $spacing-xs;
           font-weight: $font-weight-semibold;
         }
       }

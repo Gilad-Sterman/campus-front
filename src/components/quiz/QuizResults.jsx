@@ -18,6 +18,8 @@ const QuizResults = ({ onGetFullReport }) => {
     acc[curr.questionId] = curr.answer;
     return acc;
   }, {}) : {};
+  
+  const studentName = answers?.find(a => a.questionId === 1)?.answer || results?.user?.name || '';
 
   // Get section weights from enhanced scoring data
   const getSectionWeights = () => {
@@ -102,6 +104,13 @@ const QuizResults = ({ onGetFullReport }) => {
 
   return (
     <div className="quiz-results">
+      <div className='results-top'>
+        <h2>Thank you, {studentName}</h2>
+        <div className='results-description'>
+          <img src="https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/svg2427.svg" alt="" />
+          <p className='mb-5'>Scroll down to see your degree suggestions and look out for your full results report in your inbox. Whenever you're ready, our concierge team is one click away via the booking link in the email.</p>
+        </div>
+      </div>
       <div className="results-container">
         <div className="results-header">
           <h1>Your Quiz Results</h1>

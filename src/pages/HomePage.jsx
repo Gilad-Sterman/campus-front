@@ -239,7 +239,7 @@ const HomePage = () => {
                 <img src={degree.imageUrl} alt={degree.title} />
                 <div>
                   <h3>{degree.title}</h3>
-                  <p>{degree.description}</p>
+                  {/* <p>{degree.description}</p> */}
                 </div>
               </Link>
             ))}

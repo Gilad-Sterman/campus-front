@@ -53,7 +53,7 @@ const AboutPage = () => {
       <p className='about-page-title'>About</p>
       <section className="about-hero">
         <div className="hero-image-wrapper">
-          <img src="https://www.figma.com/api/mcp/asset/30702ffd-6f83-4363-81a8-958184d5d252" alt="About Hero" className="hero-full-img" />
+          <img src="https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/GettyImages-1462637703.jpg" alt="About Hero" className="hero-full-img" />
         </div>
         <h1>WHAT HAPPENED TO COLLEGE?</h1>
       </section>

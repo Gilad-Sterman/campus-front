@@ -68,6 +68,16 @@ function UsersTab({ onViewUser }) {
 
     const totalPages = Math.ceil(total / limit);
 
+    const formatDOB = (dob) => {
+        if (!dob) return '-';
+        const date = new Date(dob);
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear().toString().slice(-2);
+        return `${day}/${month}/${year}`;
+    };
+    console.log(users);
+
     return (
         <div className="admin-tab">
             <div className="admin-tab__header">
@@ -93,10 +103,10 @@ function UsersTab({ onViewUser }) {
                     <option value="active">Active</option>
                     <option value="blocked">Blocked</option>
                 </select>
-                
+
                 <div className="admin-tab__cache-info">
-                    <button 
-                        onClick={refresh} 
+                    <button
+                        onClick={refresh}
                         className="btn-admin btn-admin--small btn-admin--secondary"
                         title="Refresh data"
                     >
@@ -125,7 +135,7 @@ function UsersTab({ onViewUser }) {
                                         <th>Quiz</th>
                                         <th>Concierge</th>
                                         <th>Apps</th>
-                                        <th>Docs</th>
+                                        <th>DOB</th>
                                         <th>Joined</th>
                                         <th>Actions</th>
                                     </tr>
@@ -153,11 +163,15 @@ function UsersTab({ onViewUser }) {
                                             </td>
                                             <td>{user.applicationCount || 0}</td>
                                             <td>
-                                                <span className={`status-badge status-badge--${user.documentStatus || 'none'}`}>
-                                                    {user.documentStatus || 'none'}
+                                                <span className={`status-badge status-badge--${user.date_of_birth || 'none'}`}>
+                                                    {user.date_of_birth ? new Date(user.date_of_birth).toLocaleDateString() : '-'}
                                                 </span>
                                             </td>
-                                            <td>{new Date(user.created_at).toLocaleDateString()}</td>
+                                            <td>
+                                                <span className={`status-badge status-badge--${user.created_at || 'none'}`}>
+                                                    {user.created_at ? new Date(user.created_at).toLocaleDateString() : 'none'}
+                                                </span>
+                                            </td>
                                             <td className="admin-table__actions">
                                                 {canEdit(currentUser?.role) && (
                                                     <button

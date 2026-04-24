@@ -85,6 +85,10 @@ function UserDetailView({ userId, onBack }) {
                                 <span>{user.phone || 'Not provided'}</span>
                             </div>
                             <div className="info-item">
+                                <label><FaCalendarAlt /> Date of Birth</label>
+                                <span>{user.date_of_birth ? new Date(user.date_of_birth).toLocaleDateString() : '-'}</span>
+                            </div>
+                            <div className="info-item">
                                 <label><FaGlobe /> Country</label>
                                 <span>{user.country || 'Not provided'}</span>
                             </div>
@@ -221,7 +225,7 @@ function UserDetailView({ userId, onBack }) {
                 </section>
 
                 {/* 4. Documents */}
-                <section className="admin-card user-detail-view__documents">
+                {/* <section className="admin-card user-detail-view__documents">
                     <div className="admin-card__header">
                         <h2><FaFileAlt /> Document Library</h2>
                     </div>
@@ -244,7 +248,7 @@ function UserDetailView({ userId, onBack }) {
                             <p className="empty-msg">No documents uploaded.</p>
                         )}
                     </div>
-                </section>
+                </section> */}
             </div>
         </div>
     );

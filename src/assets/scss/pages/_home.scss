@@ -207,7 +207,7 @@
     display: grid;
     grid-template-columns: 130px 1fr;
     gap: 20px;
-    align-items: start;
+    align-items: center;
 
     img {
       width: 130px;
@@ -225,7 +225,7 @@
       line-height: 30px;
       letter-spacing: -0.03em;
       font-weight: 700;
-      width: min-content;
+      // width: min-content;
     }
 
     p {

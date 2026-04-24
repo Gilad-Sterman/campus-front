@@ -239,6 +239,7 @@ const QuizPage = ({ onComplete }) => {
             canGoBack={canGoBack}
             isLoading={isLoading}
             percentage={visibleProgress.total > 0 ? Math.round((visibleProgress.current / visibleProgress.total) * 100) : 0}
+            activeQuestionId={currentQuestion}
           />
         </div>
 
@@ -255,6 +256,7 @@ const QuizPage = ({ onComplete }) => {
             currentAnswer={currentAnswer}
             onAnswerSelect={handleAnswerSelect}
             isLoading={isLoading}
+            answers={answers}
           />
 
           <QuizNavigation

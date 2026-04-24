@@ -5,7 +5,8 @@ const QuestionCard = ({
   question,
   currentAnswer,
   onAnswerSelect,
-  isLoading
+  isLoading,
+  answers = []
 }) => {
   const [selectedAnswer, setSelectedAnswer] = useState(currentAnswer ?? null);
 
@@ -21,17 +22,17 @@ const QuestionCard = ({
   const answerOptions = question?.config?.options
     ? question.config.options
     : question?.config?.labels
-    ? question.config.labels.map((label, index) => ({
-      value: (question.config.min !== undefined ? question.config.min : 1) + index,
-      label
-    }))
-    : [
-      { value: 1, label: 'Strongly Disagree' },
-      { value: 2, label: 'Disagree' },
-      { value: 3, label: 'Neutral' },
-      { value: 4, label: 'Agree' },
-      { value: 5, label: 'Strongly Agree' }
-    ];
+      ? question.config.labels.map((label, index) => ({
+        value: (question.config.min !== undefined ? question.config.min : 1) + index,
+        label
+      }))
+      : [
+        { value: 1, label: 'Strongly Disagree' },
+        { value: 2, label: 'Disagree' },
+        { value: 3, label: 'Neutral' },
+        { value: 4, label: 'Agree' },
+        { value: 5, label: 'Strongly Agree' }
+      ];
 
 
   const renderInput = () => {
@@ -46,7 +47,7 @@ const QuestionCard = ({
               <div className="statement-steps">
                 {question.config.steps.map((step, index) => (
                   <div key={index} className="statement-step">
-                    <span className="step-number">{index + 1}.</span>
+                    <span className="step-icon"><img src={question.config.icons[index]} alt="step" /></span>
                     <span className="step-text">{step}</span>
                   </div>
                 ))}
@@ -56,6 +57,19 @@ const QuestionCard = ({
         );
 
       case 'text_field':
+        if (question.config?.multiline) {
+          return (
+            <textarea
+              className="question-text-area"
+              value={selectedAnswer || ''}
+              onChange={(e) => handleAnswerClick(e.target.value)}
+              placeholder={question.config?.placeholder || 'Type your answer'}
+              maxLength={question.config?.maxLength || 1000}
+              disabled={isLoading}
+              rows={4}
+            />
+          );
+        }
         return (
           <input
             type="text"
@@ -94,8 +108,8 @@ const QuestionCard = ({
               const isMaxed = !isChecked && selectedValues.length >= maxSelections;
 
               return (
-                <label 
-                  key={option.value} 
+                <label
+                  key={option.value}
                   className={`multi-select-option ${isChecked ? 'selected' : ''} ${(isLoading || isMaxed) ? 'disabled' : ''}`}
                 >
 
@@ -262,21 +276,41 @@ const QuestionCard = ({
       case 'likert':
       default:
         return (
-          <div className="answer-options">
-            {answerOptions.map((option) => (
-              <button
-                type="button"
-                key={option.value}
-                className={`answer-option ${selectedAnswer === option.value ? 'selected' : ''}`}
-                onClick={() => handleAnswerClick(option.value)}
-                disabled={isLoading}
-              >
-                {!question?.config?.options && renderValue(option.value)}
+          <>
+            <div className="answer-options">
+              {answerOptions.map((option) => (
+                <button
+                  type="button"
+                  key={option.value}
+                  className={`answer-option ${selectedAnswer === option.value ? 'selected' : ''}`}
+                  onClick={() => handleAnswerClick(option.value)}
+                  disabled={isLoading}
+                >
+                  {!question?.config?.options && renderValue(option.value)}
 
-                <span className="answer-label">{option.label}</span>
-              </button>
-            ))}
-          </div>
+                  {option?.icons && <div className="answer-icons">
+                    {(option.icons || []).map((icon, index) => (
+                      <span key={index} className="answer-icon">{icon}</span>
+                    ))}
+                  </div>}
+                  <span className="answer-label">{option.label}</span>
+                </button>
+              ))}
+            </div>
+            {question?.config?.allowCustom && (
+              <div className="custom-answer-container">
+                <label className="custom-answer-label">Or write you own:</label>
+                <input
+                  type="text"
+                  className="question-text-input custom-input"
+                  value={(!answerOptions.some(opt => opt.value === selectedAnswer) && selectedAnswer) || ''}
+                  onChange={(e) => handleAnswerClick(e.target.value)}
+                  placeholder="Write your answer"
+                  disabled={isLoading}
+                />
+              </div>
+            )}
+          </>
         );
 
     }
@@ -293,7 +327,7 @@ const QuestionCard = ({
       };
       return emojiMap[value] || value;
     }
-    
+
     if (scaleType === '0-2') {
       const emojiMap = {
         0: '🫥',
@@ -302,9 +336,21 @@ const QuestionCard = ({
       };
       return emojiMap[value] || value;
     }
-    
+
     return value;
   };
+
+  const getStatmentIcons = (statementType) => {
+    console.log(statementType);
+    if (statementType === 'EXPLORE_WORK') {
+      return [
+        '🎯',
+        '🧠',
+        '💡',
+      ];
+    }
+    return [];
+  }
 
   const renderValue = (value) => {
     const min = question?.config?.min;
@@ -313,7 +359,7 @@ const QuestionCard = ({
     if (min === 0 && max === 4) {
       return <span className="answer-value emoji-value">{getEmoji(value, '0-4')}</span>;
     }
-    
+
     if (min === 0 && max === 2) {
       return <span className="answer-value emoji-value">{getEmoji(value, '0-2')}</span>;
     }
@@ -324,9 +370,25 @@ const QuestionCard = ({
 
 
   const renderTitle = () => {
-
-    const title = question?.title || 'Question';
+    const studentName = answers.find(a => a.questionId === 1)?.answer || '';
     
+    let title = question?.title || 'Question';
+    let preTitle = question?.preTitle;
+
+    if (studentName) {
+      title = title.replace('{name}', studentName);
+      if (preTitle) preTitle = preTitle.replace('{name}', studentName);
+    }
+
+    if (preTitle) {
+      return (
+        <h2 className="question-title pre-title-split">
+          <span className="question-pre-title">{preTitle}</span>
+          <span className="question-main">{title}</span>
+        </h2>
+      );
+    }
+
     // Pattern 1: Splitting recurring part in quotes (V3 RIASEC/Openness)
     const quoteMatch = title.match(/^("(.*?)")\s*(.*)$/);
     if (quoteMatch) {
@@ -341,12 +403,14 @@ const QuestionCard = ({
     // Pattern 2: Splitting question and instruction by '?' (e.g. V3 Values)
     if (title.includes('?')) {
       const parts = title.split('?');
-      return (
-        <h2 className="question-title instruction-split">
-          <span className="question-main">{parts[0]}?</span>
-          <span className="question-instruction">{parts[1].trim()}</span>
-        </h2>
-      );
+      if (parts[1]?.trim()) {
+        return (
+          <h2 className="question-title instruction-split">
+            <span className="question-main">{parts[0]}?</span>
+            <span className="question-instruction">{parts[1].trim()}</span>
+          </h2>
+        );
+      }
     }
 
     return <h2 className="question-title">{title}</h2>;
