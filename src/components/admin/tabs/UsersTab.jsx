@@ -89,7 +89,7 @@ function UsersTab({ onViewUser }) {
             });
 
             const usersData = response.data.data;
-            
+
             // Map data to friendly column names
             const exportData = usersData.map(u => ({
                 'Full Name': u.full_name,
@@ -129,7 +129,7 @@ function UsersTab({ onViewUser }) {
                     onClick={handleExport}
                     disabled={isExporting}
                 >
-                    {isExporting ? 'Exporting...' : 'Export to CSV'}
+                    {isExporting ? 'Exporting...' : 'Export'}
                 </button>
             </div>
 
