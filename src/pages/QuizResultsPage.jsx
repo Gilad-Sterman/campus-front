@@ -16,6 +16,7 @@ const QuizResultsPage = () => {
     const [matchedPrograms, setMatchedPrograms] = useState([]);
     const [matchingLoading, setMatchingLoading] = useState(false);
     const [matchingError, setMatchingError] = useState(null);
+    const [visibleCount, setVisibleCount] = useState(3);
     const [addedProgramIds, setAddedProgramIds] = useState(() => new Set());
     const [universities, setUniversities] = useState([]);
     const [travelCosts, setTravelCosts] = useState({});
@@ -466,9 +467,9 @@ const QuizResultsPage = () => {
                     {!matchingLoading && !matchingError && matchedPrograms.length > 0 && (
                         <>
                             {/* Minimal Program Cards */}
-                            <h2>YOUR TOP 3 MATCHES</h2>
+                            <h2>YOUR TOP MATCHES</h2>
                             <div className="program-matches">
-                                {matchedPrograms.slice(0, 3).map((program, index) => (
+                                {matchedPrograms.slice(0, visibleCount).map((program, index) => (
                                     <div key={program.program_id} className="program-match-minimal">
                                         <div className="match-info">
                                             {/* <div className="match-rank">#{index + 1}</div> */}
@@ -508,6 +509,17 @@ const QuizResultsPage = () => {
                                     </div>
                                 ))}
                             </div>
+                            
+                            {visibleCount < matchedPrograms.length && (
+                                <div className="show-more-container">
+                                    <button 
+                                        className="btn-secondary show-more-btn"
+                                        onClick={() => setVisibleCount(prev => Math.min(prev + 3, 9))}
+                                    >
+                                        Show More Matches <FiArrowRight style={{ marginLeft: '8px' }} />
+                                    </button>
+                                </div>
+                            )}
                         </>
                     )}
                     <div className="results-actions">

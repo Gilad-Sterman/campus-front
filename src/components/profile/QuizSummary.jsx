@@ -16,6 +16,7 @@ const QuizSummary = () => {
   const [matchingLoading, setMatchingLoading] = useState(false);
   const [matchingError, setMatchingError] = useState(null);
   const [addedProgramIds, setAddedProgramIds] = useState(() => new Set());
+  const [visibleCount, setVisibleCount] = useState(3);
 
   // Check quiz status for authenticated users only
   const hasCompletedQuiz = quizState?.data?.status === 'completed';
@@ -370,9 +371,9 @@ const QuizSummary = () => {
                 <CostComparisonChart programs={matchedPrograms.slice(0, 3)} />
 
                 {/* Minimal Program Cards */}
-                <h2 className="program-matches-title">YOUR TOP 3 MATCHES</h2>
+                <h2 className="program-matches-title">YOUR TOP MATCHES</h2>
                 <div className="program-matches">
-                  {matchedPrograms.slice(0, 3).map((program, index) => (
+                  {matchedPrograms.slice(0, visibleCount).map((program, index) => (
                     <div key={program.program_id} className="program-match-minimal">
                       <div className="match-info">
                         {/* <div className="match-rank">#{index + 1}</div> */}
@@ -412,6 +413,17 @@ const QuizSummary = () => {
                     </div>
                   ))}
                 </div>
+
+                {visibleCount < matchedPrograms.length && (
+                  <div className="show-more-container">
+                    <button 
+                      className="btn-secondary show-more-btn"
+                      onClick={() => setVisibleCount(prev => Math.min(prev + 3, 9))}
+                    >
+                      Show More Matches <FiArrowRight style={{ marginLeft: '8px' }} />
+                    </button>
+                  </div>
+                )}
               </>
             )}
 

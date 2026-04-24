@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { FaGraduationCap, FaPlus, FaSearch, FaEdit, FaTrash, FaSync } from 'react-icons/fa';
+import { FaGraduationCap, FaPlus, FaSearch, FaEdit, FaTrash, FaSync, FaCloudUploadAlt } from 'react-icons/fa';
 import adminApi from '../../../services/adminApi';
 import AdminLoader from '../AdminLoader';
 import ImageUpload from '../../common/ImageUpload';
+import ImportProgramsModal from '../modals/ImportProgramsModal';
 import { canEdit } from '../../../utils/permissions';
 import { usePrograms, useUniversities } from '../../../hooks/useAdminCache';
 import { formatCacheAge } from '../../../utils/adminCacheUtils';
@@ -99,6 +100,7 @@ function ProgramsTab() {
     const [universityFilter, setUniversityFilter] = useState('');
     const [disciplineFilter, setDisciplineFilter] = useState('');
     const [showForm, setShowForm] = useState(false);
+    const [showImportModal, setShowImportModal] = useState(false);
     const [editingProgram, setEditingProgram] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [pageSize, setPageSize] = useState(10);
@@ -392,9 +394,14 @@ function ProgramsTab() {
             <div className="admin-tab__header">
                 <h1><FaGraduationCap style={{ marginRight: '10px' }} /> Programs ({displayStart}-{displayEnd} of {totalPrograms})</h1>
                 {canEdit(currentUser?.role) && (
-                    <button className="btn-admin btn-admin--primary" onClick={openAddForm}>
-                        <FaPlus /> Add Program
-                    </button>
+                    <div style={{ display: 'flex', gap: '10px' }}>
+                        <button className="btn-admin btn-admin--secondary" onClick={() => setShowImportModal(true)}>
+                            <FaCloudUploadAlt style={{ marginRight: '5px' }} /> Import Programs
+                        </button>
+                        <button className="btn-admin btn-admin--primary" onClick={openAddForm}>
+                            <FaPlus /> Add Program
+                        </button>
+                    </div>
                 )}
             </div>
 
@@ -711,6 +718,16 @@ function ProgramsTab() {
                         </form>
                     </div>
                 </div>
+            )}
+            {/* Import Modal */}
+            {showImportModal && (
+                <ImportProgramsModal 
+                    onClose={() => setShowImportModal(false)}
+                    onImportSuccess={() => {
+                        invalidateProgramsCache('update', 'program');
+                        refreshPrograms();
+                    }}
+                />
             )}
         </div>
     );

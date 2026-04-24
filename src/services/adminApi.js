@@ -22,6 +22,13 @@ const adminApi = {
         return api.get(`/admin/users?${params.toString()}`);
     },
 
+    exportUsers: async ({ search = '', status = '' } = {}) => {
+        const params = new URLSearchParams();
+        if (search) params.append('search', search);
+        if (status) params.append('status', status);
+        return api.get(`/admin/users/export?${params.toString()}`);
+    },
+
     getUserById: async (userId) => {
         return api.get(`/admin/users/${userId}`);
     },

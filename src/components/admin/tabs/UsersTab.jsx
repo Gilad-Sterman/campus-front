@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { FaUsers, FaUnlock, FaLock, FaUserShield, FaUser, FaEye, FaSync } from 'react-icons/fa';
+import * as XLSX from 'xlsx';
 import adminApi from '../../../services/adminApi';
 import AdminLoader from '../AdminLoader';
 import { canEdit } from '../../../utils/permissions';
@@ -76,12 +77,60 @@ function UsersTab({ onViewUser }) {
         const year = date.getFullYear().toString().slice(-2);
         return `${day}/${month}/${year}`;
     };
-    console.log(users);
+
+    const [isExporting, setIsExporting] = useState(false);
+
+    const handleExport = async () => {
+        try {
+            setIsExporting(true);
+            const response = await adminApi.exportUsers({
+                search,
+                status: statusFilter
+            });
+
+            const usersData = response.data.data;
+            
+            // Map data to friendly column names
+            const exportData = usersData.map(u => ({
+                'Full Name': u.full_name,
+                'Email': u.email,
+                'Phone': u.phone || '-',
+                'Role': u.role,
+                'Status': u.status,
+                'Degree Interested': u.degree_interested || '-',
+                'University Interested': u.university_interested || '-',
+                'Quiz Status': u.quiz_status || 'not_started',
+                'Concierge Status': u.concierge_status || 'none',
+                'Applications': u.application_count || 0,
+                'Joined At': new Date(u.created_at).toLocaleDateString()
+            }));
+
+            // Create workbook and worksheet
+            const ws = XLSX.utils.json_to_sheet(exportData);
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Users");
+
+            // Trigger download
+            const filename = `users_export_${new Date().toISOString().split('T')[0]}.xlsx`;
+            XLSX.writeFile(wb, filename);
+        } catch (err) {
+            alert(err.message || 'Failed to export users');
+        } finally {
+            setIsExporting(false);
+        }
+    };
 
     return (
         <div className="admin-tab">
             <div className="admin-tab__header">
                 <h1><FaUsers style={{ marginRight: '10px' }} /> Users Management</h1>
+                <button
+                    className="btn-admin btn-admin--secondary"
+                    onClick={handleExport}
+                    disabled={isExporting}
+                >
+                    {isExporting ? 'Exporting...' : 'Export to CSV'}
+                </button>
             </div>
 
             <div className="admin-tab__filters">

@@ -1393,3 +1393,151 @@
     }
   }
 }
+
+// 12. Import Styling
+.admin-import {
+  padding: 20px;
+
+  &__upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 40px;
+  }
+
+  &__dropzone {
+    width: 100%;
+    max-width: 500px;
+    height: 200px;
+    border: 2px dashed $color-border;
+    border-radius: $border-radius-lg;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: #f8fafc;
+
+    &:hover {
+      border-color: $color-primary;
+      background: rgba($color-primary, 0.05);
+    }
+
+    p {
+      margin: 0;
+      font-weight: 600;
+      color: $color-text-primary;
+    }
+
+    span {
+      font-size: 0.8rem;
+      color: $color-text-secondary;
+    }
+  }
+
+  &__template {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid $color-divider;
+    width: 100%;
+
+    p {
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+      color: $color-text-secondary;
+    }
+  }
+
+  &__status {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+    border-bottom: 1px solid $color-divider;
+  }
+
+  &__errors {
+    .error-list {
+      margin-top: 16px;
+      max-height: 300px;
+      overflow-y: auto;
+      background: #fef2f2;
+      border: 1px solid #fee2e2;
+      border-radius: $border-radius-md;
+      padding: 12px;
+    }
+
+    .error-item {
+      font-size: 0.85rem;
+      color: #991b1b;
+      padding: 4px 0;
+      border-bottom: 1px solid #fee2e2;
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+
+    .error-more {
+      font-size: 0.8rem;
+      color: #991b1b;
+      font-style: italic;
+      margin-top: 8px;
+    }
+  }
+
+  &__ready {
+    text-align: center;
+    
+    .alert {
+      margin-bottom: 24px;
+    }
+  }
+
+  &__result {
+    .alert {
+      margin-bottom: 24px;
+    }
+
+    .error-list {
+      max-height: 200px;
+      overflow-y: auto;
+      margin-bottom: 24px;
+    }
+  }
+}
+
+.alert {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-radius: $border-radius-md;
+  font-weight: 500;
+  
+  &--danger {
+    background: #fef2f2;
+    color: #991b1b;
+    border: 1px solid #fee2e2;
+  }
+
+  &--success {
+    background: #f0fdf4;
+    color: #166534;
+    border: 1px solid #dcfce7;
+  }
+
+  &--warning {
+    background: #fffbeb;
+    color: #92400e;
+    border: 1px solid #fef3c7;
+  }
+}
+
+.admin-modal__content--large {
+  max-width: 800px;
+}
