@@ -162,33 +162,35 @@ const HomePage = () => {
   const toolkitCards = [
     {
       title: 'Degree Quiz',
-      description: 'Get suggestions based on your strengths and interests.',
-      subDescription: 'No sign up required.',
+      description: 'Degree Ideas',
+      subDescription: 'Based on your strengths and interests',
       buttonLabel: 'PathFinder',
       link: quizPrimaryLink,
       icon: "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/Vector%20(3).svg"
     },
     {
       title: 'Application Concierge',
-      description: 'Real human guidance. We are waiting to hear from you.',
+      description: 'Application Support',
+      subDescription: 'Real human guidance',
       buttonLabel: 'Concierge',
       link: conciergeLink,
       icon: "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/Vector%20(2).svg"
     },
     {
       title: 'Student Intros',
-      description: 'Meet peers and students from your hometown or in your Israel destination.',
+      description: 'Meet Students ',
+      subDescription: 'Intros at home and in Israel',
       buttonLabel: 'PeerConnect',
       link: userState.isLoggedIn ? '/profile?tab=study-buddy' : '/login?redirect=/profile?tab=study-buddy',
       icon: "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/Vector%20(1).svg"
     },
-    {
-      title: 'Price Compare',
-      description: 'Compare tuition costs at your top US and Israel options.',
-      buttonLabel: 'CostCompare',
-      link: userState.isLoggedIn ? '/profile?tab=cost-calculator' : '/login?redirect=/profile?tab=cost-calculator',
-      icon: "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/Vector.svg"
-    }
+    // {
+    //   title: 'Price Compare',
+    //   description: 'Compare tuition costs at your top US and Israel options.',
+    //   buttonLabel: 'CostCompare',
+    //   link: userState.isLoggedIn ? '/profile?tab=cost-calculator' : '/login?redirect=/profile?tab=cost-calculator',
+    //   icon: "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/Vector.svg"
+    // }
   ];
 
   return (

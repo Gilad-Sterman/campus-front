@@ -169,7 +169,7 @@ const LoginPage = () => {
           <h1>{isSignUp ? 'Signup' : 'Login'}</h1>
           <p className="login-subtitle">
             {isSignUp
-              ? 'Create your free account to access your results, book a concierge appointment, and unlock your toolkit.'
+              ? 'Create your free account to access your PathFinder results, book a concierge appointment, and unlock your toolkit.'
               : ''
             }
           </p>

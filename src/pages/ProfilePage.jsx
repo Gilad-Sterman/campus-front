@@ -66,23 +66,23 @@ const ProfilePage = () => {
   const renderActiveSectionHero = () => {
     switch (activeSection) {
       case 'my-applications':
-        return "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/GettyImages-1147779453.jpg";
+        return "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/GettyImages-1147779453%20(1).jpg";
       case 'quiz-results':
-        return "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/GettyImages-1147779453.jpg";
+        return "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/GettyImages-1147779453%20(1).jpg";
       case 'cost-calculator':
-        return "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/GettyImages-1147779453.jpg";
+        return "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/GettyImages-1147779453%20(1).jpg";
       case 'study-buddy':
-        return "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/GettyImages-1147779453.jpg";
+        return "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/GettyImages-1147779453%20(1).jpg";
       case 'concierge':
-        return "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/GettyImages-1147779453.jpg";
+        return "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/GettyImages-1147779453%20(1).jpg";
       default:
-        return "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/GettyImages-1147779453.jpg";
+        return "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/GettyImages-1147779453%20(1).jpg";
     }
   };
 
   return (
     <div className="profile-page">
-      <h2>{renderActiveSectionTitle()}</h2>
+      <h2 className='profile-page-title'>{renderActiveSectionTitle()}</h2>
       <div className='profile-hero'>
         <img src={renderActiveSectionHero()} alt="profil-hero" />
       </div>
