@@ -101,7 +101,7 @@
 
   &__toolkit-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     max-width: 840px;
     margin: 0 auto;
   }
@@ -112,7 +112,7 @@
     // border-right: 1px solid $color-primary;
     display: flex;
     flex-direction: column;
-    min-height: 310px;
+    min-height: 280px;
     text-align: center;
 
     &:last-child {

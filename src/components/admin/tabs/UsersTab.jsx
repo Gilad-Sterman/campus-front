@@ -92,17 +92,18 @@ function UsersTab({ onViewUser }) {
 
             // Map data to friendly column names
             const exportData = usersData.map(u => ({
-                'Full Name': u.full_name,
+                'Full Name': `${u.first_name || ''} ${u.last_name || ''}`.trim() || 'Anonymous',
                 'Email': u.email,
                 'Phone': u.phone || '-',
+                'Country': u.country || '-',
+                'ZIP Code': u.zip_code || '-',
+                'Date of Birth': u.date_of_birth ? new Date(u.date_of_birth).toLocaleDateString('en-GB') : '-',
                 'Role': u.role,
                 'Status': u.status,
-                'Degree Interested': u.degree_interested || '-',
-                'University Interested': u.university_interested || '-',
                 'Quiz Status': u.quiz_status || 'not_started',
                 'Concierge Status': u.concierge_status || 'none',
                 'Applications': u.application_count || 0,
-                'Joined At': new Date(u.created_at).toLocaleDateString()
+                'Joined At': new Date(u.created_at).toLocaleDateString('en-GB')
             }));
 
             // Create workbook and worksheet
