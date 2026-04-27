@@ -242,3 +242,23 @@
     margin: 0;
   }
 }
+
+.login-source-banner {
+  margin-bottom: $spacing-md;
+  padding: $spacing-sm $spacing-md;
+  border-radius: $border-radius-md;
+  background-color: rgba($color-primary, 0.08);
+  color: $color-primary;
+  font-size: $font-size-sm;
+  line-height: $line-height-relaxed;
+  font-weight: $font-weight-semibold;
+}
+
+.gated-feature-quiz {
+  .quiz-start-content .quiz-cta {
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

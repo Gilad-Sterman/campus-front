@@ -84,7 +84,7 @@ const ProfilePage = () => {
     <div className="profile-page">
       <h2 className='profile-page-title'>{renderActiveSectionTitle()}</h2>
       <div className='profile-hero'>
-        <img src={renderActiveSectionHero()} alt="profil-hero" />
+        <img src={'https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/balloons-header-cropped.jpg'} alt="profil-hero" />
       </div>
       <div className="profile-container">
         <ProfileSidebar

@@ -32,6 +32,9 @@ import AdminLayout from './components/admin/AdminLayout'
 import ConciergePage from './pages/ConciergePage'
 import AboutPage from './pages/AboutPage'
 import FoundersPage from './pages/FoundersPage'
+import ConciergeLandingPage from './pages/ConciergeLandingPage.jsx'
+import PeerConnectLandingPage from './pages/PeerConnectLandingPage.jsx'
+import CostCompareLandingPage from './pages/CostCompareLandingPage.jsx'
 
 // Utils
 import { scrollToElement } from './utils/scrollUtils'
@@ -140,6 +143,21 @@ function App() {
         <Route path="/login" element={
           <Layout>
             <LoginPage />
+          </Layout>
+        } />
+        <Route path="/concierge-info" element={
+          <Layout>
+            <ConciergeLandingPage />
+          </Layout>
+        } />
+        <Route path="/peer-connect-info" element={
+          <Layout>
+            <PeerConnectLandingPage />
+          </Layout>
+        } />
+        <Route path="/cost-compare-info" element={
+          <Layout>
+            <CostCompareLandingPage />
           </Layout>
         } />
         <Route path="/forgot-password" element={

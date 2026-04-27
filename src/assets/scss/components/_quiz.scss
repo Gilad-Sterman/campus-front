@@ -58,6 +58,9 @@
     h1 {
       font-family: $font-family-display;
       text-align: center;
+      text-transform: uppercase;
+      color: white;
+      margin: 0;
       // line-height: 1.2;
 
       // letter-spacing: -4px;
@@ -169,6 +172,7 @@
       font-size: $font-size-lg;
       padding: $spacing-md $spacing-2xl;
       margin-bottom: $spacing-lg;
+      border-radius: 16px;
     }
 
     .resume-section {

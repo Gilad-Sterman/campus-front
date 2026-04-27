@@ -13,7 +13,7 @@
     .top {
       display: flex;
       gap: 1rem;
-      align-items: center;
+      align-items: end;
       margin: 0 auto;
       text-align: left;
       align-self: flex-start;
@@ -28,7 +28,7 @@
       color: $color-primary;
       margin: 0;
       text-align: left;
-      align-self: flex-start;
+      // align-self: flex-start;
       width: 100%;
       font-family: $font-family-display;
 
@@ -39,15 +39,14 @@
 
     // University Logo - positioned above image
     .university-logo {
-      width: 60px;
+      // width: 60px;
       height: 60px;
       overflow: hidden;
-      border-radius: $border-radius-lg;
-      background-color: $color-background;
       display: flex;
       align-items: center;
       justify-content: center;
       align-self: flex-start;
+      margin-inline-start: 1rem;
 
       img {
         max-width: 100%;

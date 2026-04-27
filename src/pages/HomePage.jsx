@@ -132,7 +132,9 @@ const HomePage = () => {
     : userState.hasChurnedQuiz
       ? 'Continue Quiz'
       : 'Start Free Quiz';
-  const conciergeLink = userState.isLoggedIn ? '/profile?tab=concierge' : '/login?redirect=/profile?tab=concierge';
+  const conciergeLink = userState.isLoggedIn ? '/profile?tab=concierge' : '/concierge-info';
+  const peerConnectLink = userState.isLoggedIn ? '/profile?tab=study-buddy' : '/peer-connect-info';
+  const costCompareLink = userState.isLoggedIn ? '/profile?tab=cost-calculator' : '/cost-compare-info';
   const backendOrigin = typeof window !== 'undefined' && window.location.hostname === 'localhost'
     ? 'http://localhost:3001'
     : (typeof window !== 'undefined' ? window.location.origin : '');
@@ -178,15 +180,15 @@ const HomePage = () => {
       title: 'Meet Students',
       description: 'Intros at home and in Israel',
       buttonLabel: 'PeerConnect',
-      link: userState.isLoggedIn ? '/profile?tab=study-buddy' : '/login?redirect=/profile?tab=study-buddy',
-      icon: "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/Vector%20(1).svg"
+      link: peerConnectLink,
+      icon: <FaUserFriends />
     },
     {
       title: 'Financial Planning ',
       description: 'Consider tuition in the US and Israel.',
       buttonLabel: 'CostCompare',
-      link: userState.isLoggedIn ? '/profile?tab=cost-calculator' : '/login?redirect=/profile?tab=cost-calculator',
-      icon: "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/Vector.svg"
+      link: costCompareLink,
+      icon: <FaCalculator />
     }
   ];
 
