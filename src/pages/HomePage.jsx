@@ -87,7 +87,9 @@ const HomePage = () => {
     : userState.hasChurnedQuiz
       ? 'Continue Quiz'
       : 'Start Free Quiz';
-  const conciergeLink = userState.isLoggedIn ? '/profile?tab=concierge' : '/login?redirect=/profile?tab=concierge';
+  const conciergeLink = userState.isLoggedIn ? '/profile?tab=concierge' : '/concierge-info';
+  const peerConnectLink = userState.isLoggedIn ? '/profile?tab=study-buddy' : '/peer-connect-info';
+  const costCompareLink = userState.isLoggedIn ? '/profile?tab=cost-calculator' : '/cost-compare-info';
   const backendOrigin = typeof window !== 'undefined' && window.location.hostname === 'localhost'
     ? 'http://localhost:3001'
     : (typeof window !== 'undefined' ? window.location.origin : '');
@@ -143,14 +145,14 @@ const HomePage = () => {
       title: 'Student Intros',
       description: 'Meet peers and students from your hometown or in your Israel destination.',
       buttonLabel: 'PeerConnect',
-      link: userState.isLoggedIn ? '/profile?tab=study-buddy' : '/login?redirect=/profile?tab=study-buddy',
+      link: peerConnectLink,
       icon: <FaUserFriends />
     },
     {
       title: 'Price Compare',
       description: 'Compare tuition costs at your top US and Israel options.',
       buttonLabel: 'CostCompare',
-      link: userState.isLoggedIn ? '/profile?tab=cost-calculator' : '/login?redirect=/profile?tab=cost-calculator',
+      link: costCompareLink,
       icon: <FaCalculator />
     }
   ];

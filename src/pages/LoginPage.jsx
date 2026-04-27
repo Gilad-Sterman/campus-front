@@ -30,6 +30,14 @@ const LoginPage = () => {
 
   // Get redirect URL from query params
   const redirectUrl = searchParams.get('redirect') || '/profile';
+  const source = searchParams.get('source') || searchParams.get('ref');
+
+  const sourceSignupMessages = {
+    concierge: 'Sign up to start using our Concierge service.',
+    'peer-connect': 'Sign up to start using Peer Connect.',
+    'cost-compare': 'Sign up to start using Cost Compare.'
+  };
+  const signupSourceMessage = sourceSignupMessages[source];
 
   useEffect(() => {
     const mode = searchParams.get('mode');
@@ -163,6 +171,11 @@ const LoginPage = () => {
       </div>
       <div className="login-container">
         <div className="login-header">
+          {isSignUp && signupSourceMessage && (
+            <div className="login-source-banner">
+              {signupSourceMessage}
+            </div>
+          )}
           {/* <Link to="/" className="back-link">
             ← Back to Home
           </Link> */}
