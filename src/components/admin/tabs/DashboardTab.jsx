@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { FaChartLine, FaSearch, FaSync } from 'react-icons/fa';
 import AdminLoader from '../AdminLoader';
 import { useDashboardStats } from '../../../hooks/useAdminCache';
@@ -20,36 +20,34 @@ function DashboardTab() {
     const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
 
     // Calculate date range for cache
-    const getDateRange = () => {
-        let startDate, endDate;
-        endDate = new Date().toISOString();
+    const { startDate, endDate } = useMemo(() => {
+        let start, end;
+        end = new Date().toISOString();
         
         switch (dateRange) {
             case '1d':
-                startDate = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+                start = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
                 break;
             case '7d':
-                startDate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+                start = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
                 break;
             case '30d':
-                startDate = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
+                start = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
                 break;
             case 'custom':
                 if (customDates.start && customDates.end) {
-                    startDate = new Date(customDates.start).toISOString();
-                    endDate = new Date(customDates.end + 'T23:59:59').toISOString();
+                    start = new Date(customDates.start).toISOString();
+                    end = new Date(customDates.end + 'T23:59:59').toISOString();
                 } else {
-                    startDate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+                    start = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
                 }
                 break;
             default:
-                startDate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+                start = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
         }
         
-        return { startDate, endDate };
-    };
-
-    const { startDate, endDate } = getDateRange();
+        return { startDate: start, endDate: end };
+    }, [dateRange, customDates.start, customDates.end]);
 
     // Use cache hook for dashboard stats
     const {

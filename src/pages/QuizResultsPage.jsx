@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useAddToMyApplications, shouldShowAddedState } from '../hooks/useAddToMyApplications';
 import { FiTarget, FiSearch, FiArrowRight } from 'react-icons/fi';
@@ -115,8 +115,12 @@ const QuizResultsPage = () => {
         fetchProgramMatches();
     }, [hasCompletedQuiz, quizState?.data]);
 
+    const fetchStarted = useRef(false);
+
     useEffect(() => {
         const loadData = async () => {
+            if (fetchStarted.current) return;
+            fetchStarted.current = true;
             try {
                 setLoading(true);
                 const [universitiesResponse, travelResponse] = await Promise.all([

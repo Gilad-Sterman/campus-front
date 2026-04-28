@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { FiDollarSign, FiHome, FiMapPin, FiBook, FiPlus, FiX, FiTrendingUp } from 'react-icons/fi';
 import { universityApiService } from '../../services/universityApi';
@@ -31,9 +31,13 @@ const CostCalculator = () => {
     'DC': 'Washington D.C.'
   };
 
+  const fetchStarted = useRef(false);
+
   // Load universities and travel costs on component mount
   useEffect(() => {
     const loadData = async () => {
+      if (fetchStarted.current) return;
+      fetchStarted.current = true;
       try {
         setLoading(true);
         const [universitiesResponse, travelResponse] = await Promise.all([
