@@ -88,6 +88,9 @@ export const useAdminCache = (config) => {
   const needsFetch = () => {
     if (options.forceRefresh) return true;
 
+    // Prevent infinite loops: if we already have an error, don't automatically retry
+    if (localError || cachedData?.error) return false;
+
     switch (cacheType) {
       case 'full':
         return !cachedData || isCacheExpired(cachedData.timestamp, datasetType);
