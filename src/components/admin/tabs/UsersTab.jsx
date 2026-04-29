@@ -103,7 +103,9 @@ function UsersTab({ onViewUser }) {
                 'Quiz Status': u.quiz_status || 'not_started',
                 'Concierge Status': u.concierge_status || 'none',
                 'Applications': u.application_count || 0,
-                'Joined At': new Date(u.created_at).toLocaleDateString('en-GB')
+                'Joined At': new Date(u.created_at).toLocaleDateString('en-GB'),
+                'Been to Israel': u.ever_been_to_israel || '-',
+                'Hebrew Proficiency': u.hebrew_proficiency || '-',
             }));
 
             // Create workbook and worksheet
@@ -187,6 +189,8 @@ function UsersTab({ onViewUser }) {
                                         <th>Apps</th>
                                         <th>DOB</th>
                                         <th>Joined</th>
+                                        <th>Israel</th>
+                                        <th>Hebrew</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -220,6 +224,16 @@ function UsersTab({ onViewUser }) {
                                             <td>
                                                 <span className={`status-badge status-badge--${user.created_at || 'none'}`}>
                                                     {user.created_at ? new Date(user.created_at).toLocaleDateString() : 'none'}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span className={`status-badge status-badge--${user.ever_been_to_israel || 'none'}`}>
+                                                    {user.ever_been_to_israel ? '✓' : '✗'}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span className={`status-badge status-badge--${user.hebrew_proficiency || 'none'}`}>
+                                                    {user.hebrew_proficiency || '-'}
                                                 </span>
                                             </td>
                                             <td className="admin-table__actions">

@@ -34,18 +34,18 @@ const FoundersPage = () => {
     <div className="founders-page">
       <section className="founders-hero">
         <div className="hero-image-wrapper">
-          <img src="https://www.figma.com/api/mcp/asset/30702ffd-6f83-4363-81a8-958184d5d252" alt="Founders Hero" className="hero-full-img" />
+          <img src="https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/ancient-site-header-cropped.jpg" alt="Founders Hero" className="hero-full-img" />
         </div>
         <h1>HOW WE STARTED</h1>
       </section>
 
       <div className="page-content-wrapper">
-        <div className="featured-quote">
+        {/* <div className="featured-quote">
           <blockquote>
             "If there is no room at the table, build your own."
           </blockquote>
           <cite>Bret Stephens, February 1, 2026</cite>
-        </div>
+        </div> */}
 
         <p className='text'>
           As the founders of Campus Israel, we care deeply about our people and take responsibility for future generations. We watched college campuses increasingly let down Jewish students and felt compelled to act. And then October 7th made it urgent.

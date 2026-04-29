@@ -164,7 +164,7 @@ const HomePage = () => {
   const toolkitCards = [
     {
       title: 'Degree Ideas',
-      description: 'Based on your strengths and interests',
+      description: 'Based on your strengths, interests',
       buttonLabel: 'PathFinder',
       link: quizPrimaryLink,
       icon: "https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/Vector%20(3).svg"
@@ -303,9 +303,9 @@ const HomePage = () => {
       <section className="home-redesign__support">
         <div className="container">
           <h2>We&apos;re here for you</h2>
-          <p>Welcome. Sign up for a quiz, create a profile, or book a call.</p>
+          <p>Welcome. Sign up for a quiz or book a call.</p>
           <div className="home-redesign__support-actions">
-            <a href="mailto:contact@campusisrael.com">
+            <a href={`mailto:ask@campusisrael.com?subject=${encodeURIComponent("I'd love to know more")}&body=${encodeURIComponent("Hello! We're so glad you reached out.\nCheck all that apply by placing an X next to each item:\n\n[ ] I'm a student exploring degree options\n\n[ ] I'm a parent researching on behalf of my child\n\n[ ] I'm a school counselor or educator\n\n[ ] I want to connect with a Campus Israel advisor\n\n[ ] I love new Jewish/Israel ventures. Please put me on your mailing list.\n\n[ ] Please be in touch, I am interested in helping Campus Israel\n\n[ ] Other")}`}>
               <span>Inquire</span>
               <img src="https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/Vector%20(5).svg" alt="" />
             </a>

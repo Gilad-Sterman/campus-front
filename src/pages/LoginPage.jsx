@@ -25,7 +25,9 @@ const LoginPage = () => {
     confirmPassword: '',
     country: '',
     dateOfBirth: '',
-    zipCode: ''
+    zipCode: '',
+    everBeenToIsrael: '',
+    hebrewProficiency: ''
   });
 
   // Get redirect URL from query params
@@ -72,6 +74,14 @@ const LoginPage = () => {
       }));
       return;
     }
+    if (name === 'dateOfBirth') {
+      let val = value.replace(/\D/g, '');
+      if (val.length >= 3) val = val.slice(0, 2) + '/' + val.slice(2);
+      if (val.length >= 6) val = val.slice(0, 5) + '/' + val.slice(5);
+      val = val.slice(0, 10);
+      setFormData(prev => ({ ...prev, [name]: val }));
+      return;
+    }
     setFormData(prev => ({
       ...prev,
       [name]: value
@@ -92,8 +102,8 @@ const LoginPage = () => {
           alert('Please select your state or location');
           return;
         }
-        if (!formData.dateOfBirth) {
-          alert('Please enter your date of birth');
+        if (!formData.dateOfBirth || formData.dateOfBirth.length < 10) {
+          alert('Please enter a valid date of birth (MM/DD/YYYY)');
           return;
         }
         if (!formData.zipCode.trim()) {
@@ -108,16 +118,32 @@ const LoginPage = () => {
           alert('Password must be at least 6 characters long');
           return;
         }
+        if (formData.everBeenToIsrael === '') {
+          alert('Please specify if you have ever been to Israel');
+          return;
+        }
+        if (formData.hebrewProficiency === '') {
+          alert('Please select your Hebrew proficiency');
+          return;
+        }
 
         try {
+          // Convert MM/DD/YYYY to YYYY-MM-DD for backend
+          let formattedDob = formData.dateOfBirth;
+          if (formData.dateOfBirth.includes('/')) {
+            const [mm, dd, yyyy] = formData.dateOfBirth.split('/');
+            formattedDob = `${yyyy}-${mm}-${dd}`;
+          }
           await dispatch(register({
             email: formData.email,
             password: formData.password,
             firstName: formData.firstName,
             lastName: formData.lastName,
             country: formData.country,
-            dateOfBirth: formData.dateOfBirth,
-            zipCode: formData.zipCode.trim()
+            dateOfBirth: formattedDob,
+            zipCode: formData.zipCode.trim(),
+            everBeenToIsrael: formData.everBeenToIsrael === 'yes',
+            hebrewProficiency: formData.hebrewProficiency
           }));
           // Registration success - user will be redirected by useEffect
         } catch (err) {
@@ -150,7 +176,9 @@ const LoginPage = () => {
       confirmPassword: '',
       country: '',
       dateOfBirth: '',
-      zipCode: ''
+      zipCode: '',
+      everBeenToIsrael: '',
+      hebrewProficiency: ''
     });
   };
 
@@ -244,13 +272,13 @@ const LoginPage = () => {
                 <div className="form-group">
                   <label htmlFor="dateOfBirth">Date of birth</label>
                   <input
-                    type="date"
+                    type="text"
                     id="dateOfBirth"
                     name="dateOfBirth"
                     value={formData.dateOfBirth}
                     onChange={handleInputChange}
                     required={isSignUp}
-                    max={new Date().toISOString().slice(0, 10)}
+                    placeholder="MM/DD/YYYY"
                   />
                 </div>
                 <div className="form-group">
@@ -268,6 +296,55 @@ const LoginPage = () => {
                     pattern="\d{1,9}"
                     autoComplete="postal-code"
                   />
+                </div>
+              </div>
+            )}
+
+            {isSignUp && (
+              <div className="form-row">
+                <div className="form-group">
+                  <label>Ever been to Israel?</label>
+                  <div className="radio-group" style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
+                    <label style={{ fontWeight: 'normal', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                      <input
+                        type="radio"
+                        name="everBeenToIsrael"
+                        value="yes"
+                        checked={formData.everBeenToIsrael === 'yes'}
+                        onChange={handleInputChange}
+                        required={isSignUp}
+                        style={{ margin: '0' }}
+                      />
+                      Yes
+                    </label>
+                    <label style={{ fontWeight: 'normal', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                      <input
+                        type="radio"
+                        name="everBeenToIsrael"
+                        value="no"
+                        checked={formData.everBeenToIsrael === 'no'}
+                        onChange={handleInputChange}
+                        required={isSignUp}
+                        style={{ margin: '0' }}
+                      />
+                      No
+                    </label>
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label htmlFor="hebrewProficiency">Hebrew Proficiency</label>
+                  <select
+                    id="hebrewProficiency"
+                    name="hebrewProficiency"
+                    value={formData.hebrewProficiency}
+                    onChange={handleInputChange}
+                    required={isSignUp}
+                  >
+                    <option value="">Select proficiency</option>
+                    <option value="none">None</option>
+                    <option value="basic">Basic</option>
+                    <option value="fluent">Fluent</option>
+                  </select>
                 </div>
               </div>
             )}

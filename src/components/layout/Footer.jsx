@@ -2,12 +2,16 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useAnchorLinkHandler } from '../../utils/scrollUtils';
-import { FaFacebook, FaInstagram, FaTiktok, FaLinkedin, FaPhone, FaEnvelope, FaWhatsapp } from 'react-icons/fa';
+import { FaFacebook, FaInstagram, FaTiktok, FaLinkedin, FaPhone, FaEnvelope, FaWhatsapp, FaYoutube } from 'react-icons/fa';
 
 const Footer = () => {
   // Get auth state from Redux
   const { isAuthenticated } = useSelector(state => state.auth);
   const location = useLocation();
+  const conciergeLink = isAuthenticated ? '/profile?tab=concierge' : '/concierge-info';
+  const peerConnectLink = isAuthenticated ? '/profile?tab=study-buddy' : '/peer-connect-info';
+  const costCompareLink = isAuthenticated ? '/profile?tab=cost-calculator' : '/cost-compare-info';
+
 
   // Custom handler for anchor links
   const handleAnchorClick = (e, id, targetId) => {
@@ -72,20 +76,20 @@ const Footer = () => {
           <div className="footer-nav-group">
             <h3>Campus Israel</h3>
             <ul>
-              <li><Link to="/about">ABOUT US</Link></li>
-              <li><Link to="/founders">FOUNDERS</Link></li>
-              <li><Link to="https://www.campusisrael.com/contact">WHAT TO KNOW</Link></li>
-              <li><Link to="/about">THE TEAM</Link></li>
+              <li><Link to="/about">About us</Link></li>
+              <li><Link to="/founders">How we started</Link></li>
+              {/* <li><Link to="https://www.campusisrael.com/contact">WHAT TO KNOW</Link></li> */}
+              {/* <li><Link to="/about">THE TEAM</Link></li> */}
             </ul>
           </div>
 
           <div className="footer-nav-group">
             <h3>Campus Israel Toolkit</h3>
             <ul>
-              <li><Link to={isAuthenticated ? "/profile?tab=quiz-results" : "/login?redirect=/profile?tab=quiz-results"}>PathFinder</Link></li>
-              <li><Link to={isAuthenticated ? "/profile?tab=cost-calculator" : "/login?redirect=/profile?tab=cost-calculator"}>CostCompare</Link></li>
-              <li><Link to={isAuthenticated ? "/profile?tab=study-buddy" : "/login?redirect=/profile?tab=study-buddy"}>PeerConnect</Link></li>
-              <li><Link to={isAuthenticated ? "/profile?tab=concierge" : "/login?redirect=/profile?tab=concierge"}>Concierge</Link></li>
+              <li><Link to={isAuthenticated ? "/profile?tab=quiz-results" : "/quiz"}>PathFinder</Link></li>
+              <li><Link to={costCompareLink}>CostCompare</Link></li>
+              <li><Link to={peerConnectLink}>PeerConnect</Link></li>
+              <li><Link to={conciergeLink}>Concierge</Link></li>
               <li><Link to="/apply/intro">Degree Search</Link></li>
             </ul>
           </div>
@@ -104,18 +108,21 @@ const Footer = () => {
           <div className="footer-nav-group">
             <h3>Share And Follow Us</h3>
             <div className="social-icons">
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <a href="https://www.facebook.com/reel/959624476428927" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                 <FaFacebook className="social-icon" />
               </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <a href="https://www.instagram.com/p/DXkaKbliRAS/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                 <FaInstagram className="social-icon" />
               </a>
-              <a href="https://tiktok.com" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+              <a href="https://www.tiktok.com/@campus.israel/video/7632803785131298079" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
                 <FaTiktok className="social-icon" />
               </a>
-              {/* <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <a href="https://www.linkedin.com/feed/update/urn:li:activity:7453911768126365697" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                 <FaLinkedin className="social-icon" />
-              </a> */}
+              </a>
+              <a href="https://youtube.com/shorts/VWwisv2uP1I?feature=share" target="_blank" rel="noopener noreferrer" aria-label="Youtube">
+                <FaYoutube className="social-icon" />
+              </a>
             </div>
           </div>
         </div>
