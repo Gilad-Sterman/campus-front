@@ -154,7 +154,7 @@ const QuizSummary = () => {
       <div className="profile-section-content">
         <div className="quiz-results">
           <div className="summary-header">
-            <h2>YOUR RESULTS</h2>
+            <h2>WELCOME TO YOUR RESULTS</h2>
           </div>
 
           <div className="results-analysis">
@@ -181,9 +181,9 @@ const QuizSummary = () => {
                 </div>
               </div>
             )}
-            <h3>Your Priorities</h3>
-            <p className="section-description">Your calculated priority weights in our matching algorithm:</p>
-            <div className="priorities-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            {/* <h3>Your Priorities</h3> */}
+            {/* <p className="section-description">Your calculated priority weights in our matching algorithm:</p> */}
+            {/* <div className="priorities-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <div style={{ width: '250px', height: '250px' }}>
                 <SimplePieChart
                   data={Object.entries(priorities).map(([key, value]) => ({ label: key, value }))}
@@ -199,7 +199,7 @@ const QuizSummary = () => {
                   </div>
                 ))}
               </div>
-            </div>
+            </div> */}
 
           </div>
 
@@ -249,7 +249,7 @@ const QuizSummary = () => {
             )}
 
             {/* Display RIASEC scores if available */}
-            {quizState?.data?.riasec_scores && (
+            {/* {quizState?.data?.riasec_scores && (
               <div className="riasec-scores">
                 <h4>Your Interest Profile (RIASEC)</h4>
                 <p className="section-description">Your vocational interests based on Holland's career theory:</p>
@@ -317,7 +317,7 @@ const QuizSummary = () => {
                   );
                 })()}
               </div>
-            )}
+            )} */}
 
             {/* Fallback to placeholder if no enhanced data */}
             {/* {!quizState?.data?.brilliance_summary && !quizState?.data?.personality_scores && (
@@ -345,7 +345,7 @@ const QuizSummary = () => {
 
           {/* Program Matches Section */}
           <div className="recommendations">
-            <h3>Your Top Program Matches</h3>
+            {/* <h3>Your Top Program Matches</h3> */}
 
             {matchingLoading && (
               <div className="loading-state">
@@ -368,7 +368,7 @@ const QuizSummary = () => {
             {!matchingLoading && !matchingError && matchedPrograms.length > 0 && (
               <>
                 {/* Cost Comparison Chart */}
-                <CostComparisonChart programs={matchedPrograms.slice(0, 3)} />
+                {/* <CostComparisonChart programs={matchedPrograms.slice(0, 3)} /> */}
 
                 {/* Minimal Program Cards */}
                 <h2 className="program-matches-title">YOUR TOP MATCHES</h2>
@@ -416,7 +416,7 @@ const QuizSummary = () => {
 
                 {visibleCount < matchedPrograms.length && (
                   <div className="show-more-container">
-                    <button 
+                    <button
                       className="btn-secondary show-more-btn"
                       onClick={() => setVisibleCount(prev => Math.min(prev + 3, 9))}
                     >
@@ -435,7 +435,7 @@ const QuizSummary = () => {
           </div>
 
           <div className="results-actions">
-            <Link to="/apply/intro" className="btn-primary">
+            <Link to="/profile?tab=applications-hub" className="btn-primary">
               Application Hub
             </Link>
           </div>

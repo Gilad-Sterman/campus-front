@@ -67,7 +67,7 @@ const MyApplications = () => {
   };
 
   const handleApplyToMore = () => {
-    navigate('/apply/intro');
+    navigate('/profile?tab=applications-hub');
   };
 
   if (loading) {

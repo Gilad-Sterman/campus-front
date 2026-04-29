@@ -18,7 +18,7 @@ const QuizResults = ({ onGetFullReport }) => {
     acc[curr.questionId] = curr.answer;
     return acc;
   }, {}) : {};
-  
+
   const studentName = answers?.find(a => a.questionId === 1)?.answer || results?.user?.name || '';
 
   // Get section weights from enhanced scoring data
@@ -90,6 +90,13 @@ const QuizResults = ({ onGetFullReport }) => {
     return labels[key] || key;
   };
 
+  const getUniqueUniversities = () => {
+    if (!results?.programMatches?.length) return [];
+
+    const uniqueUniversityNames = [...new Set(results.programMatches.map(program => program.university_name))];
+    return uniqueUniversityNames
+  };
+
 
   if (isLoading) {
     return (
@@ -127,7 +134,7 @@ const QuizResults = ({ onGetFullReport }) => {
                 <p>{results.insights.summary}</p>
 
                 {/* Display personality traits / RIASEC top interests */}
-                {results.insights.traits && results.insights.traits.length > 0 && (
+                {/* {results.insights.traits && results.insights.traits.length > 0 && (
                   <div className="traits-card">
                     <h5>Your Key Strengths:</h5>
                     <div className="traits-list">
@@ -139,11 +146,11 @@ const QuizResults = ({ onGetFullReport }) => {
 
                     </div>
                   </div>
-                )}
+                )} */}
               </div>
 
               {/* V3 RIASEC Teaser */}
-              {isV3 && results?.scoring?.riasec && (
+              {/* {isV3 && results?.scoring?.riasec && (
                 <div className="analysis-card">
                   <h4>Top Interests</h4>
                   <div className="riasec-teaser">
@@ -158,11 +165,11 @@ const QuizResults = ({ onGetFullReport }) => {
                       ))}
                   </div>
                 </div>
-              )}
+              )} */}
             </div>
           )}
 
-          <div className="insights-section">
+          {/* <div className="insights-section">
             <h2>Your Priority Weights</h2>
             <div className="chart-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '2rem', flexWrap: 'wrap', marginBottom: '2rem' }}>
               <div style={{ width: '150px', height: '150px' }}>
@@ -177,7 +184,7 @@ const QuizResults = ({ onGetFullReport }) => {
                 ))}
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* <div className="stats-section">
             <h3>Your Personality Insights</h3>
@@ -229,6 +236,56 @@ const QuizResults = ({ onGetFullReport }) => {
               <div className="insight-card">
                 <h3>Next Steps</h3>
                 <p>Sign up to see your full personality profile and get matched with top universities.</p>
+              </div>
+            </div>
+          )} */}
+
+          {/* Cost Comparison Table */}
+          {/* {results?.programMatches && results.programMatches.length > 0 && (
+            <div className='compare-table'>
+              <div className="results-table-container">
+                <h2>Tuition Comparison</h2>
+                <div className="comparison-table">
+                  {(() => {
+                    const uniqueUniversities = getUniqueUniversities();
+
+                    // Only show table if we have universities and cost data
+                    if (uniqueUniversities.length === 0) {
+                      return <div className="loading-state">Loading cost comparison...</div>;
+                    }
+
+                    return (
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>Category</th>
+                            {uniqueUniversities.map((university, index) => (
+                              <th key={university.name}>
+                                {university.name}
+                              </th>
+                            ))}
+                            <th className='white'>Average US University</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr className="total-row">
+                            <td className="category-cell total-category">
+                              <strong>{'Tuition & Fees'}</strong>
+                            </td>
+                            {uniqueUniversities.map((university) => {
+                              return (
+                                <td key={university.name} className="total-cell">
+                                  {university.tuition}
+                                </td>
+                              );
+                            })}
+                            <td className="total-cell white">$40,000</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    );
+                  })()}
+                </div>
               </div>
             </div>
           )} */}

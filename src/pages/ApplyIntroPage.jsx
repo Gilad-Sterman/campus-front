@@ -112,14 +112,14 @@ function ApplyIntroPage() {
             <div className="apply-intro__container">
                 {/* Main Description */}
                 <div className="apply-intro__description">
-                    <p className="apply-intro__hero-subtitle">Knowing what you want to study is often half the challenge!</p>
-                    <p className="apply-intro__hero-p">Our application hub is your command center for getting from "I like these programs" to "I am ready to prepare and submit my applications."</p>
-                    <p className="apply-intro__hero-p">Once you save programs you're interested in (which you can find in our Career/Degree search and match engine), the Hub turns them into a simple step-by-step checklist including what you need to prepare/have ready, when you need it, and how to submit it (deadlines, requirements, documents, and next actions).</p>
-                <p className="apply-intro__hero-p">You'll be able to upload and store key materials in your profile, track your progress across applications, and see exactly what's left to do. And if you get stuck, you can tap for our human concierge support so you're never guessing your next step. Everything stays organized in one place, so you can move forward with confidence, one step at a time.</p>
+                    <p className="apply-intro__hero-subtitle">Create a free account to start exploring what studying at a university in Israel could look like for you.</p>
+                    <p className="apply-intro__hero-p">Inside the Hub you can explore degree options, access application information, start thinking through the financial side, and keep track of programs that interest you.</p>
+                    <p className="apply-intro__hero-p">You can also request introductions to students already studying in Israel and get guidance from the Campus Israel Concierge whenever you want help.</p>
+                    <p className="apply-intro__hero-p">You don’t have to figure this out alone. That’s why we exist. We’re here for you.</p>
                 </div>
 
                 {/* Context & Reassurance */}
-                <div className="apply-intro__context">
+                {/* <div className="apply-intro__context">
                     <div className="apply-intro__info-text">
                         <p><strong>Easy Steps:</strong></p>
                         <p>Our 'Career/Degree search and match engine' will generate your 'degrees I am applying for' list.This list will automatically migrate into the Hub after you complete the registration process.</p>
@@ -127,7 +127,7 @@ function ApplyIntroPage() {
                         <p><strong>Our system is super strong and can handle an unlimited number of applications! Go for it!</strong></p>
                         <p>In each tracker you will find an application checklist for that degree and a checkoff system for monitoring all your documents/uploads. This has been designed to gather all the necessary elements for THAT specific degree application.</p>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Search Section */}
                 <div className="apply-intro__search" ref={dropdownRef}>

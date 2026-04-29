@@ -11,6 +11,7 @@ const Footer = () => {
   const conciergeLink = isAuthenticated ? '/profile?tab=concierge' : '/concierge-info';
   const peerConnectLink = isAuthenticated ? '/profile?tab=study-buddy' : '/peer-connect-info';
   const costCompareLink = isAuthenticated ? '/profile?tab=cost-calculator' : '/cost-compare-info';
+  const applicationsLink = isAuthenticated ? '/profile?tab=applications-hub' : '/apply/intro';
 
 
   // Custom handler for anchor links
@@ -90,7 +91,7 @@ const Footer = () => {
               <li><Link to={costCompareLink}>CostCompare</Link></li>
               <li><Link to={peerConnectLink}>PeerConnect</Link></li>
               <li><Link to={conciergeLink}>Concierge</Link></li>
-              <li><Link to="/apply/intro">Degree Search</Link></li>
+              <li><Link to={applicationsLink}>Degree Search</Link></li>
             </ul>
           </div>
 

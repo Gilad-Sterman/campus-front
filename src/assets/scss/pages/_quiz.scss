@@ -2,10 +2,8 @@
 // Page-specific styling for quiz flow
 
 .quiz-results {
-  min-height: 60vh;
   padding: $spacing-xl $spacing-md;
   padding-top: 0;
-  background-color: $color-surface;
 
   &.loading {
     @include flex-center;
