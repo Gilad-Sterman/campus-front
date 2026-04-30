@@ -176,6 +176,20 @@
         }
       }
     }
+
+    .radio-label {
+      display: flex;
+      gap: $spacing-md;
+      align-items: center;
+      justify-content: flex-start;
+      width: fit-content;
+    }
+
+    .radio-label {
+      display: flex;
+      gap: $spacing-sm;
+      align-items: center;
+    }
   }
 
   .error-message {

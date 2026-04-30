@@ -71,6 +71,20 @@
         font-size: 30px;
         line-height: 40px;
       }
+
+      @include respond-to(xs) {
+        padding: $spacing-xl $spacing-sm;
+
+        img {
+          width: 100px;
+          height: 100px;
+        }
+
+        p {
+          font-size: 18px;
+          line-height: 26px;
+        }
+      }
     }
   }
 
@@ -100,6 +114,149 @@
       margin: 0;
     }
   }
+
+  .results-content {
+    margin-block: $spacing-2xl;
+
+    .program-matches {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-evenly;
+      // flex-direction: column;
+      background-color: white;
+      gap: $spacing-md;
+      width: 100%;
+
+      @include respond-to(xs) {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+
+    .program-matches-title {
+      text-align: center;
+      font-family: $font-family-display;
+      margin: 0;
+      width: 100%;
+      padding: 1rem;
+      background-color: white;
+    }
+
+    .program-match-minimal {
+      // @include flex-between;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-direction: column;
+      min-height: 100px;
+      padding: $spacing-md;
+      transition: all $transition-base;
+      flex: 0 0 calc(33.333% - #{$spacing-md});
+      max-width: calc(33.333% - #{$spacing-md});
+
+      @include respond-to(xs) {
+        max-width: 100%;
+        padding: 10px;
+      }
+
+      .match-info {
+        display: flex;
+        align-items: center;
+        gap: $spacing-md;
+        flex: 1;
+
+        .match-rank {
+          background: $color-primary;
+          color: white;
+          padding: $spacing-xs $spacing-sm;
+          border-radius: $border-radius-lg;
+          font-size: $font-size-sm;
+          font-weight: $font-weight-semibold;
+          flex-shrink: 0;
+        }
+
+        .program-info {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: $spacing-md;
+
+          h4 {
+            margin: 0 0 $spacing-xs 0;
+            max-width: 250px;
+            font-size: $font-size-md;
+            color: $color-text-primary;
+          }
+
+          .program-image {
+            width: 180px;
+            height: 180px;
+            object-fit: contain;
+            flex-shrink: 0;
+          }
+
+          .program-image-placeholder {
+            width: 180px;
+            height: 180px;
+            background-color: #cacaca;
+          }
+
+          .program-meta {
+            display: flex;
+            gap: $spacing-md;
+            align-items: center;
+
+            .university-name {
+              // color: $color-text-secondary;
+              font-size: $font-size-sm;
+            }
+
+            .degree-level {
+              background: $color-background;
+              padding: $spacing-xs $spacing-sm;
+              border-radius: $border-radius-md;
+              font-size: $font-size-xs;
+              color: $color-text-primary;
+              text-transform: capitalize;
+              font-weight: $font-weight-medium;
+              margin: 0;
+            }
+
+            .match-score {
+              background: $color-success;
+              color: white;
+              padding: $spacing-xs $spacing-sm;
+              border-radius: $border-radius-md;
+              font-size: $font-size-xs;
+              font-weight: $font-weight-semibold;
+            }
+          }
+        }
+      }
+
+      .program-actions {
+        .btn-apply {
+          @include button-primary;
+          display: flex;
+          align-items: center;
+          gap: $spacing-xs;
+          padding: $spacing-md $spacing-xl;
+          // font-size: $font-size-sm;
+
+          svg {
+            transition: transform $transition-base;
+          }
+
+          &:hover svg {
+            transform: translateX(2px);
+          }
+        }
+      }
+    }
+  }
+
+
 
   .insights-section {
     margin-bottom: $spacing-2xl;

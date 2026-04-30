@@ -1395,6 +1395,7 @@
 
     @include respond-to(xs) {
       flex-direction: column;
+      align-items: center;
     }
   }
 
@@ -1418,6 +1419,11 @@
     transition: all $transition-base;
     flex: 0 0 calc(33.333% - #{$spacing-md});
     max-width: calc(33.333% - #{$spacing-md});
+
+    @include respond-to(xs) {
+      max-width: 100%;
+      padding: 10px;
+    }
 
     .match-info {
       display: flex;
@@ -1452,14 +1458,14 @@
         .program-image {
           width: 180px;
           height: 180px;
-          object-fit: cover;
+          object-fit: contain;
           flex-shrink: 0;
         }
 
         .program-image-placeholder {
           width: 180px;
           height: 180px;
-          background-color: $color-background;
+          background-color: #cacaca;
         }
 
         .program-meta {
@@ -1657,6 +1663,7 @@
 
     @include respond-to(xs) {
       flex-direction: column;
+      align-items: center;
     }
   }
 
@@ -1671,6 +1678,11 @@
     transition: all $transition-base;
     flex: 0 0 calc(33.333% - #{$spacing-md});
     max-width: calc(33.333% - #{$spacing-md});
+
+    @include respond-to(xs) {
+      max-width: 100%;
+      padding: 10px;
+    }
 
     .match-info {
       display: flex;
@@ -1706,14 +1718,14 @@
         .program-image {
           width: 180px;
           height: 180px;
-          object-fit: cover;
+          object-fit: contain;
           flex-shrink: 0;
         }
 
         .program-image-placeholder {
           width: 180px;
           height: 180px;
-          background-color: $color-background;
+          background-color: #cacaca;
         }
 
         .program-meta {
@@ -2204,6 +2216,10 @@
     color: $color-text-primary;
     margin: 0 0 1.5rem 0;
   }
+
+  @include respond-to(xs) {
+    padding: .2rem .5rem;
+  }
 }
 
 .comparison-table {
@@ -2282,8 +2298,8 @@
 
     th,
     td {
-      padding: 0.75rem 0.5rem;
-      font-size: 0.875rem;
+      padding: 0.5rem 0.25rem;
+      font-size: 0.75rem;
     }
 
     .category-cell {
@@ -2415,6 +2431,9 @@
     .program-match-minimal {
       flex-direction: column;
       gap: $spacing-md;
+      padding: 10px;
+      max-width: 100%;
+
 
       .match-info {
         width: 100%;

@@ -35,7 +35,7 @@ const LoginPage = () => {
   const source = searchParams.get('source') || searchParams.get('ref');
 
   const sourceSignupMessages = {
-    concierge: 'Sign up to start using our Concierge service.',
+    concierge: 'We are excited to provide this new concierge service. Please take a moment to sign up so you can book your first call.',
     'peer-connect': 'Sign up to start using Peer Connect.',
     'cost-compare': 'Sign up to start using Cost Compare.'
   };
@@ -210,7 +210,7 @@ const LoginPage = () => {
           <h1>{isSignUp ? 'Signup' : 'Login'}</h1>
           <p className="login-subtitle">
             {isSignUp
-              ? 'Create your free account to access your PathFinder results, book a concierge appointment, and unlock your toolkit.'
+              ? 'This free account will give you access to the entire Campus Israel Toolkit.'
               : ''
             }
           </p>
@@ -304,8 +304,9 @@ const LoginPage = () => {
               <div className="form-row">
                 <div className="form-group">
                   <label>Ever been to Israel?</label>
-                  <div className="radio-group" style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem' }}>
-                    <label style={{ fontWeight: 'normal', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                  <div className="radio-group">
+                    <label className='radio-label'>
+
                       <input
                         type="radio"
                         name="everBeenToIsrael"
@@ -317,7 +318,7 @@ const LoginPage = () => {
                       />
                       Yes
                     </label>
-                    <label style={{ fontWeight: 'normal', display: 'flex', alignItems: 'center', gap: '0.25rem' }}>
+                    <label className='radio-label'>
                       <input
                         type="radio"
                         name="everBeenToIsrael"

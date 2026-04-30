@@ -174,10 +174,19 @@ const QuizSummary = () => {
 
               <div className='analysis-grid'>
                 <div className="analysis-card">
-                  <h4>
-                    Your Brilliance Summary
-                  </h4>
-                  <p>{quizState.data.brilliance_summary}</p>
+                  <p>We started with a simple question: what do we actually need to know about you to make
+                    degree suggestions worth trusting?
+                    <br></br>
+                    <br></br>
+                    We combined vocational interest theory and personality assessment mapping each
+                    dimension to something real.
+                    Together, they build a profile with enough resolution to
+                    make meaningful distinctions.
+                    <br></br>
+                    <br></br>
+                    Then we encoded each academic program against the same variables. The result is a
+                    ranked list of programs matched to who you are, not a label or a box. Just a clear
+                    picture of where you&#39;re most likely to succeed, engage, and feel at home.</p>
                 </div>
               </div>
             )}
@@ -204,11 +213,11 @@ const QuizSummary = () => {
           </div>
 
           <div className="results-analysis">
-            <h3>Your Personality Profile</h3>
+            {/* <h3>Your Personality Profile</h3> */}
             {/* <p className="section-description">Based on your quiz responses, here's your detailed personality analysis.</p> */}
 
             {/* Display personality scores if available */}
-            {quizState?.data?.personality_scores && (
+            {/* {quizState?.data?.personality_scores && (
               <div className="personality-scores">
                 {(() => {
                   const personalityData = typeof quizState.data.personality_scores === 'string'
@@ -217,7 +226,6 @@ const QuizSummary = () => {
 
                   return (
                     <div className="analysis-grid">
-                      {/* Conscientiousness Score */}
                       {personalityData?.conscientiousness?.score && (
                         <div className="analysis-card">
                           <h4>Conscientiousness: {personalityData.conscientiousness.tag}</h4>
@@ -231,7 +239,6 @@ const QuizSummary = () => {
                         </div>
                       )}
 
-                      {/* Openness Score (if available) */}
                       {personalityData?.openness?.score && (
                         <div className="analysis-card">
                           <h4>Openness: {personalityData.openness.tag}</h4>
@@ -246,7 +253,7 @@ const QuizSummary = () => {
                   );
                 })()}
               </div>
-            )}
+            )} */}
 
             {/* Display RIASEC scores if available */}
             {/* {quizState?.data?.riasec_scores && (
@@ -371,7 +378,7 @@ const QuizSummary = () => {
                 {/* <CostComparisonChart programs={matchedPrograms.slice(0, 3)} /> */}
 
                 {/* Minimal Program Cards */}
-                <h2 className="program-matches-title">YOUR TOP MATCHES</h2>
+                <h2 className="program-matches-title">YOUR DEGREE IDEAS</h2>
                 <div className="program-matches">
                   {matchedPrograms.slice(0, visibleCount).map((program, index) => (
                     <div key={program.program_id} className="program-match-minimal">
@@ -434,11 +441,11 @@ const QuizSummary = () => {
             )}
           </div>
 
-          <div className="results-actions">
+          {/* <div className="results-actions">
             <Link to="/profile?tab=applications-hub" className="btn-primary">
               Application Hub
             </Link>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

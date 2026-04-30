@@ -94,7 +94,9 @@ const QuizResults = ({ onGetFullReport }) => {
     if (!results?.programMatches?.length) return [];
 
     const uniqueUniversityNames = [...new Set(results.programMatches.map(program => program.university_name))];
-    return uniqueUniversityNames
+    return uniqueUniversityNames.map(name => {
+      return results.programMatches.find(match => match.university_name === name);
+    });
   };
 
 
@@ -109,6 +111,8 @@ const QuizResults = ({ onGetFullReport }) => {
     );
   }
 
+
+
   return (
     <div className="quiz-results">
       <div className='results-top'>
@@ -120,7 +124,7 @@ const QuizResults = ({ onGetFullReport }) => {
       </div>
       <div className="results-container">
         <div className="results-header">
-          <h1>Your Quiz Results</h1>
+          <h1>Welcome to your PathFinder results.</h1>
         </div>
 
 
@@ -130,8 +134,7 @@ const QuizResults = ({ onGetFullReport }) => {
           {results?.insights && (
             <div className="insights-content">
               <div className="analysis-card">
-                <h4>Your Brilliance Summary</h4>
-                <p>{results.insights.summary}</p>
+                {/* <p></p> */}
 
                 {/* Display personality traits / RIASEC top interests */}
                 {/* {results.insights.traits && results.insights.traits.length > 0 && (
@@ -206,8 +209,29 @@ const QuizResults = ({ onGetFullReport }) => {
               </div>
             )}
           </div> */}
-          <CostComparisonChart programs={(results?.programMatches || []).slice(0, 3)} />
-
+          {/* <CostComparisonChart programs={(results?.programMatches || []).slice(0, 3)} /> */}
+          <h2>YOUR DEGREE IDEAS</h2>
+          <div className="program-matches">
+            {(results?.programMatches || []).slice(0, 3).map((program, index) => (
+              <div key={program.program_id} className="program-match-minimal">
+                <div className="match-info">
+                  {/* <div className="match-rank">#{index + 1}</div> */}
+                  <div className="program-info">
+                    <h4>{program.program_name}</h4>
+                    {program.program_image_url || program.university_logo_url ? <img
+                      src={program.program_image_url || program.university_logo_url || ''}
+                      alt={program.program_name}
+                      className='program-image'
+                    /> : <div className="program-image-placeholder"></div>}
+                    <div className="program-meta">
+                      <p className="university-name">{program.university_name}</p>
+                      {/* <p className="degree-level">{program.degree_level}</p> */}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
           {/* Program Matches Section */}
           {/* {results?.programMatches && results.programMatches.length > 0 && (
             <div className="stats-section">
@@ -241,7 +265,7 @@ const QuizResults = ({ onGetFullReport }) => {
           )} */}
 
           {/* Cost Comparison Table */}
-          {/* {results?.programMatches && results.programMatches.length > 0 && (
+          {results?.programMatches && results.programMatches.length > 0 && (
             <div className='compare-table'>
               <div className="results-table-container">
                 <h2>Tuition Comparison</h2>
@@ -258,10 +282,10 @@ const QuizResults = ({ onGetFullReport }) => {
                       <table>
                         <thead>
                           <tr>
-                            <th>Category</th>
+                            <th>-</th>
                             {uniqueUniversities.map((university, index) => (
-                              <th key={university.name}>
-                                {university.name}
+                              <th key={university.university_name}>
+                                {university.university_name}
                               </th>
                             ))}
                             <th className='white'>Average US University</th>
@@ -274,8 +298,8 @@ const QuizResults = ({ onGetFullReport }) => {
                             </td>
                             {uniqueUniversities.map((university) => {
                               return (
-                                <td key={university.name} className="total-cell">
-                                  {university.tuition}
+                                <td key={university.university_name} className="total-cell">
+                                  {university.university_living_cost}
                                 </td>
                               );
                             })}
@@ -288,7 +312,7 @@ const QuizResults = ({ onGetFullReport }) => {
                 </div>
               </div>
             </div>
-          )} */}
+          )}
         </div>
 
         <div className="cta-section">
