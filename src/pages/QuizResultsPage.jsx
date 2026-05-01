@@ -9,6 +9,7 @@ import CostComparisonChart from '../components/common/CostComparisonChart';
 import SimplePieChart from '../components/common/SimplePieChart';
 import universityApiService from '../services/universityApi';
 import { calculateTuition, getStateCodeFromName } from '../utils/tuitionCalculator';
+import { riasecTypes } from '../utils/quizRisacUtil';
 
 const QuizResultsPage = () => {
     const { addProgram } = useAddToMyApplications();
@@ -232,6 +233,12 @@ const QuizResultsPage = () => {
         }).format(amount);
     };
 
+    const topTwoTypes = (scores) => {
+        return Object.entries(scores)
+            .sort(([, a], [, b]) => b - a)
+            .slice(0, 2);
+    };
+
     if (!hasCompletedQuiz) {
         return (
             <div className='quiz-results-page'>
@@ -320,6 +327,18 @@ const QuizResultsPage = () => {
                     </div>
 
                     <div className="results-analysis">
+                        <h3>Your Personality Profile</h3>
+                        {topTwoTypes(quizState?.data?.riasec_scores).map((type) => (
+                            <>
+                                <h3 key={type[0]} className="personality-type">{riasecTypes[type[0]].title}</h3>
+                                <p>{riasecTypes[type[0]].description}</p>
+                                <ul>
+                                    {riasecTypes[type[0]].details.map((detail) => (
+                                        <li key={detail.text}>{detail.text}</li>
+                                    ))}
+                                </ul>
+                            </>
+                        ))}
                         {/* <h3>Your Personality Profile</h3> */}
                         {/* <p className="section-description">Based on your quiz responses, here's your detailed personality analysis.</p> */}
 

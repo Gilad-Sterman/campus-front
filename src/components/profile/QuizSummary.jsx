@@ -8,6 +8,7 @@ import SimplePieChart from '../common/SimplePieChart';
 import CostComparisonChart from '../common/CostComparisonChart';
 import programMatchingApi from '../../services/programMatchingApi.js';
 import { RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar, ResponsiveContainer } from 'recharts';
+import { riasecTypes } from '../../utils/quizRisacUtil.js';
 
 const QuizSummary = () => {
   const { addProgram } = useAddToMyApplications();
@@ -121,6 +122,12 @@ const QuizSummary = () => {
     fetchProgramMatches();
   }, [hasCompletedQuiz, quizState?.data]);
 
+  const topTwoTypes = (scores) => {
+    return Object.entries(scores)
+      .sort(([, a], [, b]) => b - a)
+      .slice(0, 2);
+  };
+
   if (!hasCompletedQuiz) {
     return (
       <div className="profile-section">
@@ -148,6 +155,8 @@ const QuizSummary = () => {
       </div>
     );
   }
+
+  console.log(topTwoTypes(quizState?.data?.riasec_scores));
 
   return (
     <div className="profile-section">
@@ -190,7 +199,19 @@ const QuizSummary = () => {
                 </div>
               </div>
             )}
-            {/* <h3>Your Priorities</h3> */}
+
+            <h3>Your Personality Profile</h3>
+            {topTwoTypes(quizState?.data?.riasec_scores).map((type) => (
+              <>
+                <h3 key={type[0]} className="personality-type">{riasecTypes[type[0]].title}</h3>
+                <p>{riasecTypes[type[0]].description}</p>
+                <ul>
+                  {riasecTypes[type[0]].details.map((detail) => (
+                    <li key={detail.text}>{detail.text}</li>
+                  ))}
+                </ul>
+              </>
+            ))}
             {/* <p className="section-description">Your calculated priority weights in our matching algorithm:</p> */}
             {/* <div className="priorities-container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <div style={{ width: '250px', height: '250px' }}>
