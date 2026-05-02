@@ -39,6 +39,7 @@ import CostCompareLandingPage from './pages/CostCompareLandingPage.jsx'
 // Utils
 import { scrollToElement } from './utils/scrollUtils'
 import QuizResultsPage from './pages/QuizResultsPage.jsx'
+import TeamPage from './pages/TeamPage.jsx'
 
 // Scroll to hash component
 function ScrollToHash() {
@@ -198,6 +199,11 @@ function App() {
         <Route path="/about" element={
           <Layout>
             <AboutPage />
+          </Layout>
+        } />
+        <Route path="/team" element={
+          <Layout>
+            <TeamPage />
           </Layout>
         } />
         <Route path="/founders" element={

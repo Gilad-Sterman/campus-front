@@ -1,0 +1,192 @@
+@import '../base/vars';
+@import '../base/mixins';
+
+.team-page {
+    .team-page-title {
+        font-size: 24px;
+        line-height: 28px;
+        color: #919191;
+        font-weight: 350;
+        text-align: left;
+        max-width: 840px;
+        margin: 1rem auto;
+        text-transform: uppercase;
+
+        @include respond-to(xs) {
+            font-size: 28px;
+            line-height: 30px;
+        }
+    }
+
+    .team-hero {
+        @include full-width-breakout;
+        padding: 0;
+        position: relative;
+        background-color: $color-white;
+        min-height: 420px;
+
+        .hero-image-wrapper {
+            width: 100%;
+            height: 420px;
+            overflow: hidden;
+
+            .hero-full-img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: bottom;
+                filter: brightness(0.7);
+            }
+        }
+
+        h1 {
+            position: absolute;
+            top: 80%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            z-index: 2;
+            color: $color-white;
+            max-width: 840px;
+            margin: 0 auto;
+
+            font-family: 'Druk Wide Super', 'Arial Black', Impact, sans-serif;
+            font-size: 56px;
+            line-height: 58px;
+            text-transform: uppercase;
+            letter-spacing: 0;
+
+            @include respond-to(xs) {
+                font-size: 34px;
+                line-height: 36px;
+                padding-inline-start: 1rem;
+            }
+        }
+
+        .sub-headline {
+            display: none; // Moving sub-headline out of hero in JSX
+        }
+    }
+
+    .page-content-wrapper {
+        max-width: 840px;
+        margin: $spacing-3xl auto;
+        text-align: left;
+
+        p {
+            font-size: 20px;
+            line-height: 26px;
+        }
+    }
+
+    .page-content-wrapper {
+        max-width: 840px;
+        margin: $spacing-3xl auto;
+    }
+
+    .team-members {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: $spacing-3xl;
+
+        .team-member-card {
+            display: flex;
+            gap: $spacing-2xl;
+            text-align: start;
+            max-height: 390px;
+
+            @include respond-to(xs) {
+                gap: 1rem;
+            }
+
+            .team-member-info {
+                padding-bottom: 2rem;
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+
+                @include respond-to(xs) {
+                    gap: .5rem;
+                }
+
+            }
+
+            img {
+                width: 390px;
+                object-fit: cover;
+                object-position: top;
+
+                @include respond-to(xs) {
+                    width: 150px;
+                    object-fit: contain;
+                }
+            }
+
+            h6 {
+                margin-bottom: $spacing-xs;
+                font-size: 32px;
+                line-height: 36px;
+                font-weight: 700;
+
+                @include respond-to(xs) {
+                    font-size: 24px;
+                    line-height: 28px;
+                }
+            }
+
+            .sub-role {
+                font-size: 20px;
+                line-height: 26px;
+                font-weight: 700;
+                font-style: italic;
+                max-width: 320px;
+
+                @include respond-to(xs) {
+                    font-size: 14px;
+                    line-height: 16px;
+                }
+            }
+
+            p {
+                font-size: 20px;
+                line-height: 26px;
+                margin-bottom: $spacing-xs;
+
+                @include respond-to(xs) {
+                    font-size: 14px;
+                    line-height: 16px;
+                }
+
+                &.last-line {
+                    font-style: italic;
+                    font-weight: 700;
+                }
+            }
+
+            .links {
+                display: flex;
+                gap: $spacing-md;
+
+                a {
+                    text-decoration: none;
+
+                    .link-icon {
+                        font-size: 36px;
+                        line-height: 36px;
+                        width: 36px;
+                        height: 36px;
+
+                        @include respond-to(xs) {
+                            font-size: 24px;
+                            line-height: 28px;
+                            width: 24px;
+                            height: 24px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

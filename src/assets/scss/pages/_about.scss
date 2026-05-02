@@ -58,6 +58,7 @@
       @include respond-to(xs) {
         font-size: 34px;
         line-height: 36px;
+        padding-inline-start: 1rem;
       }
     }
 
@@ -240,6 +241,10 @@
         line-height: 1.5;
         margin: 0;
       }
+    }
+
+    @include respond-to(xs) {
+      grid-template-columns: 1fr;
     }
   }
 

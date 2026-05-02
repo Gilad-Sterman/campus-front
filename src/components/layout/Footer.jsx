@@ -80,7 +80,7 @@ const Footer = () => {
               <li><Link to="/about">About us</Link></li>
               <li><Link to="/founders">How we started</Link></li>
               {/* <li><Link to="https://www.campusisrael.com/contact">WHAT TO KNOW</Link></li> */}
-              {/* <li><Link to="/about">THE TEAM</Link></li> */}
+              <li><Link to="/team">Our team</Link></li>
             </ul>
           </div>
 
@@ -95,7 +95,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div className="footer-nav-group">
+          {/* <div className="footer-nav-group">
             <h3>Join Us</h3>
             <ul>
               <li><Link to="/">Become An Ambassador</Link></li>
@@ -103,7 +103,7 @@ const Footer = () => {
               <li><Link to="/">Partner With Us</Link></li>
               <li><Link to="/">Support Us</Link></li>
             </ul>
-          </div>
+          </div> */}
           {/* <button className='btn btn-primary'>Join Us</button> */}
 
           <div className="footer-nav-group">

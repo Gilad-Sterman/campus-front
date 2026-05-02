@@ -80,36 +80,36 @@
       margin-bottom: 0.75rem;
     }
 
-    p {
-      line-height: 1.6;
-      font-size: 0.95rem;
-    }
+    // p {
+    //   line-height: 1.6;
+    //   font-size: 0.95rem;
+    // }
   }
 }
 
 .recommendations {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 
-    .card-icon {
-      font-size: 2rem;
-      color: #27ae60;
-      margin-bottom: 1rem;
-    }
-
-    h4 {
-      font-size: 1.2rem;
-      color: #2c3e50;
-      margin-bottom: 0.75rem;
-    }
-
-    p {
-      // color: #555;
-      line-height: 1.6;
-      font-size: 0.95rem;
-    }
+  .card-icon {
+    font-size: 2rem;
+    color: #27ae60;
+    margin-bottom: 1rem;
   }
+
+  h4 {
+    font-size: 1.2rem;
+    color: #2c3e50;
+    margin-bottom: 0.75rem;
+  }
+
+  p {
+    // color: #555;
+    line-height: 1.6;
+    font-size: 0.95rem;
+  }
+}
 
 .results-actions {
   display: flex;
@@ -200,7 +200,7 @@
   flex: 1;
   min-width: 300px;
   max-width: 400px;
-  
+
   // Ensure chart is centered
   display: flex;
   justify-content: center;
@@ -209,7 +209,7 @@
 .riasec-summary {
   flex: 1;
   min-width: 250px;
-  
+
   h5 {
     font-size: 1.1rem;
     font-weight: 600;
@@ -229,21 +229,21 @@
   align-items: center;
   gap: 1rem;
   padding: 0.5rem 0;
-  
+
   .riasec-rank {
     font-size: 0.9rem;
     font-weight: 600;
     color: $color-primary;
     min-width: 2rem;
   }
-  
+
   .riasec-name {
     font-size: 1rem;
     font-weight: 500;
     color: #2c3e50;
     flex: 1;
   }
-  
+
   .riasec-score {
     font-size: 0.95rem;
     font-weight: 600;
