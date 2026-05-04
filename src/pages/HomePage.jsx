@@ -198,7 +198,7 @@ const HomePage = () => {
         <img src={heroImageUrl} alt="Student learning materials" className="home-redesign__hero-image" />
         <div className="home-redesign__hero-overlay">
           <h1>WE&apos;RE HERE FOR YOU.</h1>
-          <p>Everything you need to access world-class study in Israel. In English.</p>
+          <p>Everything you need to access world-class study in Israel. In English. And it's free!</p>
           <div className="home-redesign__hero-actions">
             <Link to={quizPrimaryLink} className="home-redesign__action home-redesign__action--mint">
               Degree Ideas

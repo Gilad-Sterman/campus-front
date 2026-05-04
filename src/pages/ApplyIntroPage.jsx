@@ -141,6 +141,9 @@ function ApplyIntroPage() {
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                             onFocus={() => searchResults && setShowDropdown(true)}
+                            autoComplete="one-time-code"
+                            autoCorrect="off"
+                            spellCheck="false"
                         />
                         {searchResults && (
                             <FaChevronDown
