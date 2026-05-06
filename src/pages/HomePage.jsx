@@ -313,7 +313,7 @@ const HomePage = () => {
               <span>Meet</span>
               <img src="https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/mingcute_user-star-line.svg" alt="" />
             </Link>
-            <a href="https://wa.me/972544444444" target="_blank" rel="noreferrer">
+            <a href="https://m.me/WeAreCampusIsrael" target="_blank" rel="noreferrer">
               <span>Chat</span>
               <div className="chat-icons">
                 <img src="https://wdukbpwyysjbkdzjtguv.supabase.co/storage/v1/object/public/university-logos/Vector%20(7).svg" alt="" />
